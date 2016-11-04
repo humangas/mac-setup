@@ -8,25 +8,14 @@ homebrew_packages:
   - name: git
   - name: gibo
   # shell
-  - name: zsh
+  - { name: zsh, option: --without-etcdir }
   - name: coreutils
+  - name: zsh-completions 
   # python
   - name: python
   - name: python3
-  - name: pyside
   - name: pyenv
-  - name: pyenv-virtualenv
-  # go
-  - { name: go, option: --cross-compile-common }
-  # vim
-  - name: lua
-  - { name: vim, option: --with-lua }
-  # tmux
-  - name: tmux
-  - name: reattach-to-user-namespace
-  # aws
-  - name: awscli
-  # ruby
+   # ruby
   - name: ruby
   - name: rbenv
   - name: ruby-build
@@ -35,13 +24,17 @@ homebrew_packages:
   # node.js
   - name: node
   - name: nodebrew
-  # db
-  - name: sqlite
-  #- name: h2
-  # completion
-  - name: vagrant-completion
-  - name: bash-git-prompt
-  - name: bash-completion
+  - name: pyenv-virtualenv
+  # go
+  - { name: go, option: --cross-compile-common }
+  # vim
+  - name: lua
+  - { name: vim, option: --with-lua --with-override-system-vi }
+  # tmux
+  - name: tmux
+  - name: reattach-to-user-namespace
+  # aws
+  - name: awscli
   # tools
   - name: ansible
   - name: ghq
