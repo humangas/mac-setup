@@ -1,0 +1,3 @@
+---
+- name: Dock To right the position of the Dock
+  osx_defaults: domain=com.apple.dock key=orientation type=string value=right

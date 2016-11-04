@@ -1,0 +1,115 @@
+---
+homebrew_taps:
+  - name: caskroom/cask
+  - name: motemen/ghq
+
+homebrew_packages:
+  # git
+  - name: git
+  - name: gibo
+  # shell
+  - name: zsh
+  - name: coreutils
+  # python
+  - name: python
+  - name: python3
+  - name: pyside
+  - name: pyenv
+  - name: pyenv-virtualenv
+  # go
+  - { name: go, option: --cross-compile-common }
+  # vim
+  - name: lua
+  - { name: vim, option: --with-lua }
+  # tmux
+  - name: tmux
+  - name: reattach-to-user-namespace
+  # aws
+  - name: awscli
+  # ruby
+  - name: ruby
+  - name: rbenv
+  - name: ruby-build
+  - name: openssl
+  - name: readline
+  # node.js
+  - name: node
+  - name: nodebrew
+  # db
+  - name: sqlite
+  #- name: h2
+  # completion
+  - name: vagrant-completion
+  - name: bash-git-prompt
+  - name: bash-completion
+  # tools
+  - name: ansible
+  - name: ghq
+  - name: fzf
+  - name: tig 
+  - name: tree
+  - name: direnv
+  - name: httpie
+  #- name: neovim
+  #- name: graphviz
+  #- name: watchman
+  #- name: hub
+  #- name: jq
+  #- name: peco
+  #- name: serf
+  #- name: ranger
+  #- name: influxdb
+  #- name: telegraf
+  #- name: wget
+  #- name: jenkins
+  #- name: perl
+  #- name: xz
+  #- name: gcutil
+  #- name: oniguruma
+  #- name: qt
+  #- name: autoconf
+  #- name: gdbm
+  #- name: automake
+  #- name: gettext
+  #- name: pcre
+  #- name: utf8proc
+  #- name: libevent
+  #- name: rmtrash
+  #- name: libpng
+  #- name: pkg-config
+  #- name: chronograf
+  #- name: git-lfs
+  #- name: libtool
+  #- name: popt
+  #- name: s-lang
+  #- name: cmake
+  #- name: gnu-sed
+  #- name: libyaml
+  #- name: shiboken
+  #- name: newt
+
+homebrew_cask_packages:
+  - name: google-chrome
+  - name: google-japanese-ime
+  - name: iterm2
+  - name: alfred 
+  - name: dash
+  - name: caffeine
+  - name: clipy
+  - name: atom
+  - name: java
+  - name: vagrant
+  - name: skitch
+  #- name: virtualbox
+  #- name: diskwave
+  #- name: the-unarchiver
+  #- name: dropbox
+  #- name: the-unarchiver
+  #- name: sqlitebrowser
+  #- name: appcleaner
+  #- name: karabiner
+  #- name: maczip4win
+  #- name: day-o
+  #- name: tableau
+  #- name: tableau-public
+

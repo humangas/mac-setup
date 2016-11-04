@@ -1,0 +1,5 @@
+---
+- name: source zshrc 
+  shell: source ~/.zshrc
+  with_items: "{{ dotfiles }}"
+  when: item.src == ".zshrc"

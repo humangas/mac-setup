@@ -1,0 +1,26 @@
+---
+- name: update homebrew
+  homebrew: update_homebrew=yes
+
+- name: add homebrew tap
+  homebrew_tap: tap={{ item.name }} state=present
+  with_items: "{{ homebrew_taps }}"
+
+- name: install homebrew packages
+  homebrew: >
+    name={{ item.name }}
+    state={{ item.state | default('latest') }}
+    install_options={{
+      item.option | default() | join(',')
+      if item.option is not string
+      else item.option
+    }}
+  with_items: "{{ homebrew_packages }}"
+
+- name: install homebrew cask packages
+  homebrew_cask: name={{ item.name }} state={{ item.state | default('latest') }}
+  #environment:
+  #  HOMEBREW_CASK_OPTS: --appdir=/Applicationse
+  with_items:
+    - "{{ homebrew_cask_packages }}"
+
