@@ -4,7 +4,7 @@
   gather_facts: no
   become: no
   roles:
-    - role: dotfiles
     - role: homebrew
+    - role: dotfiles
     - role: osx_defaults
 
