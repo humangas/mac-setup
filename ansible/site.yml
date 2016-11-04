@@ -4,13 +4,7 @@
   gather_facts: no
   become: no
   roles:
-    - { role: osx_defaults,      tags: ['osx_defaults'] }
-    - { role: dotfiles,          tags: ['dotfiles'] }
-    - { role: homebrew_taps,     tags: ['homebrew_all', 'homebrew_taps'] }
-    - { role: homebrew,          tags: ['homebrew_all', 'homebrew'] }
-    - { role: homebrew_cask,     tags: ['homebrew_all', 'homebrew_cask'] }
-    - { role: atom,              tags: ['atom'] }
-    - { role: manual_install,    tags: ['manual_install'] }
-    - { role: modules_ghq,       tags: ['modules_ghq'] }
-    - { role: software_settings, tags: ['software_settings'] }
+    - role: dotfiles
+    - role: homebrew
+    - role: osx_defaults
 
