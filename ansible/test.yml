@@ -4,5 +4,6 @@
   gather_facts: no
   become: no
   roles:
-    - { role: deinvim }
+#    - { role: deinvim }
+    - { role: zplug }
  

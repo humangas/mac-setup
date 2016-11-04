@@ -1,0 +1,5 @@
+---
+- name: install zplug 
+  shell: curl -sL zplug.sh/installer | zsh 
+  ignore_errors: True
+
