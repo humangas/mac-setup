@@ -9,6 +9,13 @@
   changed_when: "'chsh: no changes made' not in result.stderr"
 #  become: yes
 
+- name: get dircolor solarized  
+  file: path=~/.config/solarized state=directory
+- get_url: >
+    url=https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.256dark
+    dest=~/.config/solarized/dircolors.256dark
+    force=True
+
 - name: install zplug 
   shell: curl -sL zplug.sh/installer | zsh 
   ignore_errors: True
