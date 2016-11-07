@@ -1,4 +1,27 @@
 ---
+- name: add zsh to /etc/shells 
+  copy: src=etc/shells dest=/etc/shells mode=644
+
+- name: change shell to zsh
+  shell: chsh -s /usr/local/bin/zsh
+
+- name: install zplug 
+  shell: curl -sL zplug.sh/installer | zsh 
+  ignore_errors: True
+
+- name: install dein.vim
+  file: path={{ deinvim['dir'] }} state=directory
+- get_url: >
+    url=https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/{{ deinvim['shell'] }}
+    dest={{ deinvim['dir'] }}/{{ deinvim['shell'] }}
+    force=True
+    mode=u+x
+- shell: "./{{ deinvim['shell'] }} {{ deinvim['dir'] }}/"
+  args:
+    chdir: "{{ deinvim['dir'] }}/"
+  register: result
+  changed_when: "'already exists!' not in result.stdout"
+
 - name: mkdir dotifles directory
   file: >
     path={{ item.dest }}
@@ -17,21 +40,4 @@
     force=yes
   with_items: "{{ dotfiles }}"
   notify: source zshrc 
-
-- name: install zplug 
-  shell: curl -sL zplug.sh/installer | zsh 
-  ignore_errors: True
-
-- name: install dein.vim
-  file: path={{ deinvim['dir'] }} state=directory
-- get_url: >
-    url=https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/{{ deinvim['shell'] }}
-    dest={{ deinvim['dir'] }}/{{ deinvim['shell'] }}
-    force=True
-    mode=u+x
-- shell: "./{{ deinvim['shell'] }} {{ deinvim['dir'] }}/"
-  args:
-    chdir: "{{ deinvim['dir'] }}/"
-  register: result
-  changed_when: "'already exists!' not in result.stdout"
 
