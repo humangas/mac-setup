@@ -1,9 +1,11 @@
 ---
 - name: add zsh to /etc/shells 
   copy: src=etc/shells dest=/etc/shells mode=644
+  become: yes
 
 - name: change shell to zsh
   shell: chsh -s /usr/local/bin/zsh
+  become: yes
 
 - name: install zplug 
   shell: curl -sL zplug.sh/installer | zsh 

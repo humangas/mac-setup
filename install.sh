@@ -46,7 +46,7 @@ function execute_ansible() {
   local ymlname=${1:-'site'}
   local workdir=${worktmpdir:-'.'}
   echo 'Execute Ansible Playbook...'
-  ansible-playbook -i ${workdir}/ansible/hosts -vv ${workdir}/ansible/${ymlname}.yml
+  ansible-playbook -i ${workdir}/ansible/hosts -vv ${workdir}/ansible/${ymlname}.yml --ask-become-pass
 }
 
 # Main
