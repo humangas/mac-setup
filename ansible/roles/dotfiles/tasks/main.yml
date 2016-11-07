@@ -5,7 +5,6 @@
 
 - name: change shell to zsh
   shell: chsh -s /usr/local/bin/zsh
-  become: yes
 
 - name: install zplug 
   shell: curl -sL zplug.sh/installer | zsh 
