@@ -1,8 +1,11 @@
 #!/bin/bash
+#########################################################################################################
+# mac-setup installation shell 
+# see also: https://github.com/humangas/mac-setup
+#########################################################################################################
 
 # Const
 readonly REPOSITORY_NAME='github.com/humangas/mac-setup'
-
 
 # Check HTTP Status
 function check_http_status() {
@@ -67,20 +70,12 @@ function main_local() {
   execute_ansible
 }
 
-# Main: --test
-function main_test() {
-  install_homebrew
-  install_ansible
-  execute_ansible 'test'
-}
-
 # main
 case $# in
   0) main ;; 
   *) case $1 in
        --local) main_local ;;
-       --test)  main_test ;;
-       *)       echo 'Usage: $ bash install.sh [--local|--test]'; exit 1 ;;
+       *)       echo 'Usage: $ bash install.sh [--local]'; exit 1 ;;
      esac 
 esac
 

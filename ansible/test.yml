@@ -1,8 +1,0 @@
----
-- hosts: localhost
-  connection: local
-  gather_facts: no
-  become: no
-  roles:
-    - { role: dotfiles }
- 
