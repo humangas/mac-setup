@@ -4,7 +4,10 @@
   become: yes
 
 - name: change shell to zsh
-  shell: chsh -s /usr/local/bin/zsh
+  shell: chsh -s /usr/local/bin/zsh $(whoami)
+  register: result
+  changed_when: "'chsh: no changes made' not in result.stderr"
+  become: yes
 
 - name: install zplug 
   shell: curl -sL zplug.sh/installer | zsh 
