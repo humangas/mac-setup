@@ -12,7 +12,11 @@ zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
 bindkey -v                                             # vi keybind 
 bindkey "^[[Z" reverse-menu-complete                   # shift-tab reverse
 
+
+# load 
+eval "$(gdircolors ~/.config/solarized/dircolors.256dark)"
+
 ## alias
-#eval "$(gdircolors ~/.dircolors.ansi-dark.solarized)"
-#alias ls='gls --color=auto'
+alias ls='gls --color=auto'
+alias vi='vim'
 
