@@ -50,5 +50,4 @@
     backup={{ item.backup | default('no') }}
     force=yes
   with_items: "{{ dotfiles }}"
-  notify: source zshrc 
 
