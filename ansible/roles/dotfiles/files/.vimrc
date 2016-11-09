@@ -90,6 +90,8 @@ endif
 
 
 " Color scheme
+syntax enable
+set background=dark
 colorscheme solarized
 
 " Plugin itchyny/lightline.vim 
