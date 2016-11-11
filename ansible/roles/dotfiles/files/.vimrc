@@ -61,12 +61,12 @@ call dein#add('Shougo/dein.vim')
 " Add or remove your plugins here:
 call dein#add('Shougo/neosnippet.vim')                                      "Adds snippet support to Vim.
 call dein#add('Shougo/neosnippet-snippets')                                 "The standard snippets repository for 'neosnippet.vim'.
-call dein#add('altercation/vim-colors-solarized')                           "Colorscheme: solarized
-call dein#add('itchyny/lightline.vim')                                      "A light and configurable statusline/tabline for Vim
 call dein#add('Shougo/unite.vim')                                           "Search and display information from arbitrary sources like files, buffers, etc.
 call dein#add('Shougo/vimfiler')                                            "Powerful file explorer implemented by Vim script
 call dein#add('Shougo/denite.nvim')                                         "Dark powered asynchronous unite all interfaces for Neovim/Vim8
 call dein#add('Shougo/neocomplete.vim')                                     "Next generation completion framework after neocomplcache
+call dein#add('altercation/vim-colors-solarized')                           "Colorscheme: solarized
+call dein#add('itchyny/lightline.vim')                                      "A light and configurable statusline/tabline for Vim
 call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })  "fzf is a general-purpose command-line fuzzy finder.
 call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })                     "vim plugin fzf
 call dein#add('kannokanno/previm')                                          "Realtime preview by Vim. (Markdown, reStructuredText, textile)
@@ -87,7 +87,6 @@ syntax enable
 if dein#check_install()
   call dein#install()
 endif
-
 
 " Color scheme
 syntax enable
