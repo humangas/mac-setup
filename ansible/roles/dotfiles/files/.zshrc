@@ -1,10 +1,23 @@
 ################################################################################################
 # ~/.zshrc
+# $ bindkey -L       :Examine key binding
+# $ man zsh          :List of zsh manuals and zsh overview
+# $ man zshmisc      :Script syntax, how to write redirects and pipes, list of special functions, etc. 
+# $ man zshexpn      :Notation of glob and variable expansion 
+# $ man zshparam     :List of special variables and notation of suffix expansion of variables  
+# $ man zshoptions   :List of options that can be set with setopt  
+# $ man zshbuiltins  :List of built-in commands 
 ################################################################################################
+# Bindkey
+bindkey -v                                             # vi keybind 
+bindkey "^[[Z" reverse-menu-complete                   # shift-tab reverse
+
 # Base
 autoload -Uz compinit; compinit                        # auto-completion: on
 autoload -Uz colors; colors                            # colors: on
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'    # Match to uppercase lowercase conversion
+setopt no_tify                                         # Notify as soon as the background job is over.
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'    # Match to uppercase lowercase conversion (However, distinguish when inputting capital letters)
+zstyle ':completion:*:default' menu select=1           # Press <Tab>, you can select the path name from candidates. 
 # To enable the completion with sudo command
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
                                            /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
@@ -22,10 +35,6 @@ zstyle ':vcs_info:*' actionformats '(%b|%a)'           # This format is displaye
 precmd () { vcs_info }
 PROMPT=$PROMPT'${vcs_info_msg_0_}$ '
 
-# Bindkey
-bindkey -v                                             # vi keybind 
-bindkey "^[[Z" reverse-menu-complete                   # shift-tab reverse
-
 # Env go setting
 export GOPATH=$HOME
 export PATH=$PATH:$GOPATH/bin
@@ -37,76 +46,68 @@ export PATH=$ORACLE_HOME:$PATH
 export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$ORACLE_HOME
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ORACLE_HOME
 
-# Load 
+# Color
 eval "$(gdircolors ~/.config/solarized/dircolors.256dark)"
+alias ls='gls --color=auto'
+
+# Load 
 eval "$(direnv hook bash)"
 eval "$(pyenv init -)" 
 eval "$(pyenv virtualenv-init -)"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Alias
-alias ls='gls --color=auto'
 alias vi='vim'
 alias fzf='fzf-tmux'
-alias 00='source ~/.zshrc'
-alias 0w='cd ~/src/work'
-alias 0s='PDIR=$(L=`ghq list -p`; L="$L\n`ls -d $GOPATH/src/work/*`" ; echo -e "$L" | sort | uniq | fzf); cd "$PDIR" > /dev/null 2>&1 || cd $(dirname "$PDIR")' 
-alias 0p='actionCurrentResource'
+alias sz='source ~/.zshrc'
+alias cdw='cd ~/src/work'
+alias cds='PDIR=$(L=`ghq list -p`; L="$L\n`ls -d $GOPATH/src/work/*`" ; echo -e "$L" | sort | uniq | fzf); cd "$PDIR" > /dev/null 2>&1 || cd $(dirname "$PDIR")' 
+alias cdp='actionCurrentResource'
 
-## History
-#export HISTFILE=${HOME}/.zsh_history                   # save history file 
-## メモリに保存される履歴の件数
-#export HISTSIZE=100
-## 履歴ファイルに保存される履歴の件数
-#export SAVEHIST=100
-#
-## 重複を記録しない
-#setopt hist_ignore_dups
-## 開始と終了を記録
-#setopt EXTENDED_HISTORY
-## 重複を記録しない
-#setopt hist_ignore_all_dups
-## ヒストリに追加されるコマンド行が古いものと同じなら古いものを削除
-#setopt hist_ignore_all_dups
-## スペースで始まるコマンド行はヒストリリストから削除
-#setopt hist_ignore_space
-## 余分な空白は詰めて記録
-#setopt hist_reduce_blanks  
-## 古いコマンドと同じものは無視 
-#setopt hist_save_no_dups
-## historyコマンドは履歴に登録しない
-#setopt hist_no_store
+# History
+################################################################################################
+# history command same as $ fc -l
+# $ history -i            Show execution date and time
+# $ history -D            Show the time spent executing
+# $ history <fr> <to>     Specify the range and show it
+#   e.g. history 1 5      Show from 1st to 5th 
+#   e.g. history -5       Show the last 5 
+#   e.g. history 1        Show from 1st (= show all) 
+#   e.g. history -10 -5   Show from the tenth most recent to the last five most recent history 
+################################################################################################
+setopt share_history                             # Share history
+export HISTFILE=~/.zsh_history                   # Save history file 
+export HISTSIZE=10000                            # Number of history items to store in memory
+export SAVEHIST=10000                            # Number of records to be saved in history file
+setopt hist_ignore_all_dups                      # Duplicate commands delete the old one
+setopt hist_ignore_space                         # Beginning starts with a space, do not add it to history.
+setopt hist_no_store                             # Do not register the history command in the history.
 
 # Plugin zplug
 source ~/.zplug/init.zsh
-
-# Plugins...
+## Plugins...
 zplug "b4b4r07/enhancd", use:init.sh
-zplug "b4b4r07/zsh-vimode-visual"
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-syntax-highlighting"
 
-# Install plugins if there are plugins that have not been installed
+## Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
     if read -q; then
         echo; zplug install
     fi
 fi
-
-# Then, source plugins and add commands to $PATH
+## Then, source plugins and add commands to $PATH
 zplug load --verbose
 
 # Functions
 function actionCurrentResource() {
   local T=$(ls -dF $PWD/* | fzf)
   echo "cd $T" | grep /$
-  if [ "$?" -eq 0 ]; then
+  if [[ $? -eq 0 ]]; then
     cd "$T"   
   else
-    #file "$T" | cut -d: -f2 | [ `cut -d" " -f2` == "ASCII" ]
-    local type=$(file "$T" | cut -d: -f2 | cut -d" " -f2)
-    if [[ "$type" == 'ASCII' ]] || [[ "$type" == 'Python' ]]; then
+    local type=$(file "$T" | cut -d: -f2 | grep 'text')
+    if [[ ${#type} -ne 0 ]]; then
       vim "$T"
     else
       read '?Open Finder? [y|n]: ' ans
@@ -116,4 +117,7 @@ function actionCurrentResource() {
     fi
   fi
 }
+
+# Load fzf (see also: ~/.cache/dein/repos/github.com/junegunn/fzf/shell/key-bindings.zsh)
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
