@@ -43,6 +43,7 @@ homebrew_packages:
   - name: tree
   - name: direnv
   - name: httpie
+  - name: hub 
   #- name: neovim
   #- name: graphviz
   #- name: watchman
