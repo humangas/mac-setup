@@ -58,7 +58,7 @@ eval "$(pyenv virtualenv-init -)"
 # Alias
 alias vi='vim'
 alias fzf='fzf-tmux'
-alias sz='source ~/.zshrc'
+alias soz='source ~/.zshrc'
 alias cdw='cd ~/src/work'
 alias cds='PDIR=$(L=`ghq list -p`; L="$L\n`ls -d $GOPATH/src/work/*`" ; echo -e "$L" | sort | uniq | fzf); cd "$PDIR" > /dev/null 2>&1 || cd $(dirname "$PDIR")' 
 alias cdp='actionCurrentResource'
