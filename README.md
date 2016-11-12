@@ -6,11 +6,9 @@ macOS setup tool for me!!
 $ curl -L https://raw.githubusercontent.com/humangas/mac-setup/master/install.sh | bash
 ```
 
-# Development
+## For local 
 ```
 $ git clone git@github.com:humangas/mac-setup.git 
 $ cd mac-setup
 $ bash install.sh --local
-or
-$ bash install.sh --test
 ```

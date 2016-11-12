@@ -1,6 +1,6 @@
 #!/bin/bash
 #########################################################################################################
-# mac-setup installation shell 
+# installation shell for macOS setup
 # see also: https://github.com/humangas/mac-setup
 #########################################################################################################
 
@@ -52,7 +52,7 @@ function execute_ansible() {
   ansible-playbook -i ${workdir}/ansible/hosts -vv ${workdir}/ansible/${ymlname}.yml --ask-become-pass
 }
 
-# Main
+# Main: default
 function main() {
   check_http_status
   worktmpdir=`mktemp -d`
