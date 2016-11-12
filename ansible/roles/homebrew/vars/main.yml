@@ -44,43 +44,8 @@ homebrew_packages:
   - name: direnv
   - name: httpie
   - name: hub 
-  #- name: neovim
-  #- name: graphviz
-  #- name: watchman
-  #- name: hub
-  #- name: jq
-  #- name: peco
-  #- name: serf
-  #- name: ranger
-  #- name: influxdb
-  #- name: telegraf
-  #- name: wget
-  #- name: jenkins
-  #- name: perl
-  #- name: xz
-  #- name: gcutil
-  #- name: oniguruma
-  #- name: qt
-  #- name: autoconf
-  #- name: gdbm
-  #- name: automake
-  #- name: gettext
-  #- name: pcre
-  #- name: utf8proc
-  #- name: libevent
-  #- name: rmtrash
-  #- name: libpng
-  #- name: pkg-config
-  #- name: chronograf
-  #- name: git-lfs
-  #- name: libtool
-  #- name: popt
-  #- name: s-lang
-  #- name: cmake
-  #- name: gnu-sed
-  #- name: libyaml
-  #- name: shiboken
-  #- name: newt
+  - name: xz
+  - name: gnu-sed
 
 homebrew_cask_packages:
   - name: google-chrome
@@ -94,16 +59,7 @@ homebrew_cask_packages:
   - name: java
   - name: vagrant
   - name: skitch
-  #- name: virtualbox
-  #- name: diskwave
-  #- name: the-unarchiver
-  #- name: dropbox
-  #- name: the-unarchiver
-  #- name: sqlitebrowser
-  #- name: appcleaner
-  #- name: karabiner
-  #- name: maczip4win
-  #- name: day-o
-  #- name: tableau
-  #- name: tableau-public
+  - name: virtualbox
+  - name: the-unarchiver
+  - name: maczip4win
 
