@@ -62,6 +62,7 @@ alias soz='source ~/.zshrc'
 alias cdw='cd ~/src/work'
 alias cds='PDIR=$(L=`ghq list -p`; L="$L\n`ls -d $GOPATH/src/work/*`" ; echo -e "$L" | sort | uniq | fzf); cd "$PDIR" > /dev/null 2>&1 || cd $(dirname "$PDIR")' 
 alias cdp='actionCurrentResource'
+alias opg='openGitURL'
 
 # History
 ################################################################################################
@@ -115,6 +116,16 @@ function actionCurrentResource() {
         open .
       fi  
     fi
+  fi
+}
+
+function openGitURL() {
+  local url=$(git config -l | grep remote.origin.url | cut -d= -f2 | sed "s/:/\//" | sed "s/git@/https:\/\//")
+  if [[ -n $url ]]; then
+    open $url
+  else
+    echo "Error! git remote.origin.url not found"
+    return 1
   fi
 }
 
