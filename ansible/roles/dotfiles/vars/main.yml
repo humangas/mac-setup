@@ -3,8 +3,10 @@ dotfiles:
   - src: .zshrc
   - src: .tmux.conf
   - src: .vimrc
-  - { src: .ssh/config, mode: '0600', dest: ~/.ssh, dest_mode: '700', backup: yes }
-
+  - { src: .ssh/config, mode: "0600", dest: ~/.ssh, dest_mode: "0700", backup: yes }
+  - { src: bin/loadavg, mode: "u+x", dest: ~/bin }
+  - { src: bin/localip, mode: "u+x", dest: ~/bin }
+ 
 deinvim:
   dir: ~/.cache/dein
   shell: installer.sh
