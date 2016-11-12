@@ -1,13 +1,19 @@
 ---
+- name: check zsh 
+  shell: echo $SHELL
+  register: result
+  changed_when: False
+
 - name: add zsh to /etc/shells 
   copy: src=etc/shells dest=/etc/shells mode=644
   become: yes
+  when: result.stdout != "/usr/local/bin/zsh"
 
 - name: change shell to zsh
   shell: chsh -s /usr/local/bin/zsh $(whoami)
   register: result
   changed_when: "'chsh: no changes made' not in result.stderr"
-#  become: yes
+  when: result.stdout != "/usr/local/bin/zsh"
 
 - name: get dircolor solarized  
   file: path=~/.config/solarized state=directory
@@ -17,8 +23,10 @@
     force=True
 
 - name: install zplug 
-  shell: curl -sL zplug.sh/installer | zsh 
-  ignore_errors: True
+  stat: path=~/.zplug 
+  register: result
+- shell: curl -sL zplug.sh/installer | zsh 
+  when: not result.stat.exists
 
 - name: install dein.vim
   file: path={{ deinvim['dir'] }} state=directory
@@ -33,11 +41,17 @@
   register: result
   changed_when: "'already exists!' not in result.stdout"
 
+- name: setting ghq style
+  file: path=~/src state=directory
+- file: path=~/pkg state=directory
+- file: path=~/bin state=directory 
+- git_config: name=ghq.root scope=global value="~/src"
+
 - name: mkdir dotifles directory
   file: >
     path={{ item.dest }}
     state=directory
-    mode={{ item.dest_mode | default('0755') }}
+    mode={{ item.dest_mode | default("0755") }}
     force=yes
   with_items: "{{ dotfiles }}"
   when: item.src | search("\/")
@@ -45,9 +59,9 @@
 - name: setup dotfiles
   copy: >
     src={{ item.src }}
-    dest={{ item.dest | default('~') }}
-    mode={{ item.mode | default('0644') }}
-    backup={{ item.backup | default('no') }}
+    dest={{ item.dest | default("~") }}
+    mode={{ item.mode | default("0644") }}
+    backup={{ item.backup | default("no") }}
     force=yes
   with_items: "{{ dotfiles }}"
 
