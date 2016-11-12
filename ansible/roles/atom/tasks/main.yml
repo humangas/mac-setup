@@ -1,0 +1,5 @@
+---
+- name: install atom packages
+  shell: apm install {{ item.name }}
+  with_items: "{{ atom_packages }}"
+
