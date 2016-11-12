@@ -6,6 +6,6 @@
   roles:
 #    - role: homebrew
     - role: dotfiles
-    - role: atom 
+#    - role: atom 
     - role: osx_defaults
 
