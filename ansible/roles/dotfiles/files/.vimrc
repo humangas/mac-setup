@@ -52,7 +52,7 @@ endif
 set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-call dein#begin('/Users/humangas/.cache/dein')
+call dein#begin('~/.cache/dein')
 
 " Let dein manage dein
 " Required:
