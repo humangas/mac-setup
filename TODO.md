@@ -2,6 +2,9 @@
 Manual setting items.
 
 # System Settings
+## 一般
+- デフォルトのブラウザ: Chrome
+
 ## Dock
 - サイズ: 最小
 - 拡大：いい感じで
