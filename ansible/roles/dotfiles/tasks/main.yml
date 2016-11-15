@@ -15,18 +15,21 @@
   changed_when: "'chsh: no changes made' not in result.stderr"
   when: result.stdout != "/usr/local/bin/zsh"
 
-- name: get dircolor solarized  
-  file: path=~/.config/solarized state=directory
-- get_url: >
-    url=https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.256dark
-    dest=~/.config/solarized/dircolors.256dark
-    force=True
+- name: mkdir ~/.zsh.d directory
+  file: path=~/.zsh.d state=directory
 
 - name: install zplug 
   stat: path=~/.zplug 
   register: result
 - shell: curl -sL zplug.sh/installer | zsh 
   when: not result.stat.exists
+
+- name: get dircolor solarized  
+  file: path=~/.config/solarized state=directory
+- get_url: >
+    url=https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.256dark
+    dest=~/.config/solarized/dircolors.256dark
+    force=True
 
 - name: install dein.vim
   file: path={{ deinvim['dir'] }} state=directory

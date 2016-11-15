@@ -132,3 +132,7 @@ function openGitURL() {
 # Load fzf (see also: ~/.cache/dein/repos/github.com/junegunn/fzf/shell/key-bindings.zsh)
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Source ~/.zsh.d/*.sh
+for file in ~/.zsh.d/*.sh ; do
+  [[ -r $file ]] && source "$file"
+done
