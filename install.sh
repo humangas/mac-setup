@@ -46,10 +46,10 @@ function download_setup_repository() {
 
 # Execute Ansible Playbook
 function execute_ansible() {
-  local ymlname=${1:-'site'}
   local workdir=${worktmpdir:-'.'}
   echo 'Execute Ansible Playbook...'
-  ansible-playbook -i ${workdir}/ansible/hosts -vv ${workdir}/ansible/${ymlname}.yml --ask-become-pass
+  echo "-> $ ansible-playbook -i ${workdir}/ansible/hosts -vv ${workdir}/ansible/site.yml --ask-become-pass" "$@"
+  ansible-playbook -i ${workdir}/ansible/hosts -vv ${workdir}/ansible/site.yml --ask-become-pass "$@"
 }
 
 # Main: default
@@ -67,15 +67,15 @@ function main() {
 function main_local() {
   install_homebrew
   install_ansible
-  execute_ansible
+  execute_ansible "$@"
 }
 
 # main
 case $# in
   0) main ;; 
   *) case $1 in
-       --local) main_local ;;
-       *)       echo 'Usage: $ bash install.sh [--local]'; exit 1 ;;
+       --local) main_local "${@:2}" ;;
+       *)       echo 'Usage: $ bash install.sh [--local] [--tags dotfiles]'; exit 1 ;;
      esac 
 esac
 

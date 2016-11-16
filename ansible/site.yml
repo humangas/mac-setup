@@ -4,8 +4,7 @@
   gather_facts: no
   become: no
   roles:
-#    - role: homebrew
-    - role: dotfiles
-#    - role: atom 
-    - role: osx_defaults
-
+    - { role: homebrew,     tags: ['homebrew'] }
+    - { role: dotfiles,     tags: ['dotfiles'] }
+    - { role: atom,         tags: ['atom'] }
+    - { role: osx_defaults, tags: ['osx_defaults'] }
