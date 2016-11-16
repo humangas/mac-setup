@@ -112,7 +112,9 @@ $ git config --global user.email you@example.com
 # Dash
 ## General
 - Gobal search shortcut: Cmd+Shift+:
+- [ ] Show dock icon
 - [x] Show menu bar icon
+- [x] Dismiss main windown when I activate a different app
 
 # Chrome
 - Login
