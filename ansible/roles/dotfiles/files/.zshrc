@@ -133,6 +133,10 @@ function openGitURL() {
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Source ~/.zsh.d/*.sh
-for file in ~/.zsh.d/*.sh ; do
-  [[ -r $file ]] && source "$file"
-done
+setopt nonomatch
+if ls ~/.zsh.d/*.sh > /dev/null 2>&1; then
+  for file in ~/.zsh.d/*.sh ; do
+    [[ -r $file ]] && source "$file"
+  done
+fi
+setopt nomatch
