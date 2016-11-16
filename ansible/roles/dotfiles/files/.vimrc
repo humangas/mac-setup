@@ -72,6 +72,8 @@ call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })                     "vim
 call dein#add('kannokanno/previm')                                          "Realtime preview by Vim. (Markdown, reStructuredText, textile)
 call dein#add('davidhalter/jedi-vim')                                       "VIM binding to the autocompletion library Jedi(for Python).
 call dein#add('fatih/vim-go')                                               "Go development plugin for Vim
+call dein#add('szw/vim-tags')                                               "The Ctags generator for Vim
+call dein#add('majutsushi/tagbar')                                          "a class outline viewer for Vim
 
 " You can specify revision/branch/tag.
 call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
