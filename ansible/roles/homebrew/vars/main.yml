@@ -43,9 +43,9 @@ homebrew_packages:
   - name: tree
   - name: direnv
   - name: httpie
-  - name: hub 
   - name: xz
   - name: gnu-sed
+  - name: ctags
 
 homebrew_cask_packages:
   - name: google-chrome
