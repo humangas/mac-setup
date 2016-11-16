@@ -11,6 +11,9 @@ $ curl -L https://raw.githubusercontent.com/humangas/mac-setup/master/install.sh
 $ git clone git@github.com:humangas/mac-setup.git 
 $ cd mac-setup
 $ bash install.sh --local
+
+# You can also add ansible options to the second argument and beyond.
+$ bash install.sh --local --tags dotfiles
 ```
 
 # Manual Setting
