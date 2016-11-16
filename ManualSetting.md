@@ -42,6 +42,9 @@ Manual setting items.
 ### ズーム機能
 - [x] スクロールジェスチャと修飾キーを使ってズーム：Ctrl
 
+## 共有
+- コンピュータ名: いい感じで
+
 # Git
 ## key setting
 Download ssh-key
