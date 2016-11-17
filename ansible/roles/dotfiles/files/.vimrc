@@ -61,10 +61,10 @@ call dein#add('Shougo/dein.vim')
 " Add or remove your plugins here:
 call dein#add('Shougo/neosnippet.vim')                                      "Adds snippet support to Vim.
 call dein#add('Shougo/neosnippet-snippets')                                 "The standard snippets repository for 'neosnippet.vim'.
-call dein#add('Shougo/unite.vim')                                           "Search and display information from arbitrary sources like files, buffers, etc.
-call dein#add('Shougo/vimfiler')                                            "Powerful file explorer implemented by Vim script
-call dein#add('Shougo/denite.nvim')                                         "Dark powered asynchronous unite all interfaces for Neovim/Vim8
 call dein#add('Shougo/neocomplete.vim')                                     "Next generation completion framework after neocomplcache
+call dein#add('Shougo/vimfiler')                                            "Powerful file explorer implemented by Vim script
+call dein#add('Shougo/unite.vim')                                           "Search and display information from arbitrary sources like files, buffers, etc.
+call dein#add('Shougo/denite.nvim')                                         "Dark powered asynchronous unite all interfaces for Neovim/Vim8
 call dein#add('altercation/vim-colors-solarized')                           "Colorscheme: solarized
 call dein#add('itchyny/lightline.vim')                                      "A light and configurable statusline/tabline for Vim
 call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })  "fzf is a general-purpose command-line fuzzy finder.
@@ -97,14 +97,17 @@ colorscheme solarized
 
 " Plugin itchyny/lightline.vim 
 let g:lightline = {}
-let g:lightline.colorscheme = 'solarized'
+let g:lightline.colorscheme = 'solarized'              "Use ColorScheme: Solarized
 
 " Plugin altercation/vim-colors-solarized
 let g:solarized_termtrans=1                            "Terminal at the time of the transparent background, to enable transparent background of Solarized.
 
 " Plugin kannokanno/previm 
-let g:previm_open_cmd = 'open -a Safari'
+let g:previm_open_cmd = 'open -a Safari'               "Open Safari when PrevimOpen
 
 " Plugin Shougo/vimfiler
-let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_as_default_explorer = 1                 "Replace vim explorer to vimfiler
+
+" Plugin fatih/vim-go
+let g:go_fmt_command = "goimports"                     "Do goimports when saving.
 
