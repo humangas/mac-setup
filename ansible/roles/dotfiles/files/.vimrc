@@ -7,7 +7,6 @@ set noswapfile                                      "No create swap file.
 set autoread                                        "Rereading Automatic When the file being edited is changed.
 set hidden                                          "Buffer is to be opened in the editing.
 set showcmd                                         "To view the command in the input to the status.
-set paste                                           "At the time of paste, not indented.
 set mouse=a                                         "To enable the mouse operation.
 set confirm                                         "To make sure when there are unsaved files.
 set visualbell t_vb=                                "Disable all the beep.
@@ -15,6 +14,7 @@ set noerrorbells                                    "Not sound the beep at the t
 set clipboard=unnamed,autoselect                    "To insert the selected text in visual mode to the clipboard. & Share the clipboard.
 set backspace=indent,eol,start                      "Backspace key so as to operate normally.
 set history=100                                     "The number of command history
+"set paste                                           "At the time of paste, not indented. -> comment out: for neocomplete
 
 " Tab
 set expandtab                                       "Convert tabs to spaces.
@@ -110,4 +110,26 @@ let g:vimfiler_as_default_explorer = 1                 "Replace vim explorer to 
 
 " Plugin fatih/vim-go
 let g:go_fmt_command = "goimports"                     "Do goimports when saving.
+
+" Plugin Shougo/neocomplete
+let g:neocomplete#enable_at_startup = 1                "Enable at startup
+
+" Plugin Shougo/neosnippet
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+imap <expr><TAB>
+ \ pumvisible() ? "\<C-n>" :
+ \ neosnippet#expandable_or_jumpable() ?
+ \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
 
