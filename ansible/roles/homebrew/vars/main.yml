@@ -8,7 +8,7 @@ homebrew_packages:
   - name: git
   - name: gibo
   # shell
-  - { name: zsh, option: --without-etcdir }
+  - { name: zsh, option: without-etcdir }
   - name: coreutils
   - name: zsh-completions 
   # python
@@ -26,10 +26,10 @@ homebrew_packages:
   - name: nodebrew
   - name: pyenv-virtualenv
   # go
-  - { name: go, option: --cross-compile-common }
+  - { name: go, option: cross-compile-common }
   # vim
   - name: lua
-  - { name: vim, option: --with-lua --with-override-system-vi }
+  - { name: vim, option: with-lua, with-override-system-vi }
   # tmux
   - name: tmux
   - name: reattach-to-user-namespace

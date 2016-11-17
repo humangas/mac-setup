@@ -10,11 +10,8 @@
   homebrew: >
     name={{ item.name }}
     state={{ item.state | default('latest') }}
-    install_options={{
-      item.option | default() | join(',')
-      if item.option is not string
-      else item.option
-    }}
+    install_options={{ item.option | default(omit) }}
+    state=upgraded
   with_items: "{{ homebrew_packages }}"
 
 - name: install homebrew cask packages
