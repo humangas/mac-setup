@@ -29,7 +29,7 @@ homebrew_packages:
   - { name: go, option: cross-compile-common }
   # vim
   - name: lua
-  - { name: vim, option: with-lua, with-override-system-vi }
+  - { name: vim, option: with-lua,with-python3,with-override-system-vi }
   # tmux
   - name: tmux
   - name: reattach-to-user-namespace
