@@ -1,11 +1,17 @@
 #!/bin/bash
 #########################################################################################################
-# installation shell for macOS setup
+# Installation shell for macOS setup
+#
+# Usage:
+# Install All:             $ bash install.sh
+# Install Any Option: e.g. $ bash install.sh --tags dotfiles
+#
 # see also: https://github.com/humangas/mac-setup
 #########################################################################################################
 
 # Const
 readonly REPOSITORY_NAME='github.com/humangas/mac-setup'
+readonly LOCAL_EXEC_PATH="$HOME/src/$REPOSITORY_NAME"
 
 # Check HTTP Status
 function check_http_status() {
@@ -52,30 +58,23 @@ function execute_ansible() {
   ansible-playbook -i ${workdir}/ansible/hosts -vv ${workdir}/ansible/site.yml --ask-become-pass "$@"
 }
 
-# Main: default
-function main() {
-  check_http_status
-  worktmpdir=`mktemp -d`
-  trap "rm -rf ${worktmpdir}" 0 1 2 3 15
-  download_setup_repository
-  install_homebrew
-  install_ansible
-  execute_ansible
+# Check Local Execute
+function check_local_exec() {
+  [ `pwd` == "$LOCAL_EXEC_PATH" ] && return 0
 }
 
-# Main: --local
-function main_local() {
-  install_homebrew
-  install_ansible
+# Main
+function main() {
+  check_local_exec
+  if [ $? -ne 0 ]; then
+    check_http_status
+    worktmpdir=`mktemp -d`
+    trap "rm -rf ${worktmpdir}" 0 1 2 3 15
+    download_setup_repository
+    install_homebrew
+    install_ansible
+  fi
   execute_ansible "$@"
 }
 
-# main
-case $# in
-  0) main ;; 
-  *) case $1 in
-       --local) main_local "${@:2}" ;;
-       *)       echo 'Usage: $ bash install.sh [--local] [--tags dotfiles]'; exit 1 ;;
-     esac 
-esac
-
+main $@
