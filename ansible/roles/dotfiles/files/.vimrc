@@ -14,7 +14,7 @@ set noerrorbells                                    "Not sound the beep at the t
 set clipboard=unnamed,autoselect                    "To insert the selected text in visual mode to the clipboard. & Share the clipboard.
 set backspace=indent,eol,start                      "Backspace key so as to operate normally.
 set history=100                                     "The number of command history
-"set paste                                           "At the time of paste, not indented. -> comment out: for neocomplete
+set completeopt=menuone,longest                     "Completion Style (* non preview)
 
 " Tab
 set expandtab                                       "Convert tabs to spaces.
@@ -74,6 +74,7 @@ call dein#add('davidhalter/jedi-vim')                                       "VIM
 call dein#add('fatih/vim-go')                                               "Go development plugin for Vim
 call dein#add('szw/vim-tags')                                               "The Ctags generator for Vim
 call dein#add('majutsushi/tagbar')                                          "a class outline viewer for Vim
+call dein#add('ConradIrwin/vim-bracketed-paste')                            "enables transparent pasting into vim. (i.e. no more :set paste!)
 
 " You can specify revision/branch/tag.
 call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
