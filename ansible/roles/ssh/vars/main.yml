@@ -1,0 +1,3 @@
+---
+dotfiles:
+  - { src: .ssh/config, mode: "0600", dest: ~/.ssh, dest_mode: "0700", backup: yes }

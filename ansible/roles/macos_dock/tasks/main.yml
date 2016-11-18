@@ -1,0 +1,34 @@
+---
+# see alseo: http://docs.ansible.com/ansible/osx_defaults_module.html
+
+- name: Dock position To bottom
+  # defaults write com.apple.dock orientation -string "bottom"
+  osx_defaults: domain=com.apple.dock key=orientation type=string value=bottom
+
+- name: Automatically hide Dock 
+  # defaults write com.apple.dock autohide -bool true
+  osx_defaults: domain=com.apple.dock key=autohide type=bool value=true
+
+- name: Zoom icon when on mouse 
+  # defaults write com.apple.dock magnification -bool true
+  osx_defaults: domain=com.apple.dock key=magnification type=bool value=true
+
+- name: Dock icon size
+  # defaults write com.apple.dock tilesize -float 50
+  osx_defaults: domain=com.apple.dock key=tilesize type=float value=50
+
+
+# TODO:
+## dockを最小にする
+## dockは稼働中アプリ以外表示しない
+## ctrl+tackpadで、拡大・縮小
+## プリンタ設定
+## wifi設定
+## iterm2の設定
+## alfredの設定
+## chromeログイン
+## dashの設定
+## docker for macの設定
+## clipyの設定
+## caffeinの設定
+

@@ -31,25 +31,6 @@
     dest=~/.config/solarized/dircolors.256dark
     force=True
 
-- name: install dein.vim
-  file: path={{ deinvim['dir'] }} state=directory
-- get_url: >
-    url=https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/{{ deinvim['shell'] }}
-    dest={{ deinvim['dir'] }}/{{ deinvim['shell'] }}
-    force=True
-    mode=u+x
-- shell: "./{{ deinvim['shell'] }} {{ deinvim['dir'] }}/"
-  args:
-    chdir: "{{ deinvim['dir'] }}/"
-  register: result
-  changed_when: "'already exists!' not in result.stdout"
-
-- name: setting ghq style
-  file: path=~/src state=directory
-- file: path=~/pkg state=directory
-- file: path=~/bin state=directory 
-- git_config: name=ghq.root scope=global value="~/src"
-
 - name: mkdir dotifles directory
   file: >
     path={{ item.dest }}
@@ -67,7 +48,3 @@
     backup={{ item.backup | default("no") }}
     force=yes
   with_items: "{{ dotfiles }}"
-
-- name: mkdir work directory
-  file: path=~/src/work state=directory
-

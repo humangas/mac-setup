@@ -1,0 +1,5 @@
+---
+dotfiles:
+  - src: .tmux.conf
+  - { src: bin/loadavg, mode: "u+x", dest: ~/bin }
+  - { src: bin/localip, mode: "u+x", dest: ~/bin }

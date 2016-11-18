@@ -5,6 +5,10 @@
   become: no
   roles:
     - { role: homebrew,     tags: ['homebrew'] }
-    - { role: dotfiles,     tags: ['dotfiles'] }
+    - { role: dirs,         tags: ['dotfiles', 'dirs'] }
+    - { role: zsh,          tags: ['dotfiles', 'zsh'] }
+    - { role: ssh,          tags: ['dotfiles', 'ssh'] }
+    - { role: tmux,         tags: ['dotfiles', 'tmux'] }
+    - { role: vim,          tags: ['dotfiles', 'vim'] }
     - { role: atom,         tags: ['atom'] }
-    - { role: osx_defaults, tags: ['osx_defaults'] }
+    - { role: macos_dock,   tags: ['macos', 'dock'] }

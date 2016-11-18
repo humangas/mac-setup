@@ -5,6 +5,7 @@
 # Usage:
 # Install All:             $ bash install.sh
 # Install Any Option: e.g. $ bash install.sh --tags dotfiles
+# Show Roles and Tags      $ bash install.sh --show
 #
 # see also: https://github.com/humangas/mac-setup
 #########################################################################################################
@@ -63,6 +64,11 @@ function check_local_exec() {
   [ `pwd` == "$LOCAL_EXEC_PATH" ] && return 0
 }
 
+# Show roles and tags
+function show_roles() {
+  grep -ve '.*#.*' ansible/site.yml | grep -oe '- { role:.*}*'
+}
+
 # Main
 function main() {
   check_local_exec
@@ -77,4 +83,7 @@ function main() {
   execute_ansible "$@"
 }
 
-main $@
+case "$1" in
+  --show) show_roles ;;
+    *)    main $@ ;;
+esac

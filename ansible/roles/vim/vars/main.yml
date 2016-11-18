@@ -1,0 +1,7 @@
+---
+dotfiles:
+  - src: .vimrc
+ 
+deinvim:
+  dir: ~/.cache/dein
+  shell: installer.sh
