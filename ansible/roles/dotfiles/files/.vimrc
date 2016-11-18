@@ -15,6 +15,7 @@ set clipboard=unnamed,autoselect                    "To insert the selected text
 set backspace=indent,eol,start                      "Backspace key so as to operate normally.
 set history=100                                     "The number of command history
 set completeopt=menuone,longest                     "Completion Style (* non preview)
+set switchbuf=useopen                               "If already in the buffer, open that file.
 
 " Tab
 set expandtab                                       "Convert tabs to spaces.
