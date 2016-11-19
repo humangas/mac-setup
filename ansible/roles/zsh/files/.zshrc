@@ -62,6 +62,7 @@ alias soz='source ~/.zshrc'
 alias cdw='cd ~/src/work'
 alias cds='PDIR=$(L=`ghq list -p`; L="$L\n`ls -d $GOPATH/src/work/*`" ; echo -e "$L" | sort | uniq | fzf); cd "$PDIR" > /dev/null 2>&1 || cd $(dirname "$PDIR")' 
 alias cdd='cdCurrentDirs'
+alias ops='openSrcDirFile'
 alias opf='openCurrentFile'
 alias opg='openCurrentGitURL'
 alias mdf='mdfindFilterFzf'
@@ -114,6 +115,14 @@ function _openFile() {
       open $(dirname $T)
     fi  
   fi
+}
+
+function openSrcDirFile() {
+  local current_dir=$(pwd)
+  cd $GOPATH/src
+  local T="$(fzf)"
+  cd "$current_dir"
+  _openFile "$GOPATH/src/$T"
 }
 
 function openCurrentFile() {
