@@ -63,19 +63,21 @@ call dein#add('Shougo/dein.vim')
 call dein#add('Shougo/neosnippet.vim')                                      "Adds snippet support to Vim.
 call dein#add('Shougo/neosnippet-snippets')                                 "The standard snippets repository for 'neosnippet.vim'.
 call dein#add('Shougo/neocomplete.vim')                                     "Next generation completion framework after neocomplcache
+call dein#add('Shougo/vimproc.vim', {'build' : 'make'})                     "Great asynchronous execution library for Vim.
 call dein#add('Shougo/vimfiler')                                            "Powerful file explorer implemented by Vim script
 call dein#add('Shougo/unite.vim')                                           "Search and display information from arbitrary sources like files, buffers, etc.
+call dein#add('Shougo/unite-outline')                                       "Vim's buffer with the outline view.
 call dein#add('Shougo/denite.nvim')                                         "Dark powered asynchronous unite all interfaces for Neovim/Vim8
 call dein#add('altercation/vim-colors-solarized')                           "Colorscheme: solarized
 call dein#add('itchyny/lightline.vim')                                      "A light and configurable statusline/tabline for Vim
-call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })  "fzf is a general-purpose command-line fuzzy finder.
-call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })                     "vim plugin fzf
+call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })  "General-purpose command-line fuzzy finder.
+call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })                     "Vim plugin fzf
 call dein#add('kannokanno/previm')                                          "Realtime preview by Vim. (Markdown, reStructuredText, textile)
 call dein#add('davidhalter/jedi-vim')                                       "VIM binding to the autocompletion library Jedi(for Python).
 call dein#add('fatih/vim-go')                                               "Go development plugin for Vim
 call dein#add('szw/vim-tags')                                               "The Ctags generator for Vim
-call dein#add('majutsushi/tagbar')                                          "a class outline viewer for Vim
-call dein#add('ConradIrwin/vim-bracketed-paste')                            "enables transparent pasting into vim. (i.e. no more :set paste!)
+call dein#add('majutsushi/tagbar')                                          "A class outline viewer for Vim
+call dein#add('ConradIrwin/vim-bracketed-paste')                            "Enables transparent pasting into vim. (i.e. no more :set paste!)
 
 " You can specify revision/branch/tag.
 call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
