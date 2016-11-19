@@ -11,5 +11,5 @@
     - { role: tmux,         tags: ['dotfiles', 'tmux'] }
     - { role: vim,          tags: ['dotfiles', 'vim'] }
     - { role: ghq,          tags: ['dotfiles', 'ghq'] }
-    - { role: macos_dock,   tags: ['macos', 'dock'] }
+    - { role: macos_dock,   tags: ['macos'   , 'dock'] }
     - { role: atom,         tags: ['atom'] }
