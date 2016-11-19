@@ -61,8 +61,10 @@ alias fzf='fzf-tmux'
 alias soz='source ~/.zshrc'
 alias cdw='cd ~/src/work'
 alias cds='PDIR=$(L=`ghq list -p`; L="$L\n`ls -d $GOPATH/src/work/*`" ; echo -e "$L" | sort | uniq | fzf); cd "$PDIR" > /dev/null 2>&1 || cd $(dirname "$PDIR")' 
-alias cdp='actionCurrentResource'
-alias opg='openGitURL'
+alias cdd='cdCurrentDirs'
+alias opf='openCurrentFile'
+alias opg='openCurrentGitURL'
+alias mdf='mdfindFilterFzf'
 
 # History
 ################################################################################################
@@ -101,25 +103,58 @@ fi
 zplug load --verbose
 
 # Functions
-function actionCurrentResource() {
-  local T=$(ls -dF $PWD/* | fzf)
-  echo "cd $T" | grep /$
-  if [[ $? -eq 0 ]]; then
-    cd "$T"   
+function _openFile() {
+  local T="$1"
+  local type=$(file "$T" | cut -d: -f2 | grep 'text')
+  if [[ ${#type} -ne 0 ]]; then
+    vim "$T"
   else
-    local type=$(file "$T" | cut -d: -f2 | grep 'text')
-    if [[ ${#type} -ne 0 ]]; then
-      vim "$T"
-    else
-      read '?Open Finder? [y|n]: ' ans
-      if [[ $ans == 'y' ]]; then
-        open .
-      fi  
-    fi
+    read '?Open Finder? [y|n]: ' ans
+    if [[ $ans == 'y' ]]; then
+      open $(dirname $T)
+    fi  
   fi
 }
 
-function openGitURL() {
+function openCurrentFile() {
+  _openFile "$(fzf)"
+ }
+
+function mdfindFilterFzf(){
+  if [[ $# -eq 0 ]]; then
+    mdfind
+    return
+  fi
+
+  local T="$(mdfind $@ | fzf)"
+  if [[ -d $T ]]; then
+    cd "$T"
+    cdCurrentDirs
+    return
+  fi
+  _openFile "$T"
+}
+
+function cdCurrentDirs() {
+  readonly EXIT='exit'
+
+  setopt nonomatch
+  if ! ls -df "$PWD"/* > /dev/null 2>&1; then
+    return
+  fi
+  setopt nomatch
+
+  local T=$(ls -dF $PWD/* | grep /$)
+  if [[ ! -z $T ]]; then
+    T="$T\n$EXIT"
+    local target=$(echo $T | fzf)
+    [[ $target == $EXIT ]] && return
+    cd "$target"
+    cdCurrentDirs 
+  fi
+}
+
+function openCurrentGitURL() {
   local url=$(git config -l | grep remote.origin.url | cut -d= -f2 | sed "s/:/\//" | sed "s/git@/https:\/\//")
   if [[ -n $url ]]; then
     open $url
