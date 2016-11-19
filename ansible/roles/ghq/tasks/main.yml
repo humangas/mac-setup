@@ -1,0 +1,6 @@
+---
+- name: setting ghq style
+  file: path=~/src state=directory
+- file: path=~/pkg state=directory
+- file: path=~/bin state=directory 
+- git_config: name=ghq.root scope=global value="~/src"
