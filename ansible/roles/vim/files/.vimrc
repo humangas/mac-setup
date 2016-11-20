@@ -17,6 +17,11 @@ set history=100                                     "The number of command histo
 set completeopt=menuone,longest                     "Completion Style (* non preview)
 set switchbuf=useopen                               "If already in the buffer, open that file.
 
+" Key
+"Replace j,k to gj, gk
+nnoremap j gj
+nnoremap k gk
+
 " Tab
 set expandtab                                       "Convert tabs to spaces.
 set shiftwidth=2                                    "Display width of the Tab character at the beginning of a line.
@@ -78,6 +83,8 @@ call dein#add('fatih/vim-go')                                               "Go 
 call dein#add('szw/vim-tags')                                               "The Ctags generator for Vim
 call dein#add('majutsushi/tagbar')                                          "A class outline viewer for Vim
 call dein#add('ConradIrwin/vim-bracketed-paste')                            "Enables transparent pasting into vim. (i.e. no more :set paste!)
+call dein#add('Yggdroot/indentLine')                                        "Displaying thin vertical lines at each indentation level for code indented with spaces.
+call dein#add('scrooloose/syntastic')                                       "Syntax checking plugin for Vim.
 
 " You can specify revision/branch/tag.
 call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
@@ -117,20 +124,23 @@ nnoremap <silent> <Space>o :<C-u>Unite<Space>outline<CR>
 
 " Plugin davidhalter/jedi-vim -> see also: https://github.com/davidhalter/jedi-vim#settings 
 let g:jedi#goto_definitions_command = "<leader>d"      "Jump to definition 
-let g:jedi#documentation_command = "<leader>c"         "Open document
+let g:jedi#usages_command = "<leader>c"                "List callers
 let g:jedi#rename_command = "<leader>r"                "Rename all references of selection section
+let g:jedi#documentation_command = "<leader>dc"         "Open document
 
 " Plugin fatih/vim-go -> see also: https://github.com/fatih/vim-go#example-mappings
 let g:go_fmt_command = "goimports"                     "Do goimports when saving.
 let g:go_term_mode = "split"                           "Opened in a vertical split
 "Jump to definition 
 au FileType go nmap <Leader>d <Plug>(go-def-split)     
-"Open document
-au FileType go nmap <Leader>c <Plug>(go-doc)
-"Open document in browser
-au FileType go nmap <Leader>cb <Plug>(go-doc-browser)
+"List callers
+au FileType go nmap <Leader>c <Plug>(go-callers)
 "Rename all references of selection section
 au FileType go nmap <Leader>r <Plug>(go-rename)
+"Open document
+au FileType go nmap <Leader>dc <Plug>(go-doc)
+"Open document in browser
+au FileType go nmap <Leader>db <Plug>(go-doc-browser)
 
 " Plugin Shougo/neocomplete
 let g:neocomplete#enable_at_startup = 1                "Enable at startup
