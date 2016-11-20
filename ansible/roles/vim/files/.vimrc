@@ -72,7 +72,6 @@ call dein#add('Shougo/vimproc.vim', {'build': 'make'})                      "Gre
 call dein#add('Shougo/vimfiler')                                            "Powerful file explorer implemented by Vim script
 call dein#add('Shougo/unite.vim')                                           "Search and display information from arbitrary sources like files, buffers, etc.
 call dein#add('Shougo/unite-outline')                                       "Vim's buffer with the outline view.
-call dein#add('Shougo/denite.nvim')                                         "Dark powered asynchronous unite all interfaces for Neovim/Vim8
 call dein#add('altercation/vim-colors-solarized')                           "Colorscheme: solarized
 call dein#add('itchyny/lightline.vim')                                      "A light and configurable statusline/tabline for Vim
 call dein#add('junegunn/fzf', {'build': './install --all', 'merged': 0})    "General-purpose command-line fuzzy finder.
