@@ -68,23 +68,24 @@ call dein#add('Shougo/dein.vim')
 call dein#add('Shougo/neosnippet.vim')                                      "Adds snippet support to Vim.
 call dein#add('Shougo/neosnippet-snippets')                                 "The standard snippets repository for 'neosnippet.vim'.
 call dein#add('Shougo/neocomplete.vim')                                     "Next generation completion framework after neocomplcache
-call dein#add('Shougo/vimproc.vim', {'build' : 'make'})                     "Great asynchronous execution library for Vim.
+call dein#add('Shougo/vimproc.vim', {'build': 'make'})                      "Great asynchronous execution library for Vim.
 call dein#add('Shougo/vimfiler')                                            "Powerful file explorer implemented by Vim script
 call dein#add('Shougo/unite.vim')                                           "Search and display information from arbitrary sources like files, buffers, etc.
 call dein#add('Shougo/unite-outline')                                       "Vim's buffer with the outline view.
 call dein#add('Shougo/denite.nvim')                                         "Dark powered asynchronous unite all interfaces for Neovim/Vim8
 call dein#add('altercation/vim-colors-solarized')                           "Colorscheme: solarized
 call dein#add('itchyny/lightline.vim')                                      "A light and configurable statusline/tabline for Vim
-call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })  "General-purpose command-line fuzzy finder.
-call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })                     "Vim plugin fzf
+call dein#add('junegunn/fzf', {'build': './install --all', 'merged': 0})    "General-purpose command-line fuzzy finder.
+call dein#add('junegunn/fzf.vim', {'depends': 'fzf'})                       "Vim plugin fzf
 call dein#add('kannokanno/previm')                                          "Realtime preview by Vim. (Markdown, reStructuredText, textile)
-call dein#add('davidhalter/jedi-vim')                                       "VIM binding to the autocompletion library Jedi(for Python).
+call dein#add('davidhalter/jedi-vim', {'on_source': ['vim-pyenv']})         "VIM binding to the autocompletion library Jedi(for Python).
+call dein#add('lambdalisue/vim-pyenv', {'on_ft': ['python']})               "Allows you to activate and deactivate the pyenv Python correctly in a live Vim session.
 call dein#add('fatih/vim-go')                                               "Go development plugin for Vim
 call dein#add('szw/vim-tags')                                               "The Ctags generator for Vim
 call dein#add('majutsushi/tagbar')                                          "A class outline viewer for Vim
 call dein#add('ConradIrwin/vim-bracketed-paste')                            "Enables transparent pasting into vim. (i.e. no more :set paste!)
 call dein#add('Yggdroot/indentLine')                                        "Displaying thin vertical lines at each indentation level for code indented with spaces.
-call dein#add('scrooloose/syntastic')                                       "Syntax checking plugin for Vim.
+call dein#add('scrooloose/syntastic')                                       "Syntax checking plugin for Vim. ('pip install flake8' is required separately.)
 
 " You can specify revision/branch/tag.
 call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
@@ -123,7 +124,7 @@ let g:vimfiler_as_default_explorer = 1                 "Replace vim explorer to 
 nnoremap <silent> <Space>o :<C-u>Unite<Space>outline<CR>
 
 " Plugin davidhalter/jedi-vim -> see also: https://github.com/davidhalter/jedi-vim#settings 
-let g:jedi#goto_definitions_command = "<leader>d"      "Jump to definition 
+let g:jedi#goto_command = "<leader>d"                  "Jump to definition 
 let g:jedi#usages_command = "<leader>c"                "List callers
 let g:jedi#documentation_command = "<leader>dc"        "Open document
 let g:jedi#rename_command = "<leader>r"                "Rename all references of selection section
@@ -163,4 +164,3 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
-
