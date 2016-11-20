@@ -112,8 +112,25 @@ let g:previm_open_cmd = 'open -a Safari'               "Open Safari when PrevimO
 " Plugin Shougo/vimfiler
 let g:vimfiler_as_default_explorer = 1                 "Replace vim explorer to vimfiler
 
-" Plugin fatih/vim-go
+" Plugin Shougo/unite-outline
+nnoremap <silent> <Space>o :<C-u>Unite<Space>outline<CR>
+
+" Plugin davidhalter/jedi-vim -> see also: https://github.com/davidhalter/jedi-vim#settings 
+let g:jedi#goto_definitions_command = "<leader>d"      "Jump to definition 
+let g:jedi#documentation_command = "<leader>c"         "Open document
+let g:jedi#rename_command = "<leader>r"                "Rename all references of selection section
+
+" Plugin fatih/vim-go -> see also: https://github.com/fatih/vim-go#example-mappings
 let g:go_fmt_command = "goimports"                     "Do goimports when saving.
+let g:go_term_mode = "split"                           "Opened in a vertical split
+"Jump to definition 
+au FileType go nmap <Leader>d <Plug>(go-def-split)     
+"Open document
+au FileType go nmap <Leader>c <Plug>(go-doc)
+"Open document in browser
+au FileType go nmap <Leader>cb <Plug>(go-doc-browser)
+"Rename all references of selection section
+au FileType go nmap <Leader>r <Plug>(go-rename)
 
 " Plugin Shougo/neocomplete
 let g:neocomplete#enable_at_startup = 1                "Enable at startup
