@@ -124,6 +124,7 @@ nnoremap <silent> <Space>e :<C-u>VimFilerBufferDir<CR>
 
 " Plugin Shougo/unite-outline
 nnoremap <silent> <Space>o :<C-u>Unite<Space>outline<CR>
+nnoremap <silent> <C-b> :<C-u>Unite<Space>bookmark<CR>
 
 " Plugin davidhalter/jedi-vim -> see also: https://github.com/davidhalter/jedi-vim#settings 
 let g:jedi#goto_command = "<leader>d"                  "Jump to definition 
