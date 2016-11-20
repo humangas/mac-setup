@@ -15,6 +15,7 @@ homebrew_packages:
   - name: python
   - name: python3
   - name: pyenv
+  - name: pyenv-virtualenv
    # ruby
   - name: ruby
   - name: rbenv
@@ -24,12 +25,11 @@ homebrew_packages:
   # node.js
   - name: node
   - name: nodebrew
-  - name: pyenv-virtualenv
   # go
   - { name: go, option: cross-compile-common }
   # vim
   - name: lua
-  - { name: vim, option: with-lua,with-python3,with-override-system-vi }
+  - { name: vim, option: [with-lua, with-override-system-vi, with-python3] }
   # tmux
   - name: tmux
   - name: reattach-to-user-namespace
