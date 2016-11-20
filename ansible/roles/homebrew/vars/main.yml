@@ -29,7 +29,7 @@ homebrew_packages:
   - { name: go, option: cross-compile-common }
   # vim
   - name: lua
-  - { name: vim, option: [with-lua, with-override-system-vi, with-python3] }
+  - { name: vim, option: [with-lua, with-override-system-vi] }
   # tmux
   - name: tmux
   - name: reattach-to-user-namespace
@@ -55,6 +55,7 @@ homebrew_cask_packages:
   - name: dash
   - name: caffeine
   - name: clipy
+  - name: docker
   - name: atom
   - name: java
   - name: vagrant
@@ -62,4 +63,3 @@ homebrew_cask_packages:
   - name: virtualbox
   - name: the-unarchiver
   - name: maczip4win
-
