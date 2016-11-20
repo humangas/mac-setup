@@ -8,8 +8,8 @@ $ curl -L https://raw.githubusercontent.com/humangas/mac-setup/master/install | 
 
 ## For local 
 ```
-$ ghq get git@github.com:humangas/mac-setup.git 
-$ cd ~/src/github.com/humangas/mac-setup
+$ git clone https://github.com/humangas/mac-setup.git 
+$ cd mac-setup 
 $ bash install
 ```
 

@@ -12,7 +12,6 @@
 
 # Const
 readonly REPOSITORY_NAME='github.com/humangas/mac-setup'
-readonly LOCAL_EXEC_PATH="$HOME/src/$REPOSITORY_NAME"
 
 # Check HTTP Status
 function check_http_status() {
@@ -61,7 +60,12 @@ function execute_ansible() {
 
 # Check Local Execute
 function check_local_exec() {
-  [ `pwd` == "$LOCAL_EXEC_PATH" ] && return 0
+  which git > /dev/null 2>&1
+  [ "$?" -ne 0 ] && return 1
+ 
+  local search_repo_name=$(echo $REPOSITORY_NAME | sed -e 's/github.com\///')
+  local repo_name=$(git config -l | grep remote.origin.url | cut -d= -f2 | grep "$search_repo_name")
+  [ ! -z $repo_name ] && return 0
 }
 
 # Show roles and tags
