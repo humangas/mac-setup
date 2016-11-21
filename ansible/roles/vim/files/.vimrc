@@ -126,20 +126,17 @@ nnoremap <silent> <Space>o :<C-u>Unite<Space>outline<CR>
 nnoremap <silent> <C-b> :<C-u>Unite<Space>bookmark<CR>
 
 " Plugin davidhalter/jedi-vim -> see also: https://github.com/davidhalter/jedi-vim#settings 
-let g:jedi#goto_command = "<leader>d"                  "Jump to definition 
+let g:jedi#goto_command = "gd"                         "Jump to definition 
 let g:jedi#usages_command = "<leader>c"                "List callers
-let g:jedi#documentation_command = "<leader>dc"        "Open document
+let g:jedi#documentation_command = "<leader>d"         "Open document
 let g:jedi#rename_command = "<leader>r"                "Rename all references of selection section
 
 " Plugin fatih/vim-go -> see also: https://github.com/fatih/vim-go#example-mappings
 let g:go_fmt_command = "goimports"                     "Do goimports when saving.
-let g:go_term_mode = "split"                           "Opened in a vertical split
-"Jump to definition 
-au FileType go nmap <Leader>d <Plug>(go-def-split)     
 "List callers
 au FileType go nmap <Leader>c <Plug>(go-callers)
 "Open document
-au FileType go nmap <Leader>dc <Plug>(go-doc)
+au FileType go nmap <Leader>d <Plug>(go-doc)
 "Open document in browser
 au FileType go nmap <Leader>db <Plug>(go-doc-browser)
 "Rename all references of selection section
