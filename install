@@ -50,12 +50,23 @@ function download_setup_repository() {
   curl -L https://${REPOSITORY_NAME}/archive/master.tar.gz -# | tar xz -C ${worktmpdir} --strip=1
 }
 
+# Check zsh
+function check_zsh() {
+  [ $SHELL == '/usr/local/bin/zsh' ] && return 0
+}
+
 # Execute Ansible Playbook
 function execute_ansible() {
   local workdir=${worktmpdir:-'.'}
   echo 'Execute Ansible Playbook...'
-  echo "-> $ ansible-playbook -i ${workdir}/ansible/hosts -vv ${workdir}/ansible/site.yml --ask-become-pass" "$@"
-  ansible-playbook -i ${workdir}/ansible/hosts -vv ${workdir}/ansible/site.yml --ask-become-pass "$@"
+  check_zsh
+  if [ $? -eq 0 ]; then
+    echo "-> $ ansible-playbook -i ${workdir}/ansible/hosts -vv ${workdir}/ansible/site.yml" "$@"
+    ansible-playbook -i ${workdir}/ansible/hosts -vv ${workdir}/ansible/site.yml "$@"
+  else
+    echo "-> $ ansible-playbook -i ${workdir}/ansible/hosts -vv ${workdir}/ansible/site.yml --ask-become-pass" "$@"
+    ansible-playbook -i ${workdir}/ansible/hosts -vv ${workdir}/ansible/site.yml --ask-become-pass "$@"
+  fi
 }
 
 # Check Local Execute
