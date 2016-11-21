@@ -58,6 +58,7 @@ homebrew_cask_packages:
   - name: atom
   - name: java
   - name: vagrant
+  - name: marp 
   - name: skitch
   - name: virtualbox
   - name: the-unarchiver
