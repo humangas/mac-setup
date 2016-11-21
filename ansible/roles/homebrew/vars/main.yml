@@ -1,7 +1,6 @@
 ---
 homebrew_taps:
   - name: caskroom/cask
-  - name: motemen/ghq
 
 homebrew_packages:
   # git
