@@ -108,17 +108,17 @@ colorscheme solarized
 
 " Plugin itchyny/lightline.vim 
 let g:lightline = {}
-let g:lightline.colorscheme = 'solarized'              "Use ColorScheme: Solarized
+let g:lightline.colorscheme = 'solarized'                                   "Use ColorScheme: Solarized
 
 " Plugin altercation/vim-colors-solarized
-let g:solarized_termtrans=1                            "Terminal at the time of the transparent background, to enable transparent background of Solarized.
+let g:solarized_termtrans=1                                                 "Terminal at the time of the transparent background, to enable transparent background of Solarized.
 
 " Plugin kannokanno/previm 
-let g:previm_open_cmd = 'open -a Safari'               "Open Safari when PrevimOpen
+let g:previm_open_cmd = 'open -a Safari'                                    "Open Safari when PrevimOpen
 
 " Plugin Shougo/vimfiler
-let g:vimfiler_as_default_explorer = 1                 "Replace vim explorer to vimfiler
-let g:vimfiler_enable_auto_cd = 1                      "vimfiler change Vim current directory
+let g:vimfiler_as_default_explorer = 1                                      "Replace vim explorer to vimfiler
+let g:vimfiler_enable_auto_cd = 1                                           "vimfiler change Vim current directory
 nnoremap <silent> <Space>e :<C-u>VimFilerBufferDir<CR>
 
 " Plugin Shougo/unite-outline
@@ -126,24 +126,34 @@ nnoremap <silent> <Space>o :<C-u>Unite<Space>outline<CR>
 nnoremap <silent> <C-b> :<C-u>Unite<Space>bookmark<CR>
 
 " Plugin davidhalter/jedi-vim -> see also: https://github.com/davidhalter/jedi-vim#settings 
-let g:jedi#goto_command = "gd"                         "Jump to definition 
-let g:jedi#usages_command = "<leader>c"                "List callers
-let g:jedi#documentation_command = "<leader>d"         "Open document
-let g:jedi#rename_command = "<leader>r"                "Rename all references of selection section
+let g:jedi#goto_command = "gd"                                              "Jump to definition 
+let g:jedi#usages_command = "<leader>c"                                     "List callers
+let g:jedi#documentation_command = "<leader>d"                              "Open document
+let g:jedi#rename_command = "<leader>r"                                     "Rename all references of selection section
 
 " Plugin fatih/vim-go -> see also: https://github.com/fatih/vim-go#example-mappings
-let g:go_fmt_command = "goimports"                     "Do goimports when saving.
-"List callers
+let g:go_highlight_functions = 1                                            "Highlight functions
+let g:go_highlight_methods = 1                                              "Highlight methods
+let g:go_highlight_structs = 1                                              "Highlight structs
+let g:go_highlight_operators = 1                                            "Highlight operators
+let g:go_highlight_build_constraints = 1                                    "Highlight build constraints
+let g:go_fmt_command = "goimports"                                          "Do goimports when saving.
+autocmd FileType go :highlight goErr cterm=bold ctermfg=197                 "Highlight err
+autocmd FileType go :match goErr /\<err\>/                                  "Highlight err
 au FileType go nmap <Leader>c <Plug>(go-callers)
-"Open document
 au FileType go nmap <Leader>d <Plug>(go-doc)
-"Open document in browser
 au FileType go nmap <Leader>db <Plug>(go-doc-browser)
-"Rename all references of selection section
 au FileType go nmap <Leader>r <Plug>(go-rename)
 
+" Plugin scrooloose/syntastic
+let g:syntastic_go_checkers = ['golint', 'gotype', 'govet', 'go']           "Go Checkers
+
+" Plugin majutsushi/tagbar
+let g:tagbar_autofocus = 1                                                  "Focus when open tagbar
+nnoremap <silent> <Space>t :<C-u>TagbarToggle<CR>
+
 " Plugin Shougo/neocomplete
-let g:neocomplete#enable_at_startup = 1                "Enable at startup
+let g:neocomplete#enable_at_startup = 1                                     "Enable at startup
 
 " Plugin Shougo/neosnippet
 " Plugin key-mappings.
