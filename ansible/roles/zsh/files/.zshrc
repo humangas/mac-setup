@@ -165,11 +165,20 @@ function cdCurrentDirs() {
 }
 
 function openCurrentGitURL() {
-  local url=$(git config -l | grep remote.origin.url | cut -d= -f2 | sed "s/:/\//" | sed "s/git@/https:\/\//")
-  if [[ -n $url ]]; then
-    open $url
-  else
+  local url=$(git config -l | grep remote.origin.url | cut -d= -f2)
+
+  if [[ ! -n $url ]]; then
     echo "Error! git remote.origin.url not found"
+    return 1
+  fi
+  
+  if [[ -n $(echo $url | grep 'http') ]]; then
+    open "$url"
+  elif [[ -n $(echo $url | grep 'git') ]]; then
+    url=$(echo "$url" | sed "s/:/\//" | sed "s/git@/https:\/\//")
+    open "$url"
+  else
+    echo "Error! Unexpected form: $url" 
     return 1
   fi
 }
