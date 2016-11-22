@@ -138,7 +138,7 @@ let g:go_highlight_build_constraints = 1                                    "Hig
 let g:go_fmt_command = "goimports"                                          "Do goimports when saving.
 autocmd FileType go :highlight goErr cterm=bold ctermfg=197                 "Highlight err
 autocmd FileType go :match goErr /\<err\>/                                  "Highlight err
-au FileType go nmap <Leader>c <Plug>(go-callers)
+au FileType go nmap <Leader>c <Plug>(go-referrers)
 au FileType go nmap <Leader>d <Plug>(go-doc)
 au FileType go nmap <Leader>db <Plug>(go-doc-browser)
 au FileType go nmap <Leader>r <Plug>(go-rename)
