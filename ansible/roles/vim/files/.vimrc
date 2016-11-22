@@ -117,11 +117,17 @@ let g:previm_open_cmd = 'open -a Safari'                                    "Ope
 " Plugin Shougo/vimfiler
 let g:vimfiler_as_default_explorer = 1                                      "Replace vim explorer to vimfiler
 let g:vimfiler_enable_auto_cd = 1                                           "vimfiler change Vim current directory
-nnoremap <silent> <Space>e :<C-u>VimFilerBufferDir<CR>
+nnoremap <silent> <Space>e :<C-u>VimFilerBufferDir<Space>-explorer<CR>
 
 " Plugin Shougo/unite-outline
 nnoremap <silent> <Space>o :<C-u>Unite<Space>outline<CR>
-nnoremap <silent> <C-b> :<C-u>Unite<Space>bookmark<CR>
+nnoremap <silent> <Space>l :<C-u>Unite<Space>buffer<CR>
+nnoremap <silent> <Space>b :<C-u>Unite<Space>bookmark<CR>
+nnoremap <silent> <Space>r :<C-u>Unite<Space>register<CR>
+nnoremap <silent> <Space>c :<C-u>Unite<Space>file<CR>
+nnoremap <silent> <Space>g :<C-u>Unite<Space>grep<CR>
+nnoremap <silent> <Space>f :<C-u>Unite<Space>find<CR>
+nnoremap <silent> <C-b> :<C-u>UniteBookmarkAdd<CR>
 
 " Plugin davidhalter/jedi-vim -> see also: https://github.com/davidhalter/jedi-vim#settings 
 let g:jedi#goto_command = "gd"                                              "Jump to definition 
