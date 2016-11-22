@@ -47,7 +47,7 @@ homebrew_packages:
   - name: ctags
   - name: macvim 
   - name: gdb 
-  - name: delve 
+  - name: go-delve/delve/delve 
 
 homebrew_cask_packages:
   - name: google-chrome
