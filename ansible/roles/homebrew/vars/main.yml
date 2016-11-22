@@ -45,6 +45,9 @@ homebrew_packages:
   - name: xz
   - name: gnu-sed
   - name: ctags
+  - name: macvim 
+  - name: gdb 
+  - name: delve 
 
 homebrew_cask_packages:
   - name: google-chrome
