@@ -58,7 +58,6 @@ homebrew_cask_packages:
   - name: caffeine
   - name: clipy
   - name: docker
-  - name: atom
   - name: java
   - name: vagrant
   - name: marp 
