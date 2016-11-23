@@ -13,9 +13,12 @@
   # defaults write com.apple.dock magnification -bool true
   osx_defaults: domain=com.apple.dock key=magnification type=bool value=true
 
+- name: Dock icon zoom size
+  osx_defaults: domain=com.apple.dock key=largesize type=float value=70
+
 - name: Dock icon size
   # defaults write com.apple.dock tilesize -float 50
-  osx_defaults: domain=com.apple.dock key=tilesize type=float value=50
+  osx_defaults: domain=com.apple.dock key=tilesize type=float value=16
 
 
 # TODO:
