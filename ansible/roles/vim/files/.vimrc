@@ -24,6 +24,8 @@ nnoremap k gk
 
 " Tab
 set expandtab                                       "Convert tabs to spaces.
+set shiftwidth=4                                    "Display width of the Tab character at the beginning of a line.
+set tabstop=4                                       "Display width of the Tab character other than the beginning of the line.
 
 " Search
 set ignorecase                                      "Search not case sensitive.
