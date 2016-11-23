@@ -124,13 +124,19 @@ nnoremap <silent> <Space>E :<C-u>VimFilerBufferDir<Space>-explorer<CR>
 
 " Plugin Shougo/unite-outline
 nnoremap <silent> <Space>o :<C-u>Unite<Space>outline<CR>
-nnoremap <silent> <Space>l :<C-u>Unite<Space>buffer<CR>
-nnoremap <silent> <Space>b :<C-u>Unite<Space>bookmark<CR>
 nnoremap <silent> <Space>r :<C-u>Unite<Space>register<CR>
-nnoremap <silent> <Space>c :<C-u>Unite<Space>file<CR>
-nnoremap <silent> <Space>g :<C-u>Unite<Space>grep<CR>
-nnoremap <silent> <Space>f :<C-u>Unite<Space>find<CR>
+nnoremap <silent> gr :<C-u>Unite<Space>grep<CR>
+nnoremap <silent> gl :<C-u>Unite<Space>buffer<CR>
+nnoremap <silent> gb :<C-u>Unite<Space>bookmark<CR>
 nnoremap <silent> <C-b> :<C-u>UniteBookmarkAdd<CR>
+
+" Plugin majutsushi/tagbar
+let g:tagbar_autofocus = 1                                                  "Focus when open tagbar
+nnoremap <silent> <Space>t :<C-u>TagbarToggle<CR>
+
+" Plugin junegunn/fzf.vim 
+nnoremap <silent> fc :<C-u>FZF<Space>%:h<CR>
+nnoremap <silent> fs :<C-u>FZF<Space>~/src<CR>
 
 " Plugin davidhalter/jedi-vim -> see also: https://github.com/davidhalter/jedi-vim#settings 
 let g:jedi#goto_command = "gd"                                              "Jump to definition 
@@ -154,10 +160,6 @@ au FileType go nmap <Leader>r <Plug>(go-rename)
 
 " Plugin scrooloose/syntastic
 let g:syntastic_go_checkers = ['golint', 'gotype', 'govet', 'go']           "Go Checkers
-
-" Plugin majutsushi/tagbar
-let g:tagbar_autofocus = 1                                                  "Focus when open tagbar
-nnoremap <silent> <Space>t :<C-u>TagbarToggle<CR>
 
 " Plugin Shougo/neocomplete
 let g:neocomplete#enable_at_startup = 1                                     "Enable at startup
