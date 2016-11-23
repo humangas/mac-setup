@@ -1,0 +1,5 @@
+---
+- name: install pip packages 
+  pip: >
+    name={{ item.name }}
+  with_items: "{{ pip_packages }}"

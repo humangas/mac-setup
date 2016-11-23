@@ -1,0 +1,4 @@
+---
+pip_packages:
+  - name: flake8 
+  - name: jupyter

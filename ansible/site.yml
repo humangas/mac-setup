@@ -4,11 +4,12 @@
   gather_facts: no
   become: no
   roles:
-    - { role: homebrew,     tags: ['homebrew'] }
+    - { role: homebrew,     tags: ['homebrew'        ] }
     - { role: dirs,         tags: ['dotfiles', 'dirs'] }
-    - { role: zsh,          tags: ['dotfiles', 'zsh'] }
+    - { role: zsh,          tags: ['dotfiles', 'zsh' ] }
     - { role: tmux,         tags: ['dotfiles', 'tmux'] }
-    - { role: vim,          tags: ['dotfiles', 'vim'] }
-    - { role: ghq,          tags: ['dotfiles', 'ghq'] }
-    - { role: ssh,          tags: ['dotfiles', 'ssh'] }
+    - { role: vim,          tags: ['dotfiles', 'vim' ] }
+    - { role: ssh,          tags: ['dotfiles', 'ssh' ] }
+    - { role: ghq,          tags: ['dotfiles', 'ghq' ] }
+    - { role: pip,          tags: ['pip'             ] }
     - { role: macos_dock,   tags: ['macos'   , 'dock'] }

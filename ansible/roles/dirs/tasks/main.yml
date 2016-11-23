@@ -1,3 +1,6 @@
 ---
 - name: mkdir work directory
   file: path=~/src/work state=directory
+
+- name: mkdir work/jupyter directory
+  file: path=~/src/work/jupyter state=directory

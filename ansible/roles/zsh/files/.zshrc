@@ -67,6 +67,7 @@ alias ops='openSrcDirFile'
 alias opc='openCurrentFile'
 alias opg='openCurrentGitURL'
 alias mdf='mdfindFilterFzf'
+alias jn='jupyter notebook --notebook-dir ~/src/work/jupyter'       # Required: $ pip insall jupyter
 
 # History
 ################################################################################################
