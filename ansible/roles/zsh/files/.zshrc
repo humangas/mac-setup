@@ -70,6 +70,11 @@ alias opc='openCurrentFile'
 alias opg='openCurrentGitURL'
 alias mdf='mdfindFilterFzf'
 alias jn='jupyter notebook --notebook-dir ~/src/work/jupyter'       # Required: $ pip insall jupyter
+alias gp='open https://play.golang.org/'
+alias tmu='tmux resize-pane -U 15'
+alias tmd='tmux resize-pane -D 15'
+alias tml='tmux resize-pane -L 15'
+alias tmr='tmux resize-pane -R 15'
 
 # History
 ################################################################################################
