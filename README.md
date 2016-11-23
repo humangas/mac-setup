@@ -21,15 +21,16 @@ $ bash install --tags dotfiles
 You can check what kind of role is specified by the following command. 
 ```
 $ bash install --show
-- { role: homebrew,     tags: ['homebrew'] }
+Usage: $ bash install --tags {name}
+- { role: homebrew,     tags: ['homebrew'        ] }
 - { role: dirs,         tags: ['dotfiles', 'dirs'] }
-- { role: zsh,          tags: ['dotfiles', 'zsh'] }
-- { role: ssh,          tags: ['dotfiles', 'ssh'] }
+- { role: zsh,          tags: ['dotfiles', 'zsh' ] }
 - { role: tmux,         tags: ['dotfiles', 'tmux'] }
-- { role: vim,          tags: ['dotfiles', 'vim'] }
-- { role: ghq,          tags: ['dotfiles', 'ghq'] }
+- { role: vim,          tags: ['dotfiles', 'vim' ] }
+- { role: ssh,          tags: ['dotfiles', 'ssh' ] }
+- { role: ghq,          tags: ['dotfiles', 'ghq' ] }
+- { role: pip,          tags: ['pip'             ] }
 - { role: macos_dock,   tags: ['macos'   , 'dock'] }
-- { role: atom,         tags: ['atom'] }
 ...
 ```
 

@@ -81,7 +81,7 @@ function check_local_exec() {
 
 # Show roles and tags
 function show_roles() {
-  echo "$ bash install --tags {name}"
+  echo "Usage: $ bash install --tags {name}"
   grep -ve '.*#.*' ansible/site.yml | grep -oe '- { role:.*}*'
 }
 
