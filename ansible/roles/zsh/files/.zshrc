@@ -155,6 +155,7 @@ function mdfindFilterFzf(){
 
 function cdCurrentDirs() {
   readonly EXIT='exit'
+  readonly QUIT='quit'
 
   setopt nonomatch
   if ! ls -df "$PWD"/* > /dev/null 2>&1; then
@@ -164,9 +165,9 @@ function cdCurrentDirs() {
 
   local T=$(ls -dF $PWD/* | grep /$)
   if [[ ! -z $T ]]; then
-    T="$T\n$EXIT"
+    T="$T\n$EXIT\n$QUIT"
     local target=$(echo $T | fzf)
-    [[ $target == $EXIT ]] && return
+    [[ $target == $EXIT || $target == $QUIT ]] && return
     cd "$target"
     cdCurrentDirs 
   fi
