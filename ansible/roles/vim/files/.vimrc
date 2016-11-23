@@ -119,7 +119,8 @@ let g:previm_open_cmd = 'open -a Safari'                                    "Ope
 " Plugin Shougo/vimfiler
 let g:vimfiler_as_default_explorer = 1                                      "Replace vim explorer to vimfiler
 let g:vimfiler_enable_auto_cd = 1                                           "vimfiler change Vim current directory
-nnoremap <silent> <Space>e :<C-u>VimFilerBufferDir<Space>-explorer<CR>
+nnoremap <silent> <Space>e :<C-u>VimFilerBufferDir<CR>
+nnoremap <silent> <Space>E :<C-u>VimFilerBufferDir<Space>-explorer<CR>
 
 " Plugin Shougo/unite-outline
 nnoremap <silent> <Space>o :<C-u>Unite<Space>outline<CR>
