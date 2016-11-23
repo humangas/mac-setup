@@ -11,6 +11,8 @@
 # Bindkey
 bindkey -v                                             # vi keybind 
 bindkey "^[[Z" reverse-menu-complete                   # shift-tab reverse
+stty stop undef                                        # disable <C-s>: Stop screen output. 
+stty start undef                                       # disable <C-q>: Restart screen output that is stopped.
 
 # Base
 autoload -Uz compinit; compinit                        # auto-completion: on
