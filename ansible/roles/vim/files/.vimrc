@@ -129,6 +129,7 @@ nnoremap <silent> <Space>r :<C-u>Unite<Space>register<CR>
 nnoremap <silent> gr :<C-u>Unite<Space>grep<CR>
 nnoremap <silent> gl :<C-u>Unite<Space>buffer<CR>
 nnoremap <silent> gb :<C-u>Unite<Space>bookmark<CR>
+nnoremap <silent> ga :<C-u>Unite<Space>tab:no-current<CR>
 nnoremap <silent> <C-b> :<C-u>UniteBookmarkAdd<CR>
 
 " Plugin majutsushi/tagbar
@@ -136,8 +137,8 @@ let g:tagbar_autofocus = 1                                                  "Foc
 nnoremap <silent> <Space>t :<C-u>TagbarToggle<CR>
 
 " Plugin junegunn/fzf.vim 
-nnoremap <silent> fc :<C-u>FZF<Space>%:h<CR>
-nnoremap <silent> fs :<C-u>FZF<Space>~/src<CR>
+nnoremap <silent> ffc :<C-u>FZF<Space>%:h<CR>
+nnoremap <silent> ffs :<C-u>FZF<Space>~/src<CR>
 
 " Plugin davidhalter/jedi-vim -> see also: https://github.com/davidhalter/jedi-vim#settings 
 let g:jedi#goto_command = "gd"                                              "Jump to definition 
