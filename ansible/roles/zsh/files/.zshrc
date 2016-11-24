@@ -62,11 +62,9 @@ alias vi='vim'
 alias fzf='fzf-tmux'
 alias soz='source ~/.zshrc'
 alias cdw='cd ~/src/work'
-alias cds='PDIR=$(L=`ghq list -p`; L="$L\n`ls -d $GOPATH/src/work/*`" ; echo -e "$L" | sort | uniq | fzf); cd "$PDIR" > /dev/null 2>&1 || cd $(dirname "$PDIR")' 
-alias cdc='cdCurrentDirs'
-alias cdz='cds && cdc'
-alias ops='openSrcDirFile'
-alias opc='openCurrentFile'
+alias cds='cd ~/src'
+alias cdg='PDIR=$(L=`ghq list -p`; L="$L\n`ls -d $GOPATH/src/work/*`" ; echo -e "$L" | sort | uniq | fzf); cd "$PDIR" > /dev/null 2>&1 || cd $(dirname "$PDIR")' 
+alias cdz='cdCurrentDirs'
 alias opg='openCurrentGitURL'
 alias mdf='mdfindFilterFzf'
 alias jn='jupyter notebook --notebook-dir ~/src/work/jupyter'       # Required: $ pip insall jupyter
@@ -125,18 +123,6 @@ function _openFile() {
     fi  
   fi
 }
-
-function openSrcDirFile() {
-  local current_dir=$(pwd)
-  cd $GOPATH/src
-  local T="$(fzf)"
-  cd "$current_dir"
-  _openFile "$GOPATH/src/$T"
-}
-
-function openCurrentFile() {
-  _openFile "$(fzf)"
- }
 
 function mdfindFilterFzf(){
   if [[ $# -eq 0 ]]; then
