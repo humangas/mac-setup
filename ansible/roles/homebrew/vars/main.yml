@@ -36,16 +36,17 @@ homebrew_packages:
   - name: awscli
   # tools
   - name: ansible
+  - name: the_silver_searcher
+  - name: tig 
   - name: ghq
   - name: fzf
-  - name: tig 
   - name: tree
-  - name: direnv
-  - name: httpie
-  - name: xz
-  - name: gnu-sed
   - name: ctags
   - name: macvim 
+  - name: direnv
+  - name: httpie
+  - name: gnu-sed
+  - name: xz
   - name: gdb 
   - name: go-delve/delve/delve 
 
