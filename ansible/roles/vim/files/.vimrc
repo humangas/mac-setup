@@ -85,6 +85,7 @@ call dein#add('majutsushi/tagbar')                                          "A c
 call dein#add('ConradIrwin/vim-bracketed-paste')                            "Enables transparent pasting into vim. (i.e. no more :set paste!)
 call dein#add('Yggdroot/indentLine')                                        "Displaying thin vertical lines at each indentation level for code indented with spaces.
 call dein#add('scrooloose/syntastic')                                       "Syntax checking plugin for Vim. ('pip install flake8' is required separately.)
+call dein#add('vim-scripts/dbext.vim')                                      "functions/mappings/commands to enable Vim to access several databases.
 
 " You can specify revision/branch/tag.
 call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
