@@ -208,9 +208,28 @@ function openFileDispatcher() {
         '[' ) cdGhqDir && openFileFromDstDir ;;
         '-' ) echo "TODO: open most recentlly file" ;;
         '@' ) openCurrentGitURL ;;
-        '-h') echo "TODO show help" ;;
+        '-h') openFileDispatcherUsage  ;;
         *   ) openFileFromDstDir "$1" ;;
     esac
+}
+
+function openFileDispatcherUsage() {
+echo '
+Usage: opn [option|{path}]
+    opn is utility tool to easily open files and directories. (use: fzf)
+    
+    default:  Open files selection screen under the current direcory
+    
+    option:
+        ..    Open parent dir files selection screen
+        ]     Open direcotry selection screen in $GOPATH/src 
+        [     Open same "]" option, After cd select dir, open current files selection screen
+        -     Open most recently files selection screen
+        @     Open current git.remote.url in browser
+    {path}    Open files selection screen under the {path} directory 
+        -h    Show Usage (This is)
+
+'
 }
 
 # Alias
