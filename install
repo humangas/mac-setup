@@ -63,6 +63,10 @@ function execute_ansible() {
   if [ $? -eq 0 ]; then
     echo "-> $ ansible-playbook -i ${workdir}/ansible/hosts -vv ${workdir}/ansible/site.yml" "$@"
     ansible-playbook -i ${workdir}/ansible/hosts -vv ${workdir}/ansible/site.yml "$@"
+    if echo "$@" | grep -e 'dotfiles\|zsh' > /dev/null; then
+        # Reload login shell: same "source ~/.zshrc"
+        exec $SHELL -l
+    fi
   else
     echo "-> $ ansible-playbook -i ${workdir}/ansible/hosts -vv ${workdir}/ansible/site.yml --ask-become-pass" "$@"
     ansible-playbook -i ${workdir}/ansible/hosts -vv ${workdir}/ansible/site.yml --ask-become-pass "$@"
@@ -75,7 +79,7 @@ function check_local_exec() {
   [ "$?" -ne 0 ] && return 1
  
   local search_repo_name=$(echo $REPOSITORY_NAME | sed -e 's/github.com\///')
-  local repo_name=$(git config -l | grep remote.origin.url | cut -d= -f2 | grep "$search_repo_name")
+  local repo_name=$(git config -l | grep 'remote.origin.url' | cut -d= -f2 | grep "$search_repo_name")
   [ ! -z $repo_name ] && return 0
 }
 
