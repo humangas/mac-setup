@@ -63,10 +63,6 @@ function execute_ansible() {
   if [ $? -eq 0 ]; then
     echo "-> $ ansible-playbook -i ${workdir}/ansible/hosts -vv ${workdir}/ansible/site.yml" "$@"
     ansible-playbook -i ${workdir}/ansible/hosts -vv ${workdir}/ansible/site.yml "$@"
-    if echo "$@" | grep -e 'dotfiles\|zsh' > /dev/null; then
-        # Reload login shell: same "source ~/.zshrc"
-        exec $SHELL -l
-    fi
   else
     echo "-> $ ansible-playbook -i ${workdir}/ansible/hosts -vv ${workdir}/ansible/site.yml --ask-become-pass" "$@"
     ansible-playbook -i ${workdir}/ansible/hosts -vv ${workdir}/ansible/site.yml --ask-become-pass "$@"
