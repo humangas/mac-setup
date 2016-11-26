@@ -50,29 +50,11 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ORACLE_HOME
 
 # Color
 eval "$(gdircolors ~/.config/solarized/dircolors.256dark)"
-alias ls='gls --color=auto'
 
 # Load 
 eval "$(direnv hook bash)"
 eval "$(pyenv init -)" 
 eval "$(pyenv virtualenv-init -)"
-
-# Alias
-alias vi='vim'
-alias fzf='fzf-tmux'
-alias soz='source ~/.zshrc'
-alias cdw='cd ~/src/work'
-alias cds='cd ~/src'
-alias cdg='PDIR=$(L=`ghq list -p`; L="$L\n`ls -d $GOPATH/src/work/*`" ; echo -e "$L" | sort | uniq | fzf); cd "$PDIR" > /dev/null 2>&1 || cd $(dirname "$PDIR")' 
-alias cdz='cdCurrentDirs'
-alias opg='openCurrentGitURL'
-alias mdf='mdfindFilterFzf'
-alias jn='jupyter notebook --notebook-dir ~/src/work/jupyter'       # Required: $ pip insall jupyter
-alias gp='open https://play.golang.org/'
-alias tmu='tmux resize-pane -U 15'
-alias tmd='tmux resize-pane -D 15'
-alias tml='tmux resize-pane -L 15'
-alias tmr='tmux resize-pane -R 15'
 
 # History
 ################################################################################################
@@ -112,74 +94,154 @@ zplug load --verbose
 
 # Functions
 function _openFile() {
-  local T="$1"
-  local type=$(file "$T" | cut -d: -f2 | grep 'text')
-  if [[ ${#type} -ne 0 ]]; then
-    vim "$T"
-  else
-    read '?Open Finder? [y|n]: ' ans
-    if [[ $ans == 'y' ]]; then
-      open $(dirname $T)
-    fi  
-  fi
+    local target="$1"
+    [[ -z $target ]] && return 1
+
+    local basedir="${2:-$PWD}/"
+    basedir=$(echo $basedir | sed -e 's@/\{2,\}@/@g')
+    local filepath="$basedir$target"
+
+    local type=$(file "$filepath" | cut -d: -f2 | grep 'text')
+    [[ -z $type ]] && return 1
+        if [[ ${#type} -ne 0 ]]; then
+        vim "$filepath"
+    else
+        open "$filepath"
+    fi
 }
 
 function mdfindFilterFzf(){
-  if [[ $# -eq 0 ]]; then
-    mdfind
-    return
-  fi
+    if [[ $# -eq 0 ]]; then
+        mdfind
+        return $?
+    fi
 
-  local T="$(mdfind $@ | fzf)"
-  if [[ -d $T ]]; then
-    cd "$T"
-    cdCurrentDirs
-    return
-  fi
-  _openFile "$T"
+    local T="$(mdfind $@ | fzf)"
+    if [[ -d $T ]]; then
+        cd "$T"
+        cdCurrentDirs
+        return $?
+    fi
+    _openFile "$T"
 }
 
 function cdCurrentDirs() {
-  readonly EXIT='exit'
-  readonly QUIT='quit'
+    readonly EXIT='exit'
+    readonly QUIT='quit'
 
-  setopt nonomatch
-  if ! ls -df "$PWD"/* > /dev/null 2>&1; then
-    return
-  fi
-  setopt nomatch
+    setopt nonomatch
+    if ! ls -df "$PWD"/* > /dev/null 2>&1; then
+        return 0
+    fi
+    setopt nomatch
 
-  local T=$(ls -dF $PWD/* | grep /$)
-  if [[ ! -z $T ]]; then
-    T="$T\n$EXIT\n$QUIT"
-    local target=$(echo $T | fzf)
-    [[ $target == $EXIT || $target == $QUIT ]] && return
-    cd "$target"
-    cdCurrentDirs 
-  fi
+    local T=$(ls -dF $PWD/* | grep /$)
+    if [[ ! -z $T ]]; then
+        T="$T\n$EXIT\n$QUIT"
+        local target=$(echo $T | fzf)
+        [[ $target == $EXIT || $target == $QUIT ]] && return 0
+        cd "$target"
+        cdCurrentDirs 
+    fi
 }
 
 function openCurrentGitURL() {
-  local url=$(git config -l | grep remote.origin.url | cut -d= -f2)
+    local url=$(git config -l | grep remote.origin.url | cut -d= -f2)
 
-  if [[ ! -n $url ]]; then
-    echo "Error! git remote.origin.url not found"
-    return 1
-  fi
+    if [[ ! -n $url ]]; then
+        echo "Error! git remote.origin.url not found"
+        return 1
+    fi
   
-  if [[ -n $(echo $url | grep 'http') ]]; then
-    open "$url"
-  elif [[ -n $(echo $url | grep 'git') ]]; then
-    url=$(echo "$url" | sed "s/:/\//" | sed "s/git@/https:\/\//")
-    open "$url"
-  else
-    echo "Error! Unexpected form: $url" 
-    return 1
-  fi
+    if [[ -n $(echo $url | grep 'http') ]]; then
+        open "$url"
+    elif [[ -n $(echo $url | grep 'ssh') ]]; then
+        url=$(echo "$url" | sed "s/ssh:/https:/" | sed "s/git@//")
+        open "$url"
+    elif [[ -n $(echo $url | grep 'git') ]]; then
+        url=$(echo "$url" | sed "s/:/\//" | sed "s/git@/https:\/\//")
+        open "$url"
+    else
+        echo "Error! Unexpected form: $url" 
+        return 1
+    fi
 }
+
+function openFileFromDstDir() {
+    local dstdir=${1:-$PWD}
+
+    if [[ ! -e $dstdir ]]; then
+        echo "Error $dstdir is not found."
+        return 1
+    fi
+
+    if [[ $dstdir == $PWD ]]; then
+        _openFile $(find $dstdir -type f \
+            | sed -e "s@$dstdir/@@" \
+            | egrep -v "\.git/|\.git$|\.DS_Store" \
+            | fzf -0 --inline-info --cycle --preview "pygmentize -O style=solarizedlight -f console256 -g {}")
+    else
+        _openFile $(find $dstdir -type f \
+            | sed -e "s@$dstdir/@@" \
+            | egrep -v "\.git/|\.git$|\.DS_Store" \
+            | fzf -0 --inline-info --cycle --preview "pygmentize -O style=solarizedlight -f console256 -g $dstdir/{}") "$dstdir"
+    fi
+}
+
+function cdGhqDir(){
+    local ghqlist=`ghq list`
+    local worklist=$(ls -d $GOPATH/src/work/* | sed -e "s@$GOPATH/src/@@")
+    local alllist="$ghqlist\n$worklist"
+    local mvdir=$(echo -e "$alllist" | sort | uniq \
+            | fzf -0 --inline-info --ansi --cycle --preview "ls -la $GOPATH/src/{}")
+
+    [[ -z $mvdir ]] && return 1
+    cd "$GOPATH/src/$mvdir"
+}
+
+# TODO: Implement the following TODO comment
+# TODO: Change to directory mode at the press ctrl+d and press tab key move to nested directory.
+function openFileDispatcher() {
+    case $1 in
+        '..') echo "TOOD: open parent dir file" ;;
+        ']' ) cdGhqDir ;; 
+        '[' ) cdGhqDir && openFileFromDstDir ;;
+        '-' ) echo "TODO: open most recentlly file" ;;
+        '@' ) openCurrentGitURL ;;
+        '-h') echo "TODO show help" ;;
+        *   ) openFileFromDstDir "$1" ;;
+    esac
+}
+
+# Alias
+alias ls='gls --color=auto'
+alias vi='vim'
+alias fzf='fzf-tmux'                                                # fzf: /usr/local/Cellar/fzf/0.15.8/bin/fzf
+alias soz='source ~/.zshrc'
+alias cap='pygmentize -O style=solarizedlight -f console256 -g'
+alias opn='openFileDispatcher'
+alias mdf='mdfindFilterFzf'
+alias jn='jupyter notebook --notebook-dir ~/src/work/jupyter'       # Required: $ pip insall jupyter
+alias gp='open https://play.golang.org/'
+alias tmu='tmux resize-pane -U 15'
+alias tmd='tmux resize-pane -D 15'
+alias tml='tmux resize-pane -L 15'
+alias tmr='tmux resize-pane -R 15'
+
+alias opd='_openFile $(find . -type d | cut -d. -f2- | egrep -v "\.git/|\.git$|\.DS_Store" | cut -d/ -f2- | fzf -0 --inline-info --cycle --preview "ls -la {}")'
+alias cdz='cdCurrentDirs'
+
+# Command less
+################################################################################################
+# TODO: write manual  
+# $ less -M               TODO 
+################################################################################################
+export LESS='-iMR'
+export LESSOPEN='|pygmentize -O style=solarizedlight -f console256 -g %s'
 
 # Load fzf (see also: ~/.cache/dein/repos/github.com/junegunn/fzf/shell/key-bindings.zsh)
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_OPTS='-0 --inline-info --cycle' 
 
 # Source ~/.zsh.d/*.sh
 setopt nonomatch
