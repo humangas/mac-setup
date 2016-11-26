@@ -138,6 +138,7 @@ nnoremap <silent> <Space>t :<C-u>TagbarToggle<CR>
 " Plugin junegunn/fzf.vim 
 let g:fzf_command_prefix = 'Fzf'
 let g:fzf_layout = { 'down': '~30%' }
+nnoremap <silent> fff :<C-u>FzfBLines<CR>
 nnoremap <silent> ffg :<C-u>FzfAg<CR>
 nnoremap <silent> ffh :<C-u>FzfHistory<CR>
 nnoremap <silent> ffc :<C-u>FZF<CR>
