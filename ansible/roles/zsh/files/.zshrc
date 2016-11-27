@@ -92,6 +92,26 @@ fi
 ## Then, source plugins and add commands to $PATH
 zplug load --verbose
 
+# Alias
+alias cd='cdex'
+alias ls='gls --color=auto'
+alias vi='vim'
+alias fzf='fzf-tmux'                                                # fzf: /usr/local/Cellar/fzf/0.15.8/bin/fzf
+alias soz='source ~/.zshrc'
+alias cap='pygmentize -O style=solarizedlight -f console256 -g'
+alias opn='openFileDispatcher'
+alias mdf='mdfindFilterFzf'
+alias jn='jupyter notebook --notebook-dir ~/src/work/jupyter'       # Required: $ pip insall jupyter
+alias gp='open https://play.golang.org/'
+alias tmu='tmux resize-pane -U 5'
+alias tmd='tmux resize-pane -D 5'
+alias tml='tmux resize-pane -L 5'
+alias tmr='tmux resize-pane -R 5'
+alias rmzcompdump='rm -f ~/.zcompdump; rm -f ~/.zplug/zcompdump'            # If tab completion error occurs, delete it. Then reload the zsh.
+
+alias opd='_openFile $(find . -type d | cut -d. -f2- | egrep -v "\.git/|\.git$|\.DS_Store" | cut -d/ -f2- | fzf -0 --inline-info --cycle --preview "ls -la {}")'
+alias cdz='cdCurrentDirs'
+
 # Functions
 function _openFile() {
     local target="$1"
@@ -167,6 +187,10 @@ function openCurrentGitURL() {
     fi
 }
 
+function _is_python_system() {
+    [[ $(pyenv version | cut -d\( -f1 | tr -d ' ') == 'system' ]]; return $?
+}
+
 function openFileFromDstDir() {
     local dstdir=${1:-$PWD}
 
@@ -175,16 +199,18 @@ function openFileFromDstDir() {
         return 1
     fi
 
+    local style=$(echo $LESSOPEN | egrep -o 'style=.*?\ ')
+
     if [[ $dstdir == $PWD ]]; then
         _openFile $(find $dstdir -type f \
             | sed -e "s@$dstdir/@@" \
             | egrep -v "\.git/|\.git$|\.DS_Store" \
-            | fzf -0 --inline-info --cycle --preview "pygmentize -O style=solarizedlight -f console256 -g {}")
+            | fzf -0 --inline-info --cycle --preview "pygmentize -O $style -f console256 -g {}")
     else
         _openFile $(find $dstdir -type f \
             | sed -e "s@$dstdir/@@" \
             | egrep -v "\.git/|\.git$|\.DS_Store" \
-            | fzf -0 --inline-info --cycle --preview "pygmentize -O style=solarizedlight -f console256 -g $dstdir/{}") "$dstdir"
+            | fzf -0 --inline-info --cycle --preview "pygmentize -O $style -f console256 -g {}") "$dstdir"
     fi
 }
 
@@ -232,24 +258,14 @@ Usage: opn [option|{path}]
 '
 }
 
-# Alias
-alias ls='gls --color=auto'
-alias vi='vim'
-alias fzf='fzf-tmux'                                                # fzf: /usr/local/Cellar/fzf/0.15.8/bin/fzf
-alias soz='source ~/.zshrc'
-alias cap='pygmentize -O style=solarizedlight -f console256 -g'
-alias opn='openFileDispatcher'
-alias mdf='mdfindFilterFzf'
-alias jn='jupyter notebook --notebook-dir ~/src/work/jupyter'       # Required: $ pip insall jupyter
-alias gp='open https://play.golang.org/'
-alias tmu='tmux resize-pane -U 5'
-alias tmd='tmux resize-pane -D 5'
-alias tml='tmux resize-pane -L 5'
-alias tmr='tmux resize-pane -R 5'
-alias rmzcompdump='rm -f ~/.zcompdump; rm -f ~/.zplug/zcompdump'            # If tab completion error occurs, delete it. Then reload the zsh.
-
-alias opd='_openFile $(find . -type d | cut -d. -f2- | egrep -v "\.git/|\.git$|\.DS_Store" | cut -d/ -f2- | fzf -0 --inline-info --cycle --preview "ls -la {}")'
-alias cdz='cdCurrentDirs'
+function cdex() {
+    __enhancd::cd $@
+    if _is_python_system; then 
+        export LESSOPEN='|pygmentize -O style=solarizedlight -f console256 -g %s'
+    else
+        export LESSOPEN='|pygmentize -O style=monokai -f console256 -g %s'
+    fi
+}
 
 # Command less
 ################################################################################################
