@@ -242,10 +242,10 @@ alias opn='openFileDispatcher'
 alias mdf='mdfindFilterFzf'
 alias jn='jupyter notebook --notebook-dir ~/src/work/jupyter'       # Required: $ pip insall jupyter
 alias gp='open https://play.golang.org/'
-alias tmu='tmux resize-pane -U 15'
-alias tmd='tmux resize-pane -D 15'
-alias tml='tmux resize-pane -L 15'
-alias tmr='tmux resize-pane -R 15'
+alias tmu='tmux resize-pane -U 5'
+alias tmd='tmux resize-pane -D 5'
+alias tml='tmux resize-pane -L 5'
+alias tmr='tmux resize-pane -R 5'
 alias rmzcompdump='rm -f ~/.zcompdump; rm -f ~/.zplug/zcompdump'            # If tab completion error occurs, delete it. Then reload the zsh.
 
 alias opd='_openFile $(find . -type d | cut -d. -f2- | egrep -v "\.git/|\.git$|\.DS_Store" | cut -d/ -f2- | fzf -0 --inline-info --cycle --preview "ls -la {}")'
