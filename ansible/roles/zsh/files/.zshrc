@@ -93,7 +93,6 @@ fi
 zplug load --verbose
 
 # Alias
-alias cd='cdex'
 alias ls='gls --color=auto'
 alias vi='vim'
 alias fzf='fzf-tmux'                                                # fzf: /usr/local/Cellar/fzf/0.15.8/bin/fzf
@@ -101,6 +100,7 @@ alias soz='source ~/.zshrc'
 alias cap='pygmentize -O style=solarizedlight -f console256 -g'
 alias opn='openFileDispatcher'
 alias mdf='mdfindFilterFzf'
+alias ggr='gitGrepOpenVim'
 alias jn='jupyter notebook --notebook-dir ~/src/work/jupyter'       # Required: $ pip insall jupyter
 alias gp='open https://play.golang.org/'
 alias tmu='tmux resize-pane -U 5'
@@ -114,6 +114,12 @@ alias cdz='cdCurrentDirs'
 
 # Functions
 function _openFile() {
+    setopt nonomatch
+    if pyenv local  > /dev/null 2>&1; then
+        pyenv shell $(pyenv local) 
+    fi
+    setopt nomatch
+
     local target="$1"
     [[ -z $target ]] && return 1
 
@@ -187,10 +193,6 @@ function openCurrentGitURL() {
     fi
 }
 
-function _is_python_system() {
-    [[ $(pyenv version | cut -d\( -f1 | tr -d ' ') == 'system' ]]; return $?
-}
-
 function openFileFromDstDir() {
     local dstdir=${1:-$PWD}
 
@@ -199,22 +201,24 @@ function openFileFromDstDir() {
         return 1
     fi
 
-    local style=$(echo $LESSOPEN | egrep -o 'style=.*?\ ')
+    pyenv shell system
 
     if [[ $dstdir == $PWD ]]; then
         _openFile $(find $dstdir -type f \
             | sed -e "s@$dstdir/@@" \
             | egrep -v "\.git/|\.git$|\.DS_Store" \
-            | fzf -0 --inline-info --cycle --preview "pygmentize -O $style -f console256 -g {}")
+            | fzf -0 --inline-info --cycle --preview "pygmentize -O style=solarizedlight -f console256 -g {}")
     else
         _openFile $(find $dstdir -type f \
             | sed -e "s@$dstdir/@@" \
             | egrep -v "\.git/|\.git$|\.DS_Store" \
-            | fzf -0 --inline-info --cycle --preview "pygmentize -O $style -f console256 -g {}") "$dstdir"
+            | fzf -0 --inline-info --cycle --preview "pygmentize -O style=solarizedlight -f console256 -g $dstdir/{}") "$dstdir"
     fi
 }
 
 function cdGhqDir(){
+    pyenv shell system
+
     local ghqlist=`ghq list`
     local worklist=$(ls -d $GOPATH/src/work/* | sed -e "s@$GOPATH/src/@@")
     local alllist="$ghqlist\n$worklist"
@@ -223,13 +227,18 @@ function cdGhqDir(){
 
     [[ -z $mvdir ]] && return 1
     cd "$GOPATH/src/$mvdir"
+
+    setopt nonomatch
+    if pyenv local  > /dev/null 2>&1; then
+        pyenv shell $(pyenv local) 
+    fi
+    setopt nomatch
 }
 
 # TODO: Implement the following TODO comment
 # TODO: Change to directory mode at the press ctrl+d and press tab key move to nested directory.
 function openFileDispatcher() {
     case $1 in
-        '..') echo "TOOD: open parent dir file" ;;
         ']' ) cdGhqDir ;; 
         '[' ) cdGhqDir && openFileFromDstDir ;;
         '-' ) echo "TODO: open most recentlly file" ;;
