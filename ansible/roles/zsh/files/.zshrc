@@ -258,13 +258,19 @@ Usage: opn [option|{path}]
 '
 }
 
-function cdex() {
-    __enhancd::cd $@
-    if _is_python_system; then 
-        export LESSOPEN='|pygmentize -O style=solarizedlight -f console256 -g %s'
-    else
-        export LESSOPEN='|pygmentize -O style=monokai -f console256 -g %s'
+function gitGrepOpenVim() {
+    local search="$@"
+    if [[ $# -eq 0 ]]; then
+        printf "grep string?: "
+        read -t 10 search
+        [[ -z $search ]] && return 1
     fi
+
+    local select=$(git grep -n $search | fzf)
+    [[ -z $select ]] && return 1
+    local file=$(echo $select | cut -d: -f1)
+    local line=$(echo $select | cut -d: -f2)
+    vim -c $line $file
 }
 
 # Command less
