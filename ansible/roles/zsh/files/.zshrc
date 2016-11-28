@@ -95,13 +95,13 @@ zplug load --verbose
 # Alias
 alias ls='gls --color=auto'
 alias vi='vim'
-alias fzf='fzf-tmux'                                                # fzf: /usr/local/Cellar/fzf/0.15.8/bin/fzf
+alias fzf='fzf-tmux'                                                        # fzf: /usr/local/Cellar/fzf/0.15.8/bin/fzf
 alias soz='source ~/.zshrc'
 alias cap='pygmentize -O style=solarizedlight -f console256 -g'
 alias opn='openFileDispatcher'
 alias mdf='mdfindFilterFzf'
 alias ggr='gitGrepOpenVim'
-alias jn='jupyter notebook --notebook-dir ~/src/work/jupyter'       # Required: $ pip insall jupyter
+alias jn='jupyter notebook --notebook-dir ~/src/work/jupyter'               # Required: $ pip insall jupyter
 alias gp='open https://play.golang.org/'
 alias tmu='tmux resize-pane -U 5'
 alias tmd='tmux resize-pane -D 5'
