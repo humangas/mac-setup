@@ -128,11 +128,11 @@ nnoremap <silent> <Space>E :<C-u>VimFilerBufferDir<Space>-explorer<Space>-direct
 " Plugin Shougo/unite-outline
 nnoremap <silent> <Space>o :<C-u>Unite<Space>outline<CR>
 nnoremap <silent> <Space>r :<C-u>Unite<Space>register<CR>
-nnoremap <silent> fl :<C-u>Unite<Space>buffer<CR>
-nnoremap <silent> fb :<C-u>Unite<Space>bookmark<CR>
+nnoremap <silent> ffl :<C-u>Unite<Space>buffer<CR>
+nnoremap <silent> ffb :<C-u>Unite<Space>bookmark<CR>
 nnoremap <silent> fbb :<C-u>UniteBookmarkAdd<CR>
-nnoremap <silent> ft :<C-u>Unite<Space>tab:no-current<CR>
-nnoremap <silent> fh :<C-u>Unite<Space>file_mru<CR>
+nnoremap <silent> fft :<C-u>Unite<Space>tab:no-current<CR>
+nnoremap <silent> ffh :<C-u>Unite<Space>file_mru<CR>
 
 " Plugin majutsushi/tagbar
 let g:tagbar_autofocus = 0                                                  "Focus when open tagbar (= 1)
@@ -144,10 +144,10 @@ nnoremap <silent> <Space>t :<C-u>TagbarToggle<CR>
 " Plugin junegunn/fzf.vim 
 let g:fzf_command_prefix = 'Fzf'
 let g:fzf_layout = { 'down': '~30%' }
-nnoremap <silent> ff :<C-u>FzfBLines<CR>
-nnoremap <silent> fg :<C-u>FzfAg<CR>
-nnoremap <silent> fc :<C-u>FZF<Space>%:p:h<CR>
-nnoremap <silent> fs :<C-u>FZF<Space>~/src<CR>
+nnoremap <silent> fff :<C-u>FzfBLines<CR>
+nnoremap <silent> ffg :<C-u>FzfAg<CR>
+nnoremap <silent> ffc :<C-u>FZF<Space>%:p:h<CR>
+nnoremap <silent> ffs :<C-u>FZF<Space>~/src<CR>
 
 " Plugin davidhalter/jedi-vim -> see also: https://github.com/davidhalter/jedi-vim#settings 
 let g:jedi#goto_command = "gd"                                              "Jump to definition 
