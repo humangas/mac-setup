@@ -219,3 +219,7 @@ endfunction
 
 command! -nargs=* Dash call <SID>dash(<f-args>)
 nnoremap <Leader>D :call <SID>dash(expand('<cword>'))<CR>
+
+if filereadable(expand('~/.vimrc.local'))
+    source ~/.vimrc.local
+endif
