@@ -21,6 +21,7 @@ set switchbuf=useopen                               "If already in the buffer, o
 "Replace j,k to gj, gk
 nnoremap j gj
 nnoremap k gk
+inoremap <silent> jj <ESC>
 
 " Tab
 set expandtab                                       "Convert tabs to spaces.
@@ -122,16 +123,16 @@ let g:previm_open_cmd = 'open -a Safari'                                    "Ope
 let g:vimfiler_as_default_explorer = 1                                      "Replace vim explorer to vimfiler
 let g:vimfiler_enable_auto_cd = 1                                           "vimfiler change Vim current directory
 nnoremap <silent> <Space>e :<C-u>VimFilerBufferDir<CR>
-nnoremap <silent> <Space>E :<C-u>VimFilerBufferDir<Space>-explorer<CR>
+nnoremap <silent> <Space>E :<C-u>VimFilerBufferDir<Space>-explorer<Space>-direction=rightbelow<CR>
 
 " Plugin Shougo/unite-outline
 nnoremap <silent> <Space>o :<C-u>Unite<Space>outline<CR>
 nnoremap <silent> <Space>r :<C-u>Unite<Space>register<CR>
-nnoremap <silent> ffl :<C-u>Unite<Space>buffer<CR>
-nnoremap <silent> ffb :<C-u>Unite<Space>bookmark<CR>
-nnoremap <silent> fft :<C-u>Unite<Space>tab:no-current<CR>
-nnoremap <silent> ffh :<C-u>Unite<Space>file_mru<CR>
-nnoremap <silent> <C-b> :<C-u>UniteBookmarkAdd<CR>
+nnoremap <silent> fl :<C-u>Unite<Space>buffer<CR>
+nnoremap <silent> fb :<C-u>Unite<Space>bookmark<CR>
+nnoremap <silent> fbb :<C-u>UniteBookmarkAdd<CR>
+nnoremap <silent> ft :<C-u>Unite<Space>tab:no-current<CR>
+nnoremap <silent> fh :<C-u>Unite<Space>file_mru<CR>
 
 " Plugin majutsushi/tagbar
 let g:tagbar_autofocus = 0                                                  "Focus when open tagbar (= 1)
@@ -143,10 +144,10 @@ nnoremap <silent> <Space>t :<C-u>TagbarToggle<CR>
 " Plugin junegunn/fzf.vim 
 let g:fzf_command_prefix = 'Fzf'
 let g:fzf_layout = { 'down': '~30%' }
-nnoremap <silent> fff :<C-u>FzfBLines<CR>
-nnoremap <silent> ffg :<C-u>FzfAg<CR>
-nnoremap <silent> ffc :<C-u>FZF<Space>%:p:h<CR>
-nnoremap <silent> ffs :<C-u>FZF<Space>~/src<CR>
+nnoremap <silent> ff :<C-u>FzfBLines<CR>
+nnoremap <silent> fg :<C-u>FzfAg<CR>
+nnoremap <silent> fc :<C-u>FZF<Space>%:p:h<CR>
+nnoremap <silent> fs :<C-u>FZF<Space>~/src<CR>
 
 " Plugin davidhalter/jedi-vim -> see also: https://github.com/davidhalter/jedi-vim#settings 
 let g:jedi#goto_command = "gd"                                              "Jump to definition 
