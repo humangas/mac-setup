@@ -8,6 +8,20 @@
 # $ man zshoptions   :List of options that can be set with setopt  
 # $ man zshbuiltins  :List of built-in commands 
 ################################################################################################
+# Env /usr/local/bin
+export PATH="/usr/local/bin:$PATH"
+
+# Env go setting
+export GOPATH=$HOME
+export PATH=$PATH:$GOPATH/bin
+
+# Env oracle client setting
+export ORACLE_HOME=/usr/local/oracle
+export TNS_ADMIN=~/.config/oracle
+export PATH=$ORACLE_HOME:$PATH
+export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$ORACLE_HOME
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ORACLE_HOME
+
 # Bindkey
 bindkey -v                                             # vi keybind 
 bindkey "^[[Z" reverse-menu-complete                   # shift-tab reverse
@@ -36,17 +50,6 @@ zstyle ':vcs_info:*' formats "%F{green}%c%u(%b)%f"     # set $vcs_info_msg_0_
 zstyle ':vcs_info:*' actionformats '(%b|%a)'           # This format is displayed at merge conflict.
 precmd () { vcs_info }
 PROMPT=$PROMPT'${vcs_info_msg_0_}$ '
-
-# Env go setting
-export GOPATH=$HOME
-export PATH=$PATH:$GOPATH/bin
-
-# Env oracle client setting
-export ORACLE_HOME=/usr/local/oracle
-export TNS_ADMIN=~/.config/oracle
-export PATH=$ORACLE_HOME:$PATH
-export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$ORACLE_HOME
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ORACLE_HOME
 
 # Color
 eval "$(gdircolors ~/.config/solarized/dircolors.256dark)"
