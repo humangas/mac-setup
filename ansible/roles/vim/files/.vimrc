@@ -71,6 +71,7 @@ call dein#add('Shougo/neocomplete.vim')                                     "Nex
 call dein#add('Shougo/vimproc.vim', {'build': 'make'})                      "Great asynchronous execution library for Vim.
 call dein#add('Shougo/vimfiler')                                            "Powerful file explorer implemented by Vim script
 call dein#add('Shougo/unite.vim')                                           "Search and display information from arbitrary sources like files, buffers, etc.
+call dein#add('Shougo/neomru.vim')                                          "MRU plugin includes unite.vim MRU sources
 call dein#add('Shougo/unite-outline')                                       "Vim's buffer with the outline view.
 call dein#add('altercation/vim-colors-solarized')                           "Colorscheme: solarized
 call dein#add('itchyny/lightline.vim')                                      "A light and configurable statusline/tabline for Vim
@@ -129,6 +130,7 @@ nnoremap <silent> <Space>r :<C-u>Unite<Space>register<CR>
 nnoremap <silent> ffl :<C-u>Unite<Space>buffer<CR>
 nnoremap <silent> ffb :<C-u>Unite<Space>bookmark<CR>
 nnoremap <silent> fft :<C-u>Unite<Space>tab:no-current<CR>
+nnoremap <silent> ffh :<C-u>Unite<Space>file_mru<CR>
 nnoremap <silent> <C-b> :<C-u>UniteBookmarkAdd<CR>
 
 " Plugin majutsushi/tagbar
@@ -143,8 +145,7 @@ let g:fzf_command_prefix = 'Fzf'
 let g:fzf_layout = { 'down': '~30%' }
 nnoremap <silent> fff :<C-u>FzfBLines<CR>
 nnoremap <silent> ffg :<C-u>FzfAg<CR>
-nnoremap <silent> ffh :<C-u>FzfHistory<CR>
-nnoremap <silent> ffc :<C-u>FZF<CR>
+nnoremap <silent> ffc :<C-u>FZF<Space>%:p:h<CR>
 nnoremap <silent> ffs :<C-u>FZF<Space>~/src<CR>
 
 " Plugin davidhalter/jedi-vim -> see also: https://github.com/davidhalter/jedi-vim#settings 
