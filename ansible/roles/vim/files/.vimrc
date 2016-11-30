@@ -21,7 +21,7 @@ set switchbuf=useopen                               "If already in the buffer, o
 "Replace j,k to gj, gk
 nnoremap j gj
 nnoremap k gk
-inoremap <silent> jj <ESC>
+inoremap <silent> ff <ESC>
 
 " Tab
 set expandtab                                       "Convert tabs to spaces.
@@ -74,6 +74,7 @@ call dein#add('Shougo/vimfiler')                                            "Pow
 call dein#add('Shougo/unite.vim')                                           "Search and display information from arbitrary sources like files, buffers, etc.
 call dein#add('Shougo/neomru.vim')                                          "MRU plugin includes unite.vim MRU sources
 call dein#add('Shougo/unite-outline')                                       "Vim's buffer with the outline view.
+call dein#add('thinca/vim-unite-history')                                   "A source of unite.vim for history of command/search.
 call dein#add('altercation/vim-colors-solarized')                           "Colorscheme: solarized
 call dein#add('itchyny/lightline.vim')                                      "A light and configurable statusline/tabline for Vim
 call dein#add('junegunn/fzf', {'build': './install --all', 'merged': 0})    "General-purpose command-line fuzzy finder.
@@ -133,6 +134,9 @@ nnoremap <silent> ffb :<C-u>Unite<Space>bookmark<CR>
 nnoremap <silent> fbb :<C-u>UniteBookmarkAdd<CR>
 nnoremap <silent> fft :<C-u>Unite<Space>tab:no-current<CR>
 nnoremap <silent> ffh :<C-u>Unite<Space>file_mru<CR>
+nnoremap ffx :<C-u>cd %:p:h<CR> :<C-u>Unite<Space>output/shellcmd:
+nnoremap <silent> fxx :<C-u>Unite<Space>output/shellcmd:<Up><CR>
+nnoremap <silent> ffy :<C-u>Unite<Space>history/command<CR>
 
 " Plugin majutsushi/tagbar
 let g:tagbar_autofocus = 0                                                  "Focus when open tagbar (= 1)
@@ -145,9 +149,9 @@ nnoremap <silent> <Space>t :<C-u>TagbarToggle<CR>
 let g:fzf_command_prefix = 'Fzf'
 let g:fzf_layout = { 'down': '~30%' }
 nnoremap <silent> fff :<C-u>FzfBLines<CR>
-nnoremap <silent> ffg :<C-u>FzfAg<CR>
-nnoremap <silent> ffc :<C-u>FZF<Space>%:p:h<CR>
-nnoremap <silent> ffs :<C-u>FZF<Space>~/src<CR>
+nnoremap <silent> ffg :<C-u>cd %:p:h<CR> :<C-u>FzfAg<CR>
+nnoremap <silent> ffc :<C-u>cd %:p:h<CR> :<C-u>FzfFiles<CR>
+nnoremap <silent> ffs :<C-u>FzfFiles<Space>~/src<CR>
 
 " Plugin davidhalter/jedi-vim -> see also: https://github.com/davidhalter/jedi-vim#settings 
 let g:jedi#goto_command = "gd"                                              "Jump to definition 
