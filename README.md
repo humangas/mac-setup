@@ -21,7 +21,7 @@ $ bash install --tags dotfiles
 You can check what kind of role is specified by the following command. 
 ```
 $ bash install --show
-Usage: $ bash install --tags {name}
+Usage: $ bash install --tags <name>
 - { role: homebrew,     tags: ['homebrew'        ] }
 - { role: dirs,         tags: ['dotfiles', 'dirs'] }
 - { role: zsh,          tags: ['dotfiles', 'zsh' ] }
