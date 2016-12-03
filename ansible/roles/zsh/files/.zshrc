@@ -104,6 +104,7 @@ alias cap='pygmentize -O style=solarizedlight -f console256 -g'
 alias opn='openFileDispatcher'
 alias mdf='mdfindFilterFzf'
 alias ggr='gitGrepOpenVim'
+alias gsc='gitShowCommitLog'
 alias jn='jupyter notebook --notebook-dir ~/src/work/jupyter'               # Required: $ pip insall jupyter
 alias gp='open https://play.golang.org/'
 alias tmu='tmux resize-pane -U 5'
@@ -253,19 +254,19 @@ function openFileDispatcher() {
 
 function openFileDispatcherUsage() {
 echo '
-Usage: opn [option|{path}]
+usage: opn [option|{path}]
     opn is utility tool to easily open files and directories. (use: fzf)
     
-    default:  Open files selection screen under the current direcory
+    default:  open files selection screen under the current direcory
     
     option:
-        ..    Open parent dir files selection screen
-        ]     Open direcotry selection screen in $GOPATH/src 
-        [     Open same "]" option, After cd select dir, open current files selection screen
-        -     Open most recently files selection screen
-        @     Open current git.remote.url in browser
-    {path}    Open files selection screen under the {path} directory 
-        -h    Show Usage (This is)
+        ..    open parent dir files selection screen
+        ]     open direcotry selection screen in $gopath/src 
+        [     open same "]" option, after cd select dir, open current files selection screen
+        -     open most recently files selection screen
+        @     open current git.remote.url in browser
+    {path}    open files selection screen under the {path} directory 
+        -h    show usage (this is)
 
 '
 }
@@ -283,6 +284,15 @@ function gitGrepOpenVim() {
     local file=$(echo $select | cut -d: -f1)
     local line=$(echo $select | cut -d: -f2)
     vim -c $line $file
+}
+
+function gitShowCommitLog() {
+    case $1 in
+        -a|--all) git log --pretty=oneline --abbrev-commit | fzf | cut -d' ' -f1 | xargs git show 
+                  ;;
+        *       ) git reflog | fzf | cut -d' ' -f1 | xargs git show
+                  ;; 
+    esac
 }
 
 # Command less
