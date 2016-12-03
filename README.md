@@ -42,8 +42,5 @@ After completing the installation in the above, make manual setting.
 # After installation 
 My terminal display after installation is like this.
 
-## tmux + zsh
-![my_terminal_tmux+zsh](my_terminal_tmux+zsh.png)
-
-## tmux + vim
-![my_terminal_tmux+vim_](my_terminal_tmux+vim.png)
+## tmux + zsh + vim + fzf
+![my_terminal_tmux+zsh](terminal_image.png)
