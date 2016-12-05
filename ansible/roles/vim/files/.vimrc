@@ -88,6 +88,7 @@ call dein#add('ConradIrwin/vim-bracketed-paste')                            "Ena
 call dein#add('Yggdroot/indentLine')                                        "Displaying thin vertical lines at each indentation level for code indented with spaces.
 call dein#add('scrooloose/syntastic')                                       "Syntax checking plugin for Vim. ('pip install flake8' is required separately.)
 call dein#add('vim-scripts/dbext.vim')                                      "functions/mappings/commands to enable Vim to access several databases.
+call dein#add('airblade/vim-gitgutter')                                     "Shows a git diff in the gutter (sign column) and stages/undoes hunks.
 
 " You can specify revision/branch/tag.
 call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
@@ -183,6 +184,10 @@ let g:neocomplete#enable_at_startup = 1                                     "Ena
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" Plugin airblade/vim-gitgutter
+nnoremap <silent> ,gg :<C-u>GitGutterToggle<CR>
+nnoremap <silent> ,gh :<C-u>GitGutterLineHighlightsToggle<CR>
 
 " SuperTab like snippets behavior.
 imap <expr><TAB>
