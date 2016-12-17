@@ -43,6 +43,7 @@ homebrew_packages:
   - name: tree
   - name: ctags
   - name: macvim 
+  - name: wget
   - name: direnv
   - name: httpie
   - name: gnu-sed
