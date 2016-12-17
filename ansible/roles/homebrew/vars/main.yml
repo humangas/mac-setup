@@ -50,6 +50,7 @@ homebrew_packages:
   - name: xz
   - name: gdb 
   - name: go-delve/delve/delve 
+  - name: osquery
 
 homebrew_cask_packages:
   - name: google-chrome
