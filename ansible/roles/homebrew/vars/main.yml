@@ -47,6 +47,7 @@ homebrew_packages:
   - name: direnv
   - name: httpie
   - name: gnu-sed
+  - name: fswatch
   - name: xz
   - name: gdb 
   - name: go-delve/delve/delve 
