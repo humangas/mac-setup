@@ -86,7 +86,7 @@ call dein#add('szw/vim-tags')                                               "The
 call dein#add('majutsushi/tagbar')                                          "A class outline viewer for Vim
 call dein#add('ConradIrwin/vim-bracketed-paste')                            "Enables transparent pasting into vim. (i.e. no more :set paste!)
 call dein#add('Yggdroot/indentLine')                                        "Displaying thin vertical lines at each indentation level for code indented with spaces.
-call dein#add('scrooloose/syntastic')                                       "Syntax checking plugin for Vim. ('pip install flake8' is required separately.)
+call dein#add('vim-syntastic/syntastic')                                    "Syntax checking plugin for Vim. ('pip install flake8', brew install tidy-html5 is required separately.)
 call dein#add('vim-scripts/dbext.vim')                                      "functions/mappings/commands to enable Vim to access several databases.
 call dein#add('airblade/vim-gitgutter')                                     "Shows a git diff in the gutter (sign column) and stages/undoes hunks.
 
@@ -116,6 +116,9 @@ let g:lightline.colorscheme = 'solarized'                                   "Use
 
 " Plugin altercation/vim-colors-solarized
 let g:solarized_termtrans=1                                                 "Terminal at the time of the transparent background, to enable transparent background of Solarized.
+
+" Plugin vim-syntastic/syntastic
+let g:syntastic_html_tidy_exec = '/usr/local/bin/tidy'                      "HTML5 syntastic check (required: brew install tidy-html5)
 
 " Plugin kannokanno/previm 
 let g:previm_open_cmd = 'open -a Safari'                                    "Open Safari when PrevimOpen
