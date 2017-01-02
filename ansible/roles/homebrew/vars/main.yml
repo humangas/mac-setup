@@ -48,6 +48,7 @@ homebrew_packages:
   - name: httpie
   - name: gnu-sed
   - name: fswatch
+  - name: tidy-html5  
   - name: xz
   - name: gdb 
   - name: go-delve/delve/delve 
