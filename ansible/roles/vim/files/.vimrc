@@ -89,6 +89,14 @@ call dein#add('Yggdroot/indentLine')                                        "Dis
 call dein#add('vim-syntastic/syntastic')                                    "Syntax checking plugin for Vim. ('pip install flake8', brew install tidy-html5 is required separately.)
 call dein#add('vim-scripts/dbext.vim')                                      "functions/mappings/commands to enable Vim to access several databases.
 call dein#add('airblade/vim-gitgutter')                                     "Shows a git diff in the gutter (sign column) and stages/undoes hunks.
+call dein#add('mattn/emmet-vim')
+call dein#add('tpope/vim-surround')
+call dein#add('tomtom/tcomment_vim')
+call dein#add('othree/html5.vim')
+call dein#add('hail2u/vim-css3-syntax')
+call dein#add('jelera/vim-javascript-syntax')
+call dein#add('hokaccha/vim-html5validator')
+call dein#add('AtsushiM/sass-compile.vim')
 
 " You can specify revision/branch/tag.
 call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
