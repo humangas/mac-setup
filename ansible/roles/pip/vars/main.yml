@@ -1,5 +1,5 @@
 ---
-pip_packages:
+packages:
   - name: flake8 
   - name: jupyter
   - name: Pygments
