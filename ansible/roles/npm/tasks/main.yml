@@ -1,0 +1,6 @@
+---
+- name: install npm packages
+  npm: >
+    name={{ item.name }}
+    global=yes
+  with_items: "{{ packages }}"
