@@ -1,0 +1,6 @@
+language: bash
+before_install:
+    - sudo apt-get install python-pip
+    - sudo pip install ansible
+script:
+    - bash install

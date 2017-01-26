@@ -1,4 +1,5 @@
 # mac-setup 
+[![Build Status](https://travis-ci.org/humangas/mac-setup.svg?branch=master)](https://travis-ci.org/humangas/mac-setup)  
 macOS setup tool for me!!
 
 # Installation
