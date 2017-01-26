@@ -1,7 +1,10 @@
+os: osx
+osx_image: xcode8.0
 language: bash
 sudo: required
 install:
     - sudo apt-get install python-pip
     - sudo pip install ansible
 script:
-    - bash install
+    - bash install --tags dirs 
+    - bash install --tags homebrew
