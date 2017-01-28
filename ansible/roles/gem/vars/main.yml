@@ -2,3 +2,4 @@
 packages:
   - name: sass
   - name: mailcatcher
+  - name: travis
