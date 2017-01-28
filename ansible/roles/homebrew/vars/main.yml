@@ -26,6 +26,8 @@ homebrew_packages:
   - name: nodebrew
   # go
   - { name: go, option: cross-compile-common }
+  # java
+  - name: jenv
   # vim
   - name: lua
   - { name: vim, option: [with-lua, with-override-system-vi] }
@@ -36,10 +38,10 @@ homebrew_packages:
   - name: awscli
   # tools
   - name: ansible
-  - name: the_silver_searcher
-  - name: tig 
   - name: ghq
+  - name: tig 
   - name: fzf
+  - name: the_silver_searcher
   - name: tree
   - name: ctags
   - name: macvim 
@@ -53,6 +55,7 @@ homebrew_packages:
   - name: gdb 
   - name: go-delve/delve/delve 
   - name: osquery
+  - name: hugo
 
 homebrew_cask_packages:
   - name: google-chrome
