@@ -4,17 +4,6 @@ language: bash
 sudo: required
 install:
     - brew install ansible
-    # - sudo apt-get install python-pip
-    #- sudo pip install ansible
 script:
-    - bash install --tags homebrew
-    - /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-   #- bash install --tags zsh
-    - bash install --tags tmux 
-    - bash install --tags vim 
-    - bash install --tags ssh 
-    - bash install --tags ghq 
-    - bash install --tags pip 
-    - bash install --tags gem 
-    - bash install --tags npm 
-   #- bash install --tags macos_dock 
+    - bash -n install
+    - ansible-playbook ansible/site.yml
