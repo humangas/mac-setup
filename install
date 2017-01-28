@@ -3,11 +3,12 @@
 # Installation shell for macOS setup
 #
 # Usage:
-# Install All:             $ bash install.sh
-# Install Any Option: e.g. $ bash install.sh --tags dotfiles
-# Show Roles and Tags      $ bash install.sh --show
+# Install all:                  $ bash install
+# Install specified roles: e.g. $ bash install --tags dotfiles
+# Show roles:                   $ bash install --show
+# Show Usage:                   $ bash install --help
 #
-# see also: https://github.com/humangas/mac-setup
+# See also: https://github.com/humangas/mac-setup
 #########################################################################################################
 
 # Const
@@ -85,6 +86,20 @@ function show_roles() {
   grep -ve '.*#.*' ansible/site.yml | grep -oe '- { role:.*}*'
 }
 
+# Show Usage
+function show_usage(){
+    echo "Installation shell for macOS setup"
+    echo ""
+    echo "Usage:"
+    echo "Install all:                  $ bash install"
+    echo "Install specified roles: e.g. $ bash install --tags dotfiles"
+    echo "Show roles:                   $ bash install --show"
+    echo "Show Usage:                   $ bash install --help"
+    echo ""
+    echo "See also: https://github.com/humangas/mac-setup"
+    echo ""
+}
+
 # Main
 function main() {
   check_local_exec
@@ -101,5 +116,6 @@ function main() {
 
 case "$1" in
   --show) show_roles ;;
+  --help) show_usage ;;
     *)    main $@ ;;
 esac
