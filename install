@@ -62,11 +62,11 @@ function execute_ansible() {
   echo 'Execute Ansible Playbook...'
   check_zsh
   if [ $? -eq 0 ]; then
-    echo "-> $ ansible-playbook -i ${workdir}/ansible/hosts -vv ${workdir}/ansible/site.yml" "$@"
-    ansible-playbook -i ${workdir}/ansible/hosts -vv ${workdir}/ansible/site.yml "$@"
+    echo "-> $ ansible-playbook ${workdir}/ansible/site.yml" -vv "$@"
+    ansible-playbook ${workdir}/ansible/site.yml -vv "$@"
   else
-    echo "-> $ ansible-playbook -i ${workdir}/ansible/hosts -vv ${workdir}/ansible/site.yml --ask-become-pass" "$@"
-    ansible-playbook -i ${workdir}/ansible/hosts -vv ${workdir}/ansible/site.yml --ask-become-pass "$@"
+    echo "-> $ ansible-playbook ${workdir}/ansible/site.yml --ask-become-pass" -vv "$@"
+    ansible-playbook ${workdir}/ansible/site.yml --ask-become-pass -vv "$@"
   fi
 }
 
