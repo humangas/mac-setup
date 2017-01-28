@@ -3,10 +3,12 @@ osx_image: xcode8.2
 language: bash
 sudo: required
 install:
-    - sudo apt-get install python-pip
-    - sudo pip install ansible
+    - brew install ansible
+    # - sudo apt-get install python-pip
+    #- sudo pip install ansible
 script:
     - bash install --tags homebrew
+    - /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
    #- bash install --tags zsh
     - bash install --tags tmux 
     - bash install --tags vim 
