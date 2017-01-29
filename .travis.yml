@@ -1,9 +1,8 @@
 os: osx
 osx_image: xcode8.2
 language: bash
-sudo: required
 install:
     - brew install ansible
 script:
     - bash -n install
-    - sudo ansible-playbook ansible/site.yml
+    - ansible-playbook ansible/site.yml --syntax-check
