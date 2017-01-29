@@ -7,13 +7,17 @@
 - name: add zsh to /etc/shells 
   copy: src=etc/shells dest=/etc/shells mode=644
   become: yes
-  when: result.stdout != "/usr/local/bin/zsh"
+  when: 
+    - result.stdout != "/usr/local/bin/zsh"
+    - test_mode == "off"
 
 - name: change shell to zsh
   shell: chsh -s /usr/local/bin/zsh $(whoami)
   register: result
   changed_when: "'chsh: no changes made' not in result.stderr"
-  when: result.stdout != "/usr/local/bin/zsh"
+  when: 
+    - result.stdout != "/usr/local/bin/zsh"
+    - test_mode == "off"
 
 - name: mkdir ~/.zsh.d directory
   file: path=~/.zsh.d state=directory
