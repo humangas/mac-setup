@@ -5,4 +5,5 @@ install:
     - brew install ansible
 script:
     - bash -n install
-    - ansible-playbook ansible/site.yml --syntax-check --extra-vars "test_mode=on"
+    - ansible-playbook ansible/site.yml --syntax-check
+    - ansible-playbook ansible/site.yml --extra-vars "test_mode=on"
