@@ -3,3 +3,4 @@ packages:
   - name: sass
   - name: mailcatcher
   - name: travis
+  - name: vimgolf 
