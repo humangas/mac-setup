@@ -4,3 +4,4 @@ packages:
   - name: jupyter
   - name: Pygments
   - name: pygments-style-solarized
+  - name: cheat
