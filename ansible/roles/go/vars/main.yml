@@ -1,0 +1,3 @@
+---
+packages:
+    - { name: github.com/dufferzafar/cheat, cmd: cheat fetch }

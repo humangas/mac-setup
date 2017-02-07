@@ -10,7 +10,8 @@
     - { role: tmux,         tags: ['dotfiles', 'tmux'] }
     - { role: vim,          tags: ['dotfiles', 'vim' ] }
     - { role: ssh,          tags: ['dotfiles', 'ssh' ] }
-    - { role: ghq,          tags: ['dotfiles', 'ghq' ] }
+    - { role: go,           tags: ['go'              ] }
+    - { role: ghq,          tags: ['ghq'             ] }
     - { role: pip,          tags: ['pip'             ] }
     - { role: gem,          tags: ['gem'             ] }
     - { role: npm,          tags: ['npm'             ] }

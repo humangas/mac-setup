@@ -1,0 +1,13 @@
+---
+- name: Create go directory
+  file: path=~/src state=directory
+- file: path=~/pkg state=directory
+- file: path=~/bin state=directory 
+
+- name: Install go packages 
+  shell: go get {{ item.name }}
+  with_items: "{{ packages }}"
+ 
+- name: Execute command go packages
+  shell: "{{ item.cmd | default(omit) }}"
+  with_items: "{{ packages }}"
