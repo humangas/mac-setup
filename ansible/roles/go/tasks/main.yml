@@ -7,11 +7,11 @@
 - name: Install go packages 
   shell: go get {{ item.name }}
   environment: 
-    GOPATH: $HOME
+    GOPATH: "{{ lookup('env', 'HOME') }}"
   with_items: "{{ packages }}"
  
 - name: Execute command go packages
   shell: "{{ item.cmd | default(omit) }}"
   environment: 
-    GOPATH: $HOME
+    GOPATH: "{{ lookup('env', 'HOME') }}"
   with_items: "{{ packages }}"
