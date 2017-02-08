@@ -11,16 +11,21 @@
 # Env /usr/local/bin
 export PATH="/usr/local/bin:$PATH"
 
-# Env go setting
+# Env go settings
 export GOPATH=$HOME
 export PATH=$PATH:$GOPATH/bin
 
-# Env oracle client setting
+# Env oracle client settings
 export ORACLE_HOME=/usr/local/oracle
 export TNS_ADMIN=~/.config/oracle
 export PATH=$ORACLE_HOME:$PATH
 export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$ORACLE_HOME
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ORACLE_HOME
+
+# cheat settings: See also: https://github.com/chrisallenlane/cheat
+export CHEAT_EDITOR=vim
+export CHEATPATH="$GOPATH/src/github.com/humangas/cheat/cheatsheets"
+export CHEATCOLORS=true
 
 # Bindkey
 bindkey -v                                             # vi keybind 

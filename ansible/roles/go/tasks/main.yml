@@ -4,14 +4,14 @@
 - file: path=~/pkg state=directory
 - file: path=~/bin state=directory 
 
-- name: Install go packages 
-  shell: go get {{ item.name }}
-  environment: 
-    GOPATH: "{{ lookup('env', 'HOME') }}"
-  with_items: "{{ packages }}"
- 
-- name: Execute command go packages
-  shell: "{{ item.cmd | default(omit) }}"
-  environment: 
-    GOPATH: "{{ lookup('env', 'HOME') }}"
-  with_items: "{{ packages }}"
+#- name: Install go packages 
+#  shell: go get {{ item.name }}
+#  environment: 
+#    GOPATH: "{{ lookup('env', 'HOME') }}"
+#  with_items: "{{ packages }}"
+# 
+#- name: Execute command go packages
+#  shell: "{{ item.cmd | default(omit) }}"
+#  environment: 
+#    GOPATH: "{{ lookup('env', 'HOME') }}"
+#  with_items: "{{ packages }}"
