@@ -6,8 +6,12 @@
 
 - name: Install go packages 
   shell: go get {{ item.name }}
+  environment: 
+    GOPATH: $HOME
   with_items: "{{ packages }}"
  
 - name: Execute command go packages
   shell: "{{ item.cmd | default(omit) }}"
+  environment: 
+    GOPATH: $HOME
   with_items: "{{ packages }}"
