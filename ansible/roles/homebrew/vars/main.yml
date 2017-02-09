@@ -57,6 +57,7 @@ homebrew_packages:
   - name: osquery
   - name: hugo
   - name: cheat
+  - name: terminal-notifier 
 
 homebrew_cask_packages:
   - name: google-chrome
