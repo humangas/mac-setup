@@ -89,6 +89,7 @@ source ~/.zplug/init.zsh
 zplug "b4b4r07/enhancd", use:init.sh
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-syntax-highlighting"
+#zplug "marzocchi/zsh-notify"
 
 ## Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
