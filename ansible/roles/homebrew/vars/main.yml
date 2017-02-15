@@ -37,10 +37,11 @@ homebrew_packages:
   # aws
   - name: awscli
   # tools
-  - name: ansible
   - name: ghq
   - name: tig 
   - name: fzf
+  - name: ansible
+  - name: terraform
   - name: the_silver_searcher
   - name: tree
   - name: ctags
