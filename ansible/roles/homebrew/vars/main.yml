@@ -79,3 +79,4 @@ homebrew_cask_packages:
   - name: the-unarchiver
   - name: maczip4win
   - name: licecap
+  - name: calibre

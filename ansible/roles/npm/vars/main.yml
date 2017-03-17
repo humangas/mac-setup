@@ -2,3 +2,4 @@
 packages:
     - name: npm
     - name: gulp
+    - name: gitbook-cli
