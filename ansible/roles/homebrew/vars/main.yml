@@ -59,6 +59,8 @@ homebrew_packages:
   - name: hugo
   - name: cheat
   - name: terminal-notifier 
+  - name: graphviz
+  - name: plantuml
 
 homebrew_cask_packages:
   - name: google-chrome
