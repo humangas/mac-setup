@@ -4,3 +4,4 @@ packages:
     - name: gulp
     - name: gitbook-cli
     - name: browser-sync
+    - name: minifyjs
