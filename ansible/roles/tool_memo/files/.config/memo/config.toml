@@ -1,6 +1,6 @@
 memodir = "~/.config/memo/_posts"
 editor = "vim"
-column = 20
+column = 50
 selectcmd = "fzf"
 grepcmd = "grep -nH ${PATTERN} ${FILES}"
 assetsdir = "."

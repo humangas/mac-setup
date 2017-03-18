@@ -18,3 +18,9 @@
     src: ~/.config/memo/_posts
     dest: ~/Dropbox/memo 
     state: link
+
+- name: Install zsh completion
+  get_url:
+    url: https://raw.githubusercontent.com/mattn/memo/master/misc/completion.zsh
+    dest: ~/.zsh.d/memo_completion.sh 
+    mode: 0644 
