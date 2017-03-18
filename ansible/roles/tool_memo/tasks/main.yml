@@ -1,0 +1,20 @@
+---
+- name: Install go packages 
+  shell: go get github.com/mattn/memo
+  environment: 
+    GOPATH: "{{ lookup('env', 'HOME') }}"
+
+- name: Setup files
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode | default('0644') }}"
+    backup: "{{ item.backup | default('no') }}"
+    force: yes
+  with_items: "{{ files }}"
+
+- name: Setup Dropbox Symbolic link 
+  file:
+    src: ~/.config/memo/_posts
+    dest: ~/Dropbox/memo 
+    state: link

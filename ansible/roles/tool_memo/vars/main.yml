@@ -1,0 +1,3 @@
+---
+files:
+  - { src: .config/memo/config.toml, dest: ~/.config/memo/config.toml }
