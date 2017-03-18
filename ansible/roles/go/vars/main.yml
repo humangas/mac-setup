@@ -1,4 +1,4 @@
----
-packages:
-    - { name: github.com/mattn/memo }
+#---
+#packages:
+#    - { name: github.com/mattn/memo }
 #    - { name: github.com/dufferzafar/cheat, cmd: cheat fetch }
