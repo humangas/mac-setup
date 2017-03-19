@@ -201,14 +201,6 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 nnoremap <silent> ,gg :<C-u>GitGutterToggle<CR>
 nnoremap <silent> ,gh :<C-u>GitGutterLineHighlightsToggle<CR>
 
-" Plugin glidenote/memolist.vim
-let g:memolist_path = "~/.config/memo/_posts"
-let g:memolist_memo_suffix = "md"
-let g:memolist_unite = 1
-nnoremap <Leader>mn  :MemoNew<CR>
-nnoremap <Leader>ml  :MemoList<CR>
-nnoremap <Leader>mg  :MemoGrep<CR>
-
 " SuperTab like snippets behavior.
 imap <expr><TAB>
  \ pumvisible() ? "\<C-n>" :
@@ -251,3 +243,6 @@ nnoremap <Leader>D :call <SID>dash(expand('<cword>'))<CR>
 if filereadable(expand('~/.vimrc.local'))
     source ~/.vimrc.local
 endif
+
+set runtimepath+=~/.vim/
+runtime! userautoload/*.vim

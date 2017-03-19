@@ -28,5 +28,6 @@
 - name: Setup git remote origin url
   git_config:
     name: remote.origin.url
+    repo: ~/.config/memo/_posts
     scope: local 
     value: git@github.com:humangas/memo.git
