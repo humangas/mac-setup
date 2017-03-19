@@ -13,14 +13,20 @@
     force: yes
   with_items: "{{ files }}"
 
+- name: Install zsh completion
+  get_url:
+    url: https://raw.githubusercontent.com/mattn/memo/master/misc/completion.zsh
+    dest: ~/.zsh.d/memo_completion.sh 
+    mode: 0644 
+
 - name: Setup Dropbox Symbolic link 
   file:
     src: ~/.config/memo/_posts
     dest: ~/Dropbox/memo 
     state: link
 
-- name: Install zsh completion
-  get_url:
-    url: https://raw.githubusercontent.com/mattn/memo/master/misc/completion.zsh
-    dest: ~/.zsh.d/memo_completion.sh 
-    mode: 0644 
+- name: Setup git remote origin url
+  git_config:
+    name: remote.origin.url
+    scope: local 
+    value: git@github.com:humangas/memo.git
