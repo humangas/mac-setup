@@ -4,6 +4,15 @@
   environment: 
     GOPATH: "{{ lookup('env', 'HOME') }}"
 
+- name: Mkdir directories
+  file:
+    path: "{{ item.dest }}"
+    state: directory
+    mode: "{{ item.dir_mode | default('0755') }}"
+    force: yes
+  with_items: "{{ files }}"
+  when: item.dest | search("\/")
+
 - name: Setup files
   copy:
     src: "{{ item.src }}"
