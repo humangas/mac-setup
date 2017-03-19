@@ -202,8 +202,9 @@ nnoremap <silent> ,gg :<C-u>GitGutterToggle<CR>
 nnoremap <silent> ,gh :<C-u>GitGutterLineHighlightsToggle<CR>
 
 " Plugin glidenote/memolist.vim
-let g:memolist_path = "~/src/github.com/humangas/_memo"
+let g:memolist_path = "~/.config/memo/_posts"
 let g:memolist_memo_suffix = "md"
+let g:memolist_unite = 1
 nnoremap <Leader>mn  :MemoNew<CR>
 nnoremap <Leader>ml  :MemoList<CR>
 nnoremap <Leader>mg  :MemoGrep<CR>
