@@ -1,4 +1,0 @@
----
-files:
-  - { src: .config/memo/config.toml, dest: ~/.config/memo }
-  - { src: .vim/userautoload/memolist.vim, dest: ~/.vim/userautoload }
