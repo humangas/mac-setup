@@ -28,6 +28,17 @@
     dest: ~/.zsh.d/memo_completion.sh 
     mode: 0644 
 
+- name: Install Dropbox 
+  homebrew_cask:
+    name: dropbox
+    state: present 
+
+- name: Create Dropbox dir 
+  file:
+    path: ~/Dropbox
+    state: directory 
+    force: yes
+
 - name: Setup Dropbox Symbolic link 
   file:
     src: ~/.config/memo/_posts
