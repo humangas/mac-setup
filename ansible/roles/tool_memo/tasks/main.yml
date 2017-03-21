@@ -13,8 +13,8 @@
 
 - name: Setup config.toml 
   copy:
-    src: ~/.config/memo/config.toml 
-    dest: ~/.config/memo 
+    src: .config/memo/config.toml 
+    dest: ~/.config/memo/
     mode: 0644
     force: yes
 
@@ -33,8 +33,8 @@
 
 - name: Setup memolist.vim 
   copy:
-    src: ~/.vim/userautoload/memolist.vim
-    dest: ~/.vim/userautoload
+    src: .vim/userautoload/memolist.vim
+    dest: ~/.vim/userautoload/
     mode: 0644
     force: yes
 
