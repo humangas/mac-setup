@@ -57,10 +57,14 @@
     state: link
 
 # git
-- name: Setup git repository 
-  git:
-    repo: git://github.com/humangas/memo.git
-    dest: ~/.config/memo/_posts
-    clone: no
-    update: no
-    accept_hostkey: yes
+- name: Setup git init 
+  shell: git init
+  args:
+    chdir: ~/.config/memo/_posts
+
+- name: Setup git remote origin url
+  git_config:
+    name: remote.origin.url
+    repo: ~/.config/memo/_posts
+    scope: local 
+    value: git@github.com:humangas/memo.git
