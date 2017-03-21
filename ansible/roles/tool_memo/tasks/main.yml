@@ -63,3 +63,4 @@
     dest: ~/.config/memo/_posts
     clone: no
     update: no
+    accept_hostkey: yes
