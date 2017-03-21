@@ -57,9 +57,9 @@
     state: link
 
 # git
-- name: Setup git remote origin url
-  git_config:
-    name: remote.origin.url
-    repo: ~/.config/memo/_posts
-    scope: local 
-    value: git@github.com:humangas/memo.git
+- name: Setup git repository 
+  git:
+    repo: git@github.com:humangas/memo.git
+    dest: ~/.config/memo/_posts
+    clone: no
+    update: no
