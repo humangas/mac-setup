@@ -59,7 +59,7 @@
 # git
 - name: Setup git repository 
   git:
-    repo: git@github.com:humangas/memo.git
+    repo: git://github.com/humangas/memo.git
     dest: ~/.config/memo/_posts
     clone: no
     update: no
