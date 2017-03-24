@@ -1,6 +1,7 @@
 ---
 packages:
     - name: npm
+    - name: yarn
     - name: gulp
     - name: gitbook-cli
     - name: browser-sync
