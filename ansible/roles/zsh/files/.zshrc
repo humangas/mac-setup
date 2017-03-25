@@ -105,24 +105,33 @@ zplug load --verbose
 
 # Alias
 alias ls='gls --color=auto'
+alias ll='ls -la'
 alias vi='vim'
 alias fzf='fzf-tmux'                                                        # fzf: /usr/local/Cellar/fzf/0.15.8/bin/fzf
 alias soz='source ~/.zshrc'
-alias cap='pygmentize -O style=solarizedlight -f console256 -g'
+
+# TODO: --helpでヘルプ表示
 alias opn='openFileDispatcher'
-alias mdf='mdfindFilterFzf'
+
+# TODO: 一つのgit操作コマンドにしてオプションでわけることにする：--helpでhelp表示
 alias ggr='gitGrepOpenVim'
 alias gsc='gitShowCommitLog'
-alias jn='jupyter notebook --notebook-dir ~/src/work/jupyter'               # Required: $ pip insall jupyter
+
+# TODO: 整理する（いらないやつは削除する）
+alias cap='pygmentize -O style=solarizedlight -f console256 -g'
 alias gp='open https://play.golang.org/'
+alias opd='_openFile $(find . -type d | cut -d. -f2- | egrep -v "\.git/|\.git$|\.DS_Store" | cut -d/ -f2- | fzf -0 --inline-info --cycle --preview "ls -la {}")'
+## TODO: 整理する　↓は必要ぽい、
+alias mdf='mdfindFilterFzf'
+alias jn='jupyter notebook --notebook-dir ~/src/work/jupyter'               # Required: $ pip insall jupyter
+alias rmzcompdump='rm -f ~/.zcompdump; rm -f ~/.zplug/zcompdump'            # If tab completion error occurs, delete it. Then reload the zsh.
+
+# TODO: 整理する一つのコマンドで、オプション化する --help でhelp
 alias tmu='tmux resize-pane -U 5'
 alias tmd='tmux resize-pane -D 5'
 alias tml='tmux resize-pane -L 5'
 alias tmr='tmux resize-pane -R 5'
-alias rmzcompdump='rm -f ~/.zcompdump; rm -f ~/.zplug/zcompdump'            # If tab completion error occurs, delete it. Then reload the zsh.
 
-alias opd='_openFile $(find . -type d | cut -d. -f2- | egrep -v "\.git/|\.git$|\.DS_Store" | cut -d/ -f2- | fzf -0 --inline-info --cycle --preview "ls -la {}")'
-alias cdz='cdCurrentDirs'
 
 # Functions
 function _openFile() {
@@ -255,7 +264,7 @@ function openFileDispatcher() {
         '[' ) cdGhqDir && openFileFromDstDir ;;
         '-' ) echo "TODO: open most recentlly file" ;;
         '@' ) openCurrentGitURL ;;
-        '-h') openFileDispatcherUsage  ;;
+        '-h' | '--help') openFileDispatcherUsage  ;;
         *   ) openFileFromDstDir "$1" ;;
     esac
 }
