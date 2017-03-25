@@ -115,15 +115,13 @@ alias opn='openFileDispatcher'
 
 # TODO: 一つのgit操作コマンドにしてオプションでわけることにする：--helpでhelp表示
 alias ggr='gitGrepOpenVim'
-alias gsc='gitShowCommitLog'
 
 # TODO: 整理する（いらないやつは削除する）
-alias cap='pygmentize -O style=solarizedlight -f console256 -g'
 alias gp='open https://play.golang.org/'
 alias opd='_openFile $(find . -type d | cut -d. -f2- | egrep -v "\.git/|\.git$|\.DS_Store" | cut -d/ -f2- | fzf -0 --inline-info --cycle --preview "ls -la {}")'
 ## TODO: 整理する　↓は必要ぽい、
 alias mdf='mdfindFilterFzf'
-alias jn='jupyter notebook --notebook-dir ~/src/work/jupyter'               # Required: $ pip insall jupyter
+alias jnb='jupyter notebook --notebook-dir ~/src/work/jupyter'               # Required: $ pip insall jupyter
 alias rmzcompdump='rm -f ~/.zcompdump; rm -f ~/.zplug/zcompdump'            # If tab completion error occurs, delete it. Then reload the zsh.
 
 # TODO: 整理する一つのコマンドで、オプション化する --help でhelp
@@ -303,14 +301,6 @@ function gitGrepOpenVim() {
     vim -c $line $file
 }
 
-function gitShowCommitLog() {
-    case $1 in
-        -a|--all) git log --pretty=oneline --abbrev-commit | fzf | cut -d' ' -f1 | xargs git show 
-                  ;;
-        *       ) git reflog | fzf | cut -d' ' -f1 | xargs git show
-                  ;; 
-    esac
-}
 
 # Command less
 ################################################################################################
