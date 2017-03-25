@@ -59,9 +59,12 @@ PROMPT=$PROMPT'${vcs_info_msg_0_}$ '
 eval "$(gdircolors ~/.config/solarized/dircolors.256dark)"
 
 # Load 
-eval "$(direnv hook bash)"
+eval "$(direnv hook zsh)"
 eval "$(pyenv init -)" 
 eval "$(pyenv virtualenv-init -)"
+
+# Editor
+export EDITOR=vim
 
 # History
 ################################################################################################
