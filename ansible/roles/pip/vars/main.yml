@@ -2,5 +2,3 @@
 packages:
   - name: flake8 
   - name: jupyter
-  - name: Pygments
-  - name: pygments-style-solarized
