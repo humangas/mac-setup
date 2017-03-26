@@ -276,7 +276,7 @@ function agCurrentOpenVim() {
         [[ -z $search ]] && return 1
     fi
 
-    local select=$(ag $search | fzf)
+    local select=$(ag --hidden --ignore .git/ $search | fzf)
     [[ -z $select ]] && return 1
     local file=$(echo $select | cut -d: -f1)
     local line=$(echo $select | cut -d: -f2)
