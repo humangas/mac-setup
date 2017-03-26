@@ -110,7 +110,7 @@ alias vi='vim'
 alias fzf='fzf-tmux'                                                        # fzf: /usr/local/Cellar/fzf/0.15.8/bin/fzf
 alias soz='source ~/.zshrc'
 alias opn='openFileDispatcher'
-alias ggr='gitGrepOpenVim'
+alias ago='agCurrentOpenVim'
 alias mdf='openMdfindFilterFzf'
 alias tmr='tmuxResizePane'
 alias jnb='jupyter notebook --notebook-dir ~/src/work/jupyter'              # Required: $ pip insall jupyter
@@ -267,16 +267,16 @@ Usage: opn [<path> | @]
 '
 }
 
-function gitGrepOpenVim() {
+function agCurrentOpenVim() {
     local search="$@"
 
     if [[ $# -eq 0 ]]; then
-        printf "git grep string: "
+        printf "ag string: "
         read -t 10 search
         [[ -z $search ]] && return 1
     fi
 
-    local select=$(git grep -n $search | fzf)
+    local select=$(ag $search | fzf)
     [[ -z $select ]] && return 1
     local file=$(echo $select | cut -d: -f1)
     local line=$(echo $select | cut -d: -f2)
