@@ -120,7 +120,6 @@ alias rmzcompdump='rm -f ~/.zcompdump; rm -f ~/.zplug/zcompdump'            # If
 function tmuxResizePane() {
     local pane=$1
     local size=$2
-
     local showUsage=1
     local inputPane=1
     local inputSize=1
@@ -160,12 +159,6 @@ Usage: tmr [pane] [size]"
 }
 
 function _openFile() {
-    setopt nonomatch
-    if pyenv local  > /dev/null 2>&1; then
-        pyenv shell $(pyenv local) 
-    fi
-    setopt nomatch
-
     local target="$1"
     [[ -z $target ]] && return 1
 
@@ -182,7 +175,6 @@ function _openFile() {
     fi
 }
 
-
 function openMdfindFilterFzf(){
     if [[ $# -eq 0 ]]; then
         mdfind
@@ -191,26 +183,6 @@ function openMdfindFilterFzf(){
 
     local T="$(mdfind $@ | fzf)"
     [[ ! -z $T ]] && open $T
-}
-
-function cdCurrentDirs() {
-    readonly EXIT='exit'
-    readonly QUIT='quit'
-
-    setopt nonomatch
-    if ! ls -df "$PWD"/* > /dev/null 2>&1; then
-        return 0
-    fi
-    setopt nomatch
-
-    local T=$(ls -dF $PWD/* | grep /$)
-    if [[ ! -z $T ]]; then
-        T="$T\n$EXIT\n$QUIT"
-        local target=$(echo $T | fzf)
-        [[ $target == $EXIT || $target == $QUIT ]] && return 0
-        cd "$target"
-        cdCurrentDirs 
-    fi
 }
 
 function openCurrentGitURL() {
@@ -243,24 +215,20 @@ function openFileFromDstDir() {
         return 1
     fi
 
-    pyenv shell system
-
     if [[ $dstdir == $PWD ]]; then
         _openFile $(find $dstdir -type f \
             | sed -e "s@$dstdir/@@" \
             | egrep -v "\.git/|\.git$|\.DS_Store" \
-            | fzf -0 --inline-info --cycle --preview "pygmentize -O style=solarizedlight -f console256 -g {}")
+            | fzf -0 --inline-info --cycle --preview "less {}")
     else
         _openFile $(find $dstdir -type f \
             | sed -e "s@$dstdir/@@" \
             | egrep -v "\.git/|\.git$|\.DS_Store" \
-            | fzf -0 --inline-info --cycle --preview "pygmentize -O style=solarizedlight -f console256 -g $dstdir/{}") "$dstdir"
+            | fzf -0 --inline-info --cycle --preview "less $dstdir/{}") "$dstdir"
     fi
 }
 
 function cdGhqDir(){
-    pyenv shell system
-
     local ghqlist=`ghq list`
     local worklist=$(ls -d $GOPATH/src/work/* | sed -e "s@$GOPATH/src/@@")
     local alllist="$ghqlist\n$worklist"
@@ -269,12 +237,6 @@ function cdGhqDir(){
 
     [[ -z $mvdir ]] && return 1
     cd "$GOPATH/src/$mvdir"
-
-    setopt nonomatch
-    if pyenv local  > /dev/null 2>&1; then
-        pyenv shell $(pyenv local) 
-    fi
-    setopt nomatch
 }
 
 function openFileDispatcher() {
@@ -321,13 +283,8 @@ function gitGrepOpenVim() {
     vim -c $line $file
 }
 
-# Command less
-################################################################################################
-# TODO: write manual  
-# $ less -M               TODO 
-################################################################################################
+# less option
 export LESS='-iMR'
-#export LESSOPEN='|pygmentize -O style=solarizedlight -f console256 -g %s'
 
 # Load fzf (see also: ~/.cache/dein/repos/github.com/junegunn/fzf/shell/key-bindings.zsh)
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
