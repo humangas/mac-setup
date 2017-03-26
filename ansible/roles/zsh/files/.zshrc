@@ -109,29 +109,56 @@ alias ll='ls -la'
 alias vi='vim'
 alias fzf='fzf-tmux'                                                        # fzf: /usr/local/Cellar/fzf/0.15.8/bin/fzf
 alias soz='source ~/.zshrc'
-
-# TODO: --helpでヘルプ表示
 alias opn='openFileDispatcher'
-
-# TODO: 一つのgit操作コマンドにしてオプションでわけることにする：--helpでhelp表示
 alias ggr='gitGrepOpenVim'
-
-# TODO: 整理する（いらないやつは削除する）
-alias gp='open https://play.golang.org/'
-alias opd='_openFile $(find . -type d | cut -d. -f2- | egrep -v "\.git/|\.git$|\.DS_Store" | cut -d/ -f2- | fzf -0 --inline-info --cycle --preview "ls -la {}")'
-## TODO: 整理する　↓は必要ぽい、
-alias mdf='mdfindFilterFzf'
-alias jnb='jupyter notebook --notebook-dir ~/src/work/jupyter'               # Required: $ pip insall jupyter
+alias mdf='openMdfindFilterFzf'
+alias tmr='tmuxResizePane'
+alias jnb='jupyter notebook --notebook-dir ~/src/work/jupyter'              # Required: $ pip insall jupyter
 alias rmzcompdump='rm -f ~/.zcompdump; rm -f ~/.zplug/zcompdump'            # If tab completion error occurs, delete it. Then reload the zsh.
 
-# TODO: 整理する一つのコマンドで、オプション化する --help でhelp
-alias tmu='tmux resize-pane -U 5'
-alias tmd='tmux resize-pane -D 5'
-alias tml='tmux resize-pane -L 5'
-alias tmr='tmux resize-pane -R 5'
-
-
 # Functions
+function tmuxResizePane() {
+    local pane=$1
+    local size=$2
+
+    local showUsage=1
+    local inputPane=1
+    local inputSize=1
+    
+    [[ $1 =~ "^[U|D|L|R]$" ]] && inputPane=0
+    [[ $2 =~ "^([5-9]|[1-9][0-9]|100)$" ]] && inputSize=0
+    [[ $inputPane -eq 0 && $inputSize -eq 0 ]] && showUsage=0
+    [[ $showUsage -ne 0 ]] && tmuxResizePaneUsage
+
+    if [[ $inputPane -eq 1 ]]; then
+        printf "pane: "
+        read -t 10 pane
+        case $pane in
+            U|D|L|R) ;;
+            ''|*) return 1 ;;
+        esac
+    fi
+
+    if [[ $inputSize -eq 1 ]]; then
+        printf "size: "
+        read -t 10 size 
+        case $size in
+            [5-9]|[1-9][0-9]|100) ;;
+            ''|*) return 1 ;;
+        esac
+    fi
+
+    tmux resize-pane -$pane $size
+}
+
+function tmuxResizePaneUsage() {
+echo 'tmux resize pane
+Usage: tmr [pane] [size]" 
+    - pane:   U(UP), D(Down), L(Left), R(Right)"
+    - size:   5 - 100"
+'
+}
+
 function _openFile() {
     setopt nonomatch
     if pyenv local  > /dev/null 2>&1; then
@@ -155,19 +182,15 @@ function _openFile() {
     fi
 }
 
-function mdfindFilterFzf(){
+
+function openMdfindFilterFzf(){
     if [[ $# -eq 0 ]]; then
         mdfind
         return $?
     fi
 
     local T="$(mdfind $@ | fzf)"
-    if [[ -d $T ]]; then
-        cd "$T"
-        cdCurrentDirs
-        return $?
-    fi
-    _openFile "$T"
+    [[ ! -z $T ]] && open $T
 }
 
 function cdCurrentDirs() {
@@ -254,13 +277,13 @@ function cdGhqDir(){
     setopt nomatch
 }
 
-# TODO: Implement the following TODO comment
-# TODO: Change to directory mode at the press ctrl+d and press tab key move to nested directory.
 function openFileDispatcher() {
+    if [ $# -eq 0 ]; then
+       cdGhqDir && openFileFromDstDir
+       return
+    fi
+
     case $1 in
-        ']' ) cdGhqDir ;; 
-        '[' ) cdGhqDir && openFileFromDstDir ;;
-        '-' ) echo "TODO: open most recentlly file" ;;
         '@' ) openCurrentGitURL ;;
         '-h' | '--help') openFileDispatcherUsage  ;;
         *   ) openFileFromDstDir "$1" ;;
@@ -269,27 +292,24 @@ function openFileDispatcher() {
 
 function openFileDispatcherUsage() {
 echo '
-usage: opn [option|{path}]
+Usage: opn [<path> | @]
     opn is utility tool to easily open files and directories. (use: fzf)
     
-    default:  open files selection screen under the current direcory
+    Default:  Open direcory selection screen in $gopath/src and after cd select dir,
+              following open current files selection screen.
     
-    option:
-        ..    open parent dir files selection screen
-        ]     open direcotry selection screen in $gopath/src 
-        [     open same "]" option, after cd select dir, open current files selection screen
-        -     open most recently files selection screen
-        @     open current git.remote.url in browser
-    {path}    open files selection screen under the {path} directory 
-        -h    show usage (this is)
+    Option:
+    <path>    Open files selection screen under the <path> directory 
+        @     Open current git.remote.url in browser
 
 '
 }
 
 function gitGrepOpenVim() {
     local search="$@"
+
     if [[ $# -eq 0 ]]; then
-        printf "grep string?: "
+        printf "git grep string: "
         read -t 10 search
         [[ -z $search ]] && return 1
     fi
@@ -301,14 +321,13 @@ function gitGrepOpenVim() {
     vim -c $line $file
 }
 
-
 # Command less
 ################################################################################################
 # TODO: write manual  
 # $ less -M               TODO 
 ################################################################################################
 export LESS='-iMR'
-export LESSOPEN='|pygmentize -O style=solarizedlight -f console256 -g %s'
+#export LESSOPEN='|pygmentize -O style=solarizedlight -f console256 -g %s'
 
 # Load fzf (see also: ~/.cache/dein/repos/github.com/junegunn/fzf/shell/key-bindings.zsh)
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
