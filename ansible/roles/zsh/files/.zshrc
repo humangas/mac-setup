@@ -284,6 +284,7 @@ function openFileDispatcher() {
 function openWorkDir() {
     local select=$(ghq list | ag work/ | fzf)
     [[ -z $select ]] && return 1
+    cd $GOPATH/src/$select
     openFileFromDstDir $GOPATH/src/$select
 }
 
