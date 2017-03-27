@@ -3,9 +3,6 @@
 #
 # See also: https://github.com/humangas/mac-setup
 ################################################################### 
-all:
-	@make help
-
 help:
 	@echo "Usage: make target [args]"
 	@echo ""
@@ -16,6 +13,7 @@ help:
 	@echo "Examples:"
 	@echo " make install"
 	@echo " make install TAGS=zsh"
+	@echo " make install TAGS=zsh,vim"
 
 install:
 	@if [ -z "$(TAGS)" ]; then\
