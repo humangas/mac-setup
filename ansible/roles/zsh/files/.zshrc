@@ -111,12 +111,31 @@ alias fzf='fzf-tmux'                                                        # fz
 alias soz='source ~/.zshrc'
 alias opn='openFileDispatcher'
 alias ago='agCurrentOpenVim'
+alias mkw='mkdirWorkDir'
 alias mdf='openMdfindFilterFzf'
 alias tmr='tmuxResizePane'
 alias jnb='jupyter notebook --notebook-dir ~/src/work/jupyter'              # Required: $ pip insall jupyter
 alias rmzcompdump='rm -f ~/.zcompdump; rm -f ~/.zplug/zcompdump'            # If tab completion error occurs, delete it. Then reload the zsh.
 
 # Functions
+function mkdirWorkDir() {
+    local dirname=$1
+
+    if [[ -z $dirname ]]; then
+        mkdirWorkDirUsage
+        return 1
+    fi
+
+    mkdir -p "$GOPATH/src/work/$dirname"
+    cd $_
+    git init
+}
+
+function mkdirWorkDirUsage() {
+echo 'Usage: mkw DIRNAME
+   mkw command is creating DIRNAME directory under $GOPATH/src/work and move it.'
+}
+
 function tmuxResizePane() {
     local pane=$1
     local size=$2
@@ -130,7 +149,7 @@ function tmuxResizePane() {
     [[ $showUsage -ne 0 ]] && tmuxResizePaneUsage
 
     if [[ $inputPane -eq 1 ]]; then
-        printf "pane: "
+        printf "PANE: "
         read -t 10 pane
         case $pane in
             U|D|L|R) ;;
@@ -139,7 +158,7 @@ function tmuxResizePane() {
     fi
 
     if [[ $inputSize -eq 1 ]]; then
-        printf "size: "
+        printf "SIZE: "
         read -t 10 size 
         case $size in
             [5-9]|[1-9][0-9]|100) ;;
@@ -151,10 +170,10 @@ function tmuxResizePane() {
 }
 
 function tmuxResizePaneUsage() {
-echo 'tmux resize pane
-Usage: tmr [pane] [size]" 
-    - pane:   U(UP), D(Down), L(Left), R(Right)"
-    - size:   5 - 100"
+echo 'Usage: tmr PANE SIZE" 
+   tmr command is tmux resize pane.
+   - PANE:  U(UP), D(Down), L(Left), R(Right)"
+   - SIZE:  5 - 100"
 '
 }
 
@@ -242,44 +261,83 @@ function cdGhqDir(){
 function openFileDispatcher() {
     if [ $# -eq 0 ]; then
        cdGhqDir && openFileFromDstDir
-       return
+       return $?
     fi
 
     case $1 in
         '@' ) openCurrentGitURL ;;
-        '-h' | '--help') openFileDispatcherUsage  ;;
-        *   ) openFileFromDstDir "$1" ;;
+        '#' ) openWorkDir ;;
+        '-h' | '--help') openFileDispatcherUsage ;;
+        *   ) 
+            if [[ -d $1 ]]; then
+                openFileFromDstDir "$1"
+            else
+                echo "Error: $1 is not direcory path."
+                echo ""
+                openFileDispatcherUsage
+                return 1
+            fi
+            ;;
     esac
 }
 
-function openFileDispatcherUsage() {
-echo '
-Usage: opn [<path> | @]
-    opn is utility tool to easily open files and directories. (use: fzf)
-    
-    Default:  Open direcory selection screen in $gopath/src and after cd select dir,
-              following open current files selection screen.
-    
-    Option:
-    <path>    Open files selection screen under the <path> directory 
-        @     Open current git.remote.url in browser
+function openWorkDir() {
+    local select=$(ghq list | ag work/ | fzf)
+    [[ -z $select ]] && return 1
+    openFileFromDstDir $GOPATH/src/$select
+}
 
-'
+function openFileDispatcherUsage() {
+echo 'Usage: opn [PATH | @ | #]
+   opn command is utility tool to easily open files and directories. (use: fzf)
+   
+   Default:  Open direcory selection screen in $gopath/src and after cd select dir,
+             following open current files selection screen.
+   Option:
+    PATH     Open files selection screen under the PATH directory 
+       #     Open files selection screen under the $GOPATH/work direcory
+       @     Open current git.remote.url in browser'
+}
+
+function agCurrentOpenVimUsage() {
+    echo 'Usage: ago PATTERN [PATH]'
+    echo '  ago command is Search PATTERN using ag and open the selected file with vim.'
+    return
 }
 
 function agCurrentOpenVim() {
-    local search="$@"
+    local search=$1
+    local tpath=$2
 
-    if [[ $# -eq 0 ]]; then
-        printf "ag string: "
-        read -t 10 search
-        [[ -z $search ]] && return 1
+    if [[ -z $search ]]; then
+        agCurrentOpenVimUsage
+        return 1
     fi
 
-    local select=$(ag --hidden --ignore .git/ $search | fzf)
+    if [[ ! -z $tpath ]]; then
+        if [[ ! -e $tpath ]] then
+            echo "Error: $tpath path is not found."
+            echo ""
+            agCurrentOpenVimUsage
+            return 1
+        fi
+    fi
+
+    local select=$(ag --hidden --ignore .git/ $search $tpath | fzf)
     [[ -z $select ]] && return 1
-    local file=$(echo $select | cut -d: -f1)
-    local line=$(echo $select | cut -d: -f2)
+
+    local tmpval=$(echo $select | cut -d: -f1)
+    local file=''
+    local line=''
+
+    if [[ $tmpval =~ "^([0-9].*)$" ]]; then
+        file=$tpath
+        line=$tmpval
+    else
+        file=$tmpval
+        line=$(echo $select | cut -d: -f2)
+    fi
+
     vim -c $line $file
 }
 
