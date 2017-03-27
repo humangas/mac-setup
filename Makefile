@@ -30,4 +30,4 @@ tags:
 	@echo ""
 	@grep -ve '.*#.*' ansible/site.yml | grep -oe '- { role:.*}*'
 
-.PHONY: all help install tags
+.PHONY: help install tags
