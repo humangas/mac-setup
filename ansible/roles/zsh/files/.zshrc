@@ -116,8 +116,56 @@ alias mdf='openMdfindFilterFzf'
 alias tmr='tmuxResizePane'
 alias jnb='jupyter notebook --notebook-dir ~/src/work/jupyter'              # Required: $ pip insall jupyter
 alias rmzcompdump='rm -f ~/.zcompdump; rm -f ~/.zplug/zcompdump'            # If tab completion error occurs, delete it. Then reload the zsh.
+alias md="MEMO_PREFIX=''; _memoDispatch $@"
+alias mm="MEMO_PREFIX='memo-'; _memoDispatch $@"
+alias td="MEMO_PREFIX='todo-'; _memoDispatch $@"
+alias ch="MEMO_PREFIX='cheat-'; _memoDispatch $@"
 
 # Functions
+function _memoEx() {
+    local memodir=$@[-1]
+    local args=$@[1,-2]
+
+    if [[ $#args -eq 0 ]]; then
+        echo "Commands: md:default, mm:memo, td:todo, ch:cheat, memo:YYYY-MM-DD-"
+        echo ""
+        memo
+        echo "    newf, f     Create memo flat file name" 
+        echo "     ago, a     Search by ag and open the selected part with vim" 
+        return 1
+    fi
+
+    case $1 in
+        'ago'|'a')
+            if [[ -z $2 ]]; then
+                echo "Error: memo ago PATTERN required"
+                return 1
+            fi
+            agCurrentOpenVim $2 $memodir
+            ;;
+        'newf'|'f')
+            printf "Title: "
+            read -t 10 title
+            [[ -z $title ]] && return 1
+            echo "# $title\n" > "$memodir/$MEMO_PREFIX$title.md"
+            vim "$memodir/$MEMO_PREFIX$title.md"
+            ;;
+        *)
+            memo $args
+            ;;
+    esac
+}
+
+function _memoDispatch() {
+    if [[ ! -z $MEMODIR ]]; then
+        _memoEx "$@" "$MEMODIR"
+    else
+        local memodir=$(cat ~/.config/memo/config.toml | ag memodir | awk '{print $3}' | sed s/\"//g)
+        memodir=$(/usr/local/bin/zsh -c "echo $memodir")
+        _memoEx "$@" "$memodir"
+    fi
+}
+
 function mkdirWorkDir() {
     local dirname=$1
 
