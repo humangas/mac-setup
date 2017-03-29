@@ -6,16 +6,16 @@ homebrew_packages:
   # git
   - name: git
   - name: gibo
+  - name: tig 
   # shell
   - { name: zsh, option: without-etcdir }
-  - name: coreutils
   - name: zsh-completions 
   # python
   - name: python
   - name: python3
   - name: pyenv
   - name: pyenv-virtualenv
-   # ruby
+  # ruby
   - name: ruby
   - name: rbenv
   - name: ruby-build
@@ -26,41 +26,49 @@ homebrew_packages:
   - name: nodebrew
   # go
   - { name: go, option: cross-compile-common }
+  - name: gdb 
+  - name: go-delve/delve/delve 
   # java
   - name: jenv
   # vim
   - name: lua
   - { name: vim, option: [with-lua, with-override-system-vi] }
+  - name: macvim 
   # tmux
   - name: tmux
   - name: reattach-to-user-namespace
   # aws
   - name: awscli
-  # tools
-  - name: ghq
-  - name: tig 
-  - name: fzf
+  # GNU commands
+  - name: xz
+  - name: binutils
+  - name: coreutils 
+  - name: findutils 
+  - name: tree
+  - name: wget
+  - name: gnu-sed
+  # provison tools
   - name: ansible
   - name: terraform
-  - name: the_silver_searcher
-  - name: tree
-  - name: ctags
-  - name: macvim 
-  - name: wget
+  # search tools
+  - name: fzf
+  - name: ag
+  # dev tools
+  - name: ghq
   - name: direnv
-  - name: httpie
-  - name: gnu-sed
+  - name: ctags
   - name: fswatch
-  - name: tidy-html5  
-  - name: xz
-  - name: gdb 
-  - name: go-delve/delve/delve 
-  - name: osquery
+  - name: httpie
+  # document tools
   - name: hugo
-  - name: cheat
-  - name: terminal-notifier 
   - name: graphviz
   - name: plantuml
+  # system tools
+  - name: osquery
+  # etc tools
+  - name: tidy-html5  
+  - name: cheat
+  - name: terminal-notifier 
 
 homebrew_cask_packages:
   - name: google-chrome
