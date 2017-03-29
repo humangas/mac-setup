@@ -3,6 +3,12 @@
 #
 # See also: https://github.com/humangas/mac-setup
 ################################################################### 
+.DEFAULT_GOAL := help
+
+.PHONY: all help install tags
+
+all:
+
 help:
 	@echo "Usage: make target [args]"
 	@echo ""
@@ -29,5 +35,3 @@ tags:
 	@echo " make install TAGS=zsh"
 	@echo ""
 	@grep -ve '.*#.*' ansible/site.yml | grep -oe '- { role:.*}*'
-
-.PHONY: help install tags
