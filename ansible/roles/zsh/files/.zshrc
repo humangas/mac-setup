@@ -22,6 +22,10 @@ export PATH=$ORACLE_HOME:$PATH
 export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$ORACLE_HOME
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ORACLE_HOME
 
+# Env GNU commands
+export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
+export PATH=$(brew --prefix findutils)/libexec/gnubin:$PATH
+
 # cheat settings: See also: https://github.com/chrisallenlane/cheat
 export CHEAT_EDITOR=vim
 export CHEATPATH="$GOPATH/src/github.com/humangas/cheat/cheatsheets"
