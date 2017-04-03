@@ -47,6 +47,7 @@ homebrew_packages:
   - name: tree
   - name: wget
   - name: gnu-sed
+  - name: dupes/grep
   # provison tools
   - name: ansible
   - name: terraform

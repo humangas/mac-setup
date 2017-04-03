@@ -110,6 +110,7 @@ zplug load --verbose
 # Alias
 alias ls='gls --color=auto'
 alias ll='ls -la'
+alias grep='/usr/local/bin/ggrep'
 alias vi='vim'
 alias fzf='fzf-tmux'                                                        # fzf: /usr/local/Cellar/fzf/0.15.8/bin/fzf
 alias soz='source ~/.zshrc'
