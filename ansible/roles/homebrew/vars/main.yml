@@ -10,6 +10,7 @@ homebrew_packages:
   # shell
   - { name: zsh, option: without-etcdir }
   - name: zsh-completions 
+  - name: bash
   # python
   - name: python
   - name: python3
