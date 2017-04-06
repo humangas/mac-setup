@@ -6,7 +6,6 @@ homebrew_packages:
   # git
   - name: git
   - name: gibo
-  - name: tig 
   # shell
   - { name: zsh, option: without-etcdir }
   - name: zsh-completions 

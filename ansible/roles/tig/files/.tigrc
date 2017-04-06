@@ -1,0 +1,1 @@
+bind generic L !git log -p %(file)

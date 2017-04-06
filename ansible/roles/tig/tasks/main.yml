@@ -1,0 +1,17 @@
+---
+- name: Install homebrew packages
+  homebrew:
+      name: "{{ item.name }}"
+      state: "{{ item.state | default('latest') }}"
+      install_options: "{{ item.option | default(omit) }}"
+      state: upgraded
+  with_items: "{{ homebrew_packages }}"
+
+- name: Setup files
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest | default('~') }}"
+    mode: "{{ item.mode | default('0644') }}"
+    backup: "{{ item.backup | default('no') }}"
+    force: "{{ item.force | default('yes') }}"
+  with_items: "{{ files }}"
