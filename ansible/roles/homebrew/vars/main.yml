@@ -53,6 +53,7 @@ homebrew_packages:
   - name: terraform
   # search tools
   - name: fzf
+  - name: yank
   - name: ag
   # dev tools
   - name: ghq
