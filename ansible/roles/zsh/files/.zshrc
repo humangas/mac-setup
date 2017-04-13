@@ -66,6 +66,7 @@ eval "$(gdircolors ~/.config/solarized/dircolors.256dark)"
 eval "$(direnv hook zsh)"
 eval "$(pyenv init -)" 
 eval "$(pyenv virtualenv-init -)"
+eval "$(fasd --init auto)"
 
 # Editor
 export EDITOR=vim
@@ -108,10 +109,13 @@ zplug load --verbose
 # Alias
 alias ls='gls --color=auto'
 alias ll='ls -la'
-alias grep='/usr/local/bin/ggrep'
+alias sed='/usr/local/bin/gsed'                                             # Dependencies: brew install gnu-sed
+alias grep='/usr/local/bin/ggrep'                                           # Dependencies: brew install grep
 alias vi='vim'
+alias mkdir='mkdirEnhance'
 alias fzf='fzf-tmux'                                                        # fzf: /usr/local/Cellar/fzf/0.15.8/bin/fzf
 alias soz='source ~/.zshrc'
+
 alias opn='openFileDispatcher'
 alias ago='agCurrentOpenVim'
 alias mkw='mkdirWorkDir'
@@ -119,72 +123,28 @@ alias mdf='openMdfindFilterFzf'
 alias tmr='tmuxResizePane'
 alias jnb='jupyter notebook --notebook-dir ~/src/work/jupyter'              # Required: $ pip insall jupyter
 alias rmzcompdump='rm -f ~/.zcompdump; rm -f ~/.zplug/zcompdump'            # If tab completion error occurs, delete it. Then reload the zsh.
-alias md="MEMO_PREFIX=''; _memoDispatch $@"
-alias mm="MEMO_PREFIX='memo-'; _memoDispatch $@"
-alias td="MEMO_PREFIX='todo-'; _memoDispatch $@"
-alias ch="MEMO_PREFIX='cheat-'; _memoDispatch $@"
 
 # Functions
-function _memoEx() {
-    local memodir=$@[-1]
-    local args=$@[1,-2]
-
-    if [[ $#args -eq 0 ]]; then
-        echo "Commands: md:default, mm:memo, td:todo, ch:cheat, memo:YYYY-MM-DD-"
-        echo ""
-        memo
-        echo "    newf, f     Create memo flat file name" 
-        echo "     ago, a     Search by ag and open the selected part with vim" 
-        return 1
-    fi
-
+function mkdirEnhance() {
     case $1 in
-        'ago'|'a')
-            if [[ -z $2 ]]; then
-                echo "Error: memo ago PATTERN required"
+        -w)
+            local dirname=$2
+            if [[ -z $dirname ]]; then
+                echo 'Usage: mkdir -w DIRNAME'
                 return 1
             fi
-            agCurrentOpenVim $2 $memodir
+            mkdir -p "$GOPATH/src/work/$dirname"
+            cd $_
+            git init
             ;;
-        'newf'|'f')
-            printf "Title: "
-            read -t 10 title
-            [[ -z $title ]] && return 1
-            echo "# $title\n" > "$memodir/$MEMO_PREFIX$title.md"
-            vim "$memodir/$MEMO_PREFIX$title.md"
+        --help)
+            local _help=$(/usr/local/opt/coreutils/libexec/gnubin/mkdir --help)
+            echo $_help | sed -e '5i \　-w  DIRNAME   　  creating DIRNAME directory under $GOPATH/src/work and move it.'
             ;;
         *)
-            memo $args
+            /usr/local/opt/coreutils/libexec/gnubin/mkdir $@
             ;;
     esac
-}
-
-function _memoDispatch() {
-    if [[ ! -z $MEMODIR ]]; then
-        _memoEx "$@" "$MEMODIR"
-    else
-        local memodir=$(cat ~/.config/memo/config.toml | ag memodir | awk '{print $3}' | sed s/\"//g)
-        memodir=$(/usr/local/bin/zsh -c "echo $memodir")
-        _memoEx "$@" "$memodir"
-    fi
-}
-
-function mkdirWorkDir() {
-    local dirname=$1
-
-    if [[ -z $dirname ]]; then
-        mkdirWorkDirUsage
-        return 1
-    fi
-
-    mkdir -p "$GOPATH/src/work/$dirname"
-    cd $_
-    git init
-}
-
-function mkdirWorkDirUsage() {
-echo 'Usage: mkw DIRNAME
-   mkw command is creating DIRNAME directory under $GOPATH/src/work and move it.'
 }
 
 function tmuxResizePane() {
