@@ -113,12 +113,9 @@ alias sed='/usr/local/bin/gsed'                                             # De
 alias grep='/usr/local/bin/ggrep'                                           # Dependencies: brew install grep
 alias vi='vim'
 alias mkdir='mkdirEnhance'
+alias cd='cdEnhance'
 alias fzf='fzf-tmux'                                                        # fzf: /usr/local/Cellar/fzf/0.15.8/bin/fzf
 alias soz='source ~/.zshrc'
-
-alias opn='openFileDispatcher'
-alias ago='agCurrentOpenVim'
-alias mkw='mkdirWorkDir'
 alias mdf='openMdfindFilterFzf'
 alias tmr='tmuxResizePane'
 alias jnb='jupyter notebook --notebook-dir ~/src/work/jupyter'              # Required: $ pip insall jupyter
@@ -147,6 +144,71 @@ function mkdirEnhance() {
     esac
 }
 
+function cdEnhance() {
+    case $1 in
+        --help) _cdEnhanceUsage ;;
+        -s|--src) _cdGhqDir ;;
+        -w|--work) _openWorkDir ;;
+        -g|--git) _openCurrentGitURL ;;
+        --)
+            local dir
+            dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
+            ;;
+        *) builtin cd $@ ;;
+    esac
+}
+
+function _cdEnhanceUsage() {
+echo "Usage: cd [options] [dir]
+
+options:
+  -s, --src           List \$GOPATH/src list
+  -w, --work          List \$GOPATH/src/work list
+  -g, --git           Open git url
+  --                  List history
+  **                  Subsequently press tab, fzf mode will be set
+"
+}
+
+function _cdGhqDir(){
+    local ghqlist=`ghq list`
+    local worklist=$(ls -d $GOPATH/src/work/* | sed -e "s@$GOPATH/src/@@")
+    local alllist="$ghqlist\n$worklist"
+    local mvdir=$(echo -e "$alllist" | sort | uniq \
+            | fzf -0 --inline-info --ansi --cycle --preview "ls -la $GOPATH/src/{}")
+
+    [[ -z $mvdir ]] && return 1
+    cd "$GOPATH/src/$mvdir"
+}
+
+function _openWorkDir() {
+    local select=$(ghq list | ag work/ | fzf)
+    [[ -z $select ]] && return 1
+    cd $GOPATH/src/$select
+}
+
+function _openCurrentGitURL() {
+    local url=$(git config -l | grep remote.origin.url | cut -d= -f2)
+
+    if [[ ! -n $url ]]; then
+        echo "Error! git remote.origin.url not found"
+        return 1
+    fi
+  
+    if [[ -n $(echo $url | grep 'http') ]]; then
+        open "$url"
+    elif [[ -n $(echo $url | grep 'ssh') ]]; then
+        url=$(echo "$url" | sed "s/ssh:/https:/" | sed "s/git@//")
+        open "$url"
+    elif [[ -n $(echo $url | grep 'git') ]]; then
+        url=$(echo "$url" | sed "s/:/\//" | sed "s/git@/https:\/\//")
+        open "$url"
+    else
+        echo "Error! Unexpected form: $url" 
+        return 1
+    fi
+}
+
 function tmuxResizePane() {
     local pane=$1
     local size=$2
@@ -157,7 +219,7 @@ function tmuxResizePane() {
     [[ $1 =~ "^[U|D|L|R]$" ]] && inputPane=0
     [[ $2 =~ "^([5-9]|[1-9][0-9]|100)$" ]] && inputSize=0
     [[ $inputPane -eq 0 && $inputSize -eq 0 ]] && showUsage=0
-    [[ $showUsage -ne 0 ]] && tmuxResizePaneUsage
+    [[ $showUsage -ne 0 ]] && _tmuxResizePaneUsage
 
     if [[ $inputPane -eq 1 ]]; then
         printf "PANE: "
@@ -180,29 +242,12 @@ function tmuxResizePane() {
     tmux resize-pane -$pane $size
 }
 
-function tmuxResizePaneUsage() {
+function _tmuxResizePaneUsage() {
 echo 'Usage: tmr PANE SIZE" 
    tmr command is tmux resize pane.
    - PANE:  U(UP), D(Down), L(Left), R(Right)"
    - SIZE:  5 - 100"
 '
-}
-
-function _openFile() {
-    local target="$1"
-    [[ -z $target ]] && return 1
-
-    local basedir="${2:-$PWD}/"
-    basedir=$(echo $basedir | sed -e 's@/\{2,\}@/@g')
-    local filepath="$basedir$target"
-
-    local type=$(file "$filepath" | cut -d: -f2 | grep 'text')
-    [[ -z $type ]] && return 1
-        if [[ ${#type} -ne 0 ]]; then
-        vim "$filepath"
-    else
-        open "$filepath"
-    fi
 }
 
 function openMdfindFilterFzf(){
@@ -215,143 +260,79 @@ function openMdfindFilterFzf(){
     [[ ! -z $T ]] && open $T
 }
 
-function openCurrentGitURL() {
-    local url=$(git config -l | grep remote.origin.url | cut -d= -f2)
+#function _openFile() {
+#    local target="$1"
+#    [[ -z $target ]] && return 1
+#
+#    local basedir="${2:-$PWD}/"
+#    basedir=$(echo $basedir | sed -e 's@/\{2,\}@/@g')
+#    local filepath="$basedir$target"
+#
+#    local type=$(file "$filepath" | cut -d: -f2 | grep 'text')
+#    [[ -z $type ]] && return 1
+#        if [[ ${#type} -ne 0 ]]; then
+#        vim "$filepath"
+#    else
+#        open "$filepath"
+#    fi
+#}
 
-    if [[ ! -n $url ]]; then
-        echo "Error! git remote.origin.url not found"
-        return 1
-    fi
-  
-    if [[ -n $(echo $url | grep 'http') ]]; then
-        open "$url"
-    elif [[ -n $(echo $url | grep 'ssh') ]]; then
-        url=$(echo "$url" | sed "s/ssh:/https:/" | sed "s/git@//")
-        open "$url"
-    elif [[ -n $(echo $url | grep 'git') ]]; then
-        url=$(echo "$url" | sed "s/:/\//" | sed "s/git@/https:\/\//")
-        open "$url"
-    else
-        echo "Error! Unexpected form: $url" 
-        return 1
-    fi
-}
+#function openFileFromDstDir() {
+#    local dstdir=${1:-$PWD}
+#
+#    if [[ ! -e $dstdir ]]; then
+#        echo "Error $dstdir is not found."
+#        return 1
+#    fi
+#
+#    if [[ $dstdir == $PWD ]]; then
+#        _openFile $(find $dstdir -type f \
+#            | sed -e "s@$dstdir/@@" \
+#            | egrep -v "\.git/|\.git$|\.DS_Store" \
+#            | fzf -0 --inline-info --cycle --preview "less {}")
+#    else
+#        _openFile $(find $dstdir -type f \
+#            | sed -e "s@$dstdir/@@" \
+#            | egrep -v "\.git/|\.git$|\.DS_Store" \
+#            | fzf -0 --inline-info --cycle --preview "less $dstdir/{}") "$dstdir"
+#    fi
+#}
 
-function openFileFromDstDir() {
-    local dstdir=${1:-$PWD}
+#function openFileDispatcher() {
+#    if [ $# -eq 0 ]; then
+#       cdGhqDir && openFileFromDstDir
+#       return $?
+#    fi
+#
+#    case $1 in
+#        '@' ) openCurrentGitURL ;;
+#        '#' ) openWorkDir ;;
+#        '-h' | '--help') openFileDispatcherUsage ;;
+#        *   ) 
+#            if [[ -d $1 ]]; then
+#                openFileFromDstDir "$1"
+#            else
+#                echo "Error: $1 is not direcory path."
+#                echo ""
+#                openFileDispatcherUsage
+#                return 1
+#            fi
+#            ;;
+#    esac
+#}
 
-    if [[ ! -e $dstdir ]]; then
-        echo "Error $dstdir is not found."
-        return 1
-    fi
 
-    if [[ $dstdir == $PWD ]]; then
-        _openFile $(find $dstdir -type f \
-            | sed -e "s@$dstdir/@@" \
-            | egrep -v "\.git/|\.git$|\.DS_Store" \
-            | fzf -0 --inline-info --cycle --preview "less {}")
-    else
-        _openFile $(find $dstdir -type f \
-            | sed -e "s@$dstdir/@@" \
-            | egrep -v "\.git/|\.git$|\.DS_Store" \
-            | fzf -0 --inline-info --cycle --preview "less $dstdir/{}") "$dstdir"
-    fi
-}
-
-function cdGhqDir(){
-    local ghqlist=`ghq list`
-    local worklist=$(ls -d $GOPATH/src/work/* | sed -e "s@$GOPATH/src/@@")
-    local alllist="$ghqlist\n$worklist"
-    local mvdir=$(echo -e "$alllist" | sort | uniq \
-            | fzf -0 --inline-info --ansi --cycle --preview "ls -la $GOPATH/src/{}")
-
-    [[ -z $mvdir ]] && return 1
-    cd "$GOPATH/src/$mvdir"
-}
-
-function openFileDispatcher() {
-    if [ $# -eq 0 ]; then
-       cdGhqDir && openFileFromDstDir
-       return $?
-    fi
-
-    case $1 in
-        '@' ) openCurrentGitURL ;;
-        '#' ) openWorkDir ;;
-        '-h' | '--help') openFileDispatcherUsage ;;
-        *   ) 
-            if [[ -d $1 ]]; then
-                openFileFromDstDir "$1"
-            else
-                echo "Error: $1 is not direcory path."
-                echo ""
-                openFileDispatcherUsage
-                return 1
-            fi
-            ;;
-    esac
-}
-
-function openWorkDir() {
-    local select=$(ghq list | ag work/ | fzf)
-    [[ -z $select ]] && return 1
-    cd $GOPATH/src/$select
-    openFileFromDstDir $GOPATH/src/$select
-}
-
-function openFileDispatcherUsage() {
-echo 'Usage: opn [PATH | @ | #]
-   opn command is utility tool to easily open files and directories. (use: fzf)
-   
-   Default:  Open direcory selection screen in $gopath/src and after cd select dir,
-             following open current files selection screen.
-   Option:
-    PATH     Open files selection screen under the PATH directory 
-       #     Open files selection screen under the $GOPATH/work direcory
-       @     Open current git.remote.url in browser'
-}
-
-function agCurrentOpenVimUsage() {
-    echo 'Usage: ago PATTERN [PATH]'
-    echo '  ago command is Search PATTERN using ag and open the selected file with vim.'
-    return
-}
-
-function agCurrentOpenVim() {
-    local search=$1
-    local tpath=$2
-
-    if [[ -z $search ]]; then
-        agCurrentOpenVimUsage
-        return 1
-    fi
-
-    if [[ ! -z $tpath ]]; then
-        if [[ ! -e $tpath ]] then
-            echo "Error: $tpath path is not found."
-            echo ""
-            agCurrentOpenVimUsage
-            return 1
-        fi
-    fi
-
-    local select=$(ag --hidden --ignore .git/ $search $tpath | fzf)
-    [[ -z $select ]] && return 1
-
-    local tmpval=$(echo $select | cut -d: -f1)
-    local file=''
-    local line=''
-
-    if [[ $tmpval =~ "^([0-9].*)$" ]]; then
-        file=$tpath
-        line=$tmpval
-    else
-        file=$tmpval
-        line=$(echo $select | cut -d: -f2)
-    fi
-
-    vim -c $line $file
-}
+#function openFileDispatcherUsage() {
+#echo 'Usage: opn [PATH | @ | #]
+#   opn command is utility tool to easily open files and directories. (use: fzf)
+#   
+#   Default:  Open direcory selection screen in $gopath/src and after cd select dir,
+#             following open current files selection screen.
+#   Option:
+#    PATH     Open files selection screen under the PATH directory 
+#       #     Open files selection screen under the $GOPATH/work direcory
+#       @     Open current git.remote.url in browser'
+#}
 
 # less option
 export LESS='-iMR'
