@@ -260,80 +260,6 @@ function openMdfindFilterFzf(){
     [[ ! -z $T ]] && open $T
 }
 
-#function _openFile() {
-#    local target="$1"
-#    [[ -z $target ]] && return 1
-#
-#    local basedir="${2:-$PWD}/"
-#    basedir=$(echo $basedir | sed -e 's@/\{2,\}@/@g')
-#    local filepath="$basedir$target"
-#
-#    local type=$(file "$filepath" | cut -d: -f2 | grep 'text')
-#    [[ -z $type ]] && return 1
-#        if [[ ${#type} -ne 0 ]]; then
-#        vim "$filepath"
-#    else
-#        open "$filepath"
-#    fi
-#}
-
-#function openFileFromDstDir() {
-#    local dstdir=${1:-$PWD}
-#
-#    if [[ ! -e $dstdir ]]; then
-#        echo "Error $dstdir is not found."
-#        return 1
-#    fi
-#
-#    if [[ $dstdir == $PWD ]]; then
-#        _openFile $(find $dstdir -type f \
-#            | sed -e "s@$dstdir/@@" \
-#            | egrep -v "\.git/|\.git$|\.DS_Store" \
-#            | fzf -0 --inline-info --cycle --preview "less {}")
-#    else
-#        _openFile $(find $dstdir -type f \
-#            | sed -e "s@$dstdir/@@" \
-#            | egrep -v "\.git/|\.git$|\.DS_Store" \
-#            | fzf -0 --inline-info --cycle --preview "less $dstdir/{}") "$dstdir"
-#    fi
-#}
-
-#function openFileDispatcher() {
-#    if [ $# -eq 0 ]; then
-#       cdGhqDir && openFileFromDstDir
-#       return $?
-#    fi
-#
-#    case $1 in
-#        '@' ) openCurrentGitURL ;;
-#        '#' ) openWorkDir ;;
-#        '-h' | '--help') openFileDispatcherUsage ;;
-#        *   ) 
-#            if [[ -d $1 ]]; then
-#                openFileFromDstDir "$1"
-#            else
-#                echo "Error: $1 is not direcory path."
-#                echo ""
-#                openFileDispatcherUsage
-#                return 1
-#            fi
-#            ;;
-#    esac
-#}
-
-
-#function openFileDispatcherUsage() {
-#echo 'Usage: opn [PATH | @ | #]
-#   opn command is utility tool to easily open files and directories. (use: fzf)
-#   
-#   Default:  Open direcory selection screen in $gopath/src and after cd select dir,
-#             following open current files selection screen.
-#   Option:
-#    PATH     Open files selection screen under the PATH directory 
-#       #     Open files selection screen under the $GOPATH/work direcory
-#       @     Open current git.remote.url in browser'
-#}
-
 # less option
 export LESS='-iMR'
 
@@ -344,8 +270,8 @@ export FZF_DEFAULT_OPTS='-0 --inline-info --cycle'
 # Source ~/.zsh.d/*.sh
 setopt nonomatch
 if ls ~/.zsh.d/*.sh > /dev/null 2>&1; then
-  for file in ~/.zsh.d/*.sh ; do
-    [[ -r $file ]] && source "$file"
-  done
+    for file in ~/.zsh.d/*.sh ; do
+        [[ -r $file ]] && source "$file"
+    done
 fi
 setopt nomatch
