@@ -1,3 +1,0 @@
----
-- name: Setting ghq config 
-  git_config: name=ghq.root scope=global value="~/src"

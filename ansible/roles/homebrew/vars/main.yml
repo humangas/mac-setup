@@ -21,10 +21,6 @@ homebrew_packages:
   # node.js
   - name: node
   - name: nodebrew
-  # go
-  - { name: go, option: cross-compile-common }
-  - name: gdb 
-  - name: go-delve/delve/delve 
   # java
   - name: jenv
   # vim
@@ -53,7 +49,6 @@ homebrew_packages:
   - name: yank
   - name: ag
   # dev tools
-  - name: ghq
   - name: direnv
   - name: ctags
   - name: fswatch

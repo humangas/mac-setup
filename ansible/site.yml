@@ -15,6 +15,6 @@
     - { role: gem,          tags: ['gem'              ] }
     - { role: npm,          tags: ['npm'              ] }
     - { role: tig,          tags: ['tool'    , 'tig'  ] }
-    - { role: tool_ghq,     tags: ['tool'    , 'ghq'  ] }
+    - { role: ghq,          tags: ['tool'    , 'ghq'  ] }
     - { role: tool_memo,    tags: ['tool'    , 'memo' ] }
     - { role: macos_dock,   tags: ['macos'   , 'dock' ] }
