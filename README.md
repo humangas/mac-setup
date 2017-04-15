@@ -40,8 +40,7 @@ Examples:
 - { role: pip,          tags: ['pip'              ] }
 - { role: gem,          tags: ['gem'              ] }
 - { role: npm,          tags: ['npm'              ] }
-- { role: tool_ghq,     tags: ['tool'    , 'ghq'  ] }
-- { role: tool_memo,    tags: ['tool'    , 'memo' ] }
+- { role: ghq,          tags: ['tool'    , 'ghq'  ] }
 - { role: macos_dock,   tags: ['macos'   , 'dock' ] }
 ...
 ```
