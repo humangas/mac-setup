@@ -5,12 +5,12 @@
 macOS setup tool for me. (use: ansible)
 
 
-# Installation
+## Installation
 ```
 $ curl -L https://raw.githubusercontent.com/humangas/mac-setup/master/install | bash
 ```
 
-## Local installation
+### Local installation
 ```
 $ git clone https://github.com/humangas/mac-setup.git 
 $ cd mac-setup 
@@ -47,8 +47,8 @@ Examples:
 ```
 
 
-# After installation 
+## After installation 
 After installation, the terminal will be as follows.
 
-## tmux + zsh + vim + fzf
+### tmux + zsh + vim + fzf
 ![my_terminal_tmux+zsh](terminal_image.png)
