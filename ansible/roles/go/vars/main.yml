@@ -1,4 +1,9 @@
-#---
-#packages:
+---
+homebrew_packages:
+  - { name: go, option: cross-compile-common }
+  - name: gdb 
+  - name: go-delve/delve/delve 
+
+#golang_packages:
 #    - { name: github.com/mattn/memo }
 #    - { name: github.com/dufferzafar/cheat, cmd: cheat fetch }
