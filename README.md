@@ -1,6 +1,6 @@
 # mac-setup 
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
-[![OS macOS](https://img.shields.io/badge/OS-macOS-blue.svg)](OS)  
+[![OS macOS](https://img.shields.io/badge/OS-macOS-blue.svg)](OS)
 [![Build Status](https://travis-ci.org/humangas/mac-setup.svg?branch=master)](https://travis-ci.org/humangas/mac-setup)  
 macOS setup tool for me. (use: ansible)
 
