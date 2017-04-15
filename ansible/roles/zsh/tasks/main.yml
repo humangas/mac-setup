@@ -1,4 +1,12 @@
 ---
+- name: install homebrew packages
+  homebrew:
+    name: "{{ item.name }}"
+    state: "{{ item.state | default('latest') }}"
+    install_options: "{{ item.option | default(omit) }}"
+    state: upgraded
+  with_items: "{{ homebrew_packages }}"
+
 - name: check zsh 
   shell: echo $SHELL
   register: result
@@ -30,25 +38,25 @@
 
 - name: get dircolor solarized  
   file: path=~/.config/solarized state=directory
-- get_url: >
-    url=https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.256dark
-    dest=~/.config/solarized/dircolors.256dark
-    force=True
+- get_url:
+    url: https://raw.githubusercontent.com/seebi/dircolors-solarized/master/dircolors.256dark
+    dest: ~/.config/solarized/dircolors.256dark
+    force: True
 
 - name: mkdir dotifles directory
-  file: >
-    path={{ item.dest }}
-    state=directory
-    mode={{ item.dest_mode | default("0755") }}
-    force=yes
+  file:
+    path: "{{ item.dest }}"
+    state: directory
+    mode: "{{ item.dest_mode | default('0755') }}"
+    force: yes
   with_items: "{{ dotfiles }}"
   when: item.src | search("\/")
 
 - name: setup dotfiles
-  copy: >
-    src={{ item.src }}
-    dest={{ item.dest | default("~") }}
-    mode={{ item.mode | default("0644") }}
-    backup={{ item.backup | default("no") }}
-    force=yes
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest | default('~') }}"
+    mode: "{{ item.mode | default('0644') }}"
+    backup: "{{ item.backup | default('no') }}"
+    force: yes
   with_items: "{{ dotfiles }}"

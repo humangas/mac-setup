@@ -1,3 +1,7 @@
 ---
+homebrew_packages:
+  - { name: zsh, option: without-etcdir }
+  - name: zsh-completions 
+
 dotfiles:
   - src: .zshrc
