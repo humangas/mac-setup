@@ -7,11 +7,11 @@
   with_items: "{{ homebrew_taps }}"
 
 - name: install homebrew packages
-  homebrew: >
-    name={{ item.name }}
-    state={{ item.state | default('latest') }}
-    install_options={{ item.option | default(omit) }}
-    state=upgraded
+  homebrew:
+    name: "{{ item.name }}"
+    state: "{{ item.state | default('latest') }}"
+    install_options: "{{ item.option | default(omit) }}"
+    state: upgraded
   with_items: "{{ homebrew_packages }}"
 
 - name: install homebrew cask packages
