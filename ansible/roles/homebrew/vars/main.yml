@@ -6,7 +6,6 @@ homebrew_packages:
   # git
   - name: git
   - name: gibo
-  - name: bash
   # python
   - name: python
   - name: python3

@@ -7,6 +7,7 @@
     - { role: homebrew,     tags: ['homebrew'         ] }
     - { role: dirs,         tags: ['dotfiles', 'dirs' ] }
     - { role: zsh,          tags: ['dotfiles', 'zsh'  ] }
+    - { role: bash,         tags: ['dotfiles', 'bash' ] }
     - { role: tmux,         tags: ['dotfiles', 'tmux' ] }
     - { role: vim,          tags: ['dotfiles', 'vim'  ] }
     - { role: ssh,          tags: ['dotfiles', 'ssh'  ] }
