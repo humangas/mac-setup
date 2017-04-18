@@ -3,9 +3,6 @@ homebrew_taps:
   - name: caskroom/cask
 
 homebrew_packages:
-  # git
-  - name: git
-  - name: gibo
   # python
   - name: python
   - name: python3
