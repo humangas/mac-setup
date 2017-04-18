@@ -1,6 +1,6 @@
 ---
 # humangas/memoru
-- name: Git clone
+- name: Ghq get
   shell: ghq get "git@github.com:humangas/memoru.git"
  
 - name: Make install

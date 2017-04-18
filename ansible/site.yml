@@ -4,19 +4,20 @@
   gather_facts: no
   become: no
   roles:
-    - { role: homebrew,     tags: ['homebrew'          ] }
-    - { role: dirs,         tags: ['dotfiles', 'dirs'  ] }
-    - { role: zsh,          tags: ['dotfiles', 'zsh'   ] }
-    - { role: bash,         tags: ['dotfiles', 'bash'  ] }
-    - { role: tmux,         tags: ['dotfiles', 'tmux'  ] }
-    - { role: vim,          tags: ['dotfiles', 'vim'   ] }
-    - { role: ssh,          tags: ['dotfiles', 'ssh'   ] }
-    - { role: git,          tags: ['git'               ] }
-    - { role: go,           tags: ['go'                ] }
-    - { role: pip,          tags: ['pip'               ] }
-    - { role: gem,          tags: ['gem'               ] }
-    - { role: npm,          tags: ['npm'               ] }
-    - { role: tig,          tags: ['tool'    , 'tig'   ] }
-    - { role: ghq,          tags: ['tool'    , 'ghq'   ] }
-    - { role: memoru,       tags: ['tool'    , 'memoru'] }
-    - { role: macos_dock,   tags: ['macos'   , 'dock'  ] }
+    - { role: homebrew,     tags: ['homebrew'               ] }
+    - { role: dirs,         tags: ['dotfiles', 'dirs'       ] }
+    - { role: zsh,          tags: ['dotfiles', 'zsh'        ] }
+    - { role: bash,         tags: ['dotfiles', 'bash'       ] }
+    - { role: tmux,         tags: ['dotfiles', 'tmux'       ] }
+    - { role: vim,          tags: ['dotfiles', 'vim'        ] }
+    - { role: ssh,          tags: ['dotfiles', 'ssh'        ] }
+    - { role: git,          tags: ['git'                    ] }
+    - { role: go,           tags: ['go'                     ] }
+    - { role: pip,          tags: ['pip'                    ] }
+    - { role: gem,          tags: ['gem'                    ] }
+    - { role: npm,          tags: ['npm'                    ] }
+    - { role: tig,          tags: ['tool'    , 'tig'        ] }
+    - { role: ghq,          tags: ['tool'    , 'ghq'        ] }
+    - { role: fileopener,   tags: ['tool'    , 'fileopener' ] }
+    - { role: memoru,       tags: ['tool'    , 'memoru'     ] }
+    - { role: macos_dock,   tags: ['macos'   , 'dock'       ] }
