@@ -1,0 +1,11 @@
+---
+# humangas/memoru
+- name: Ghq get
+  shell: ghq get "git@github.com:humangas/fileopener.git"
+ 
+- name: Make install
+  shell: make install
+  args:
+    chdir: "{{ gopath }}/src/github.com/humangas/fileopener"
+  vars:
+    gopath: "{{ lookup('env', 'GOPATH') }}"
