@@ -22,6 +22,8 @@ help:
 	@echo " make install TAGS=zsh,vim"
 
 install:
+	@ln -s ansible/ansible.cfg .
+	@ln -s ansible/hosts .
 	@if [ -z "$(TAGS)" ]; then\
 		/bin/bash install;\
 	else\
