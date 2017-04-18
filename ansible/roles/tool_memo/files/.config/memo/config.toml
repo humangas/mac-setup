@@ -1,9 +1,0 @@
-memodir = "~/.config/memo/_posts"
-editor = "vim"
-column = 13
-selectcmd = "fzf"
-grepcmd = "ag ${PATTERN} ${DIR}"
-assetsdir = "."
-pluginsdir = "~/.config/memo/plugins"
-templatedirfile = ""
-templatebodyfile = ""

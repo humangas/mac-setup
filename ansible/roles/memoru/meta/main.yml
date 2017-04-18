@@ -1,4 +1,5 @@
 ---
 dependencies:
-  - { role: go }
+  - { role: git }
+  - { role: ghq }
   - { role: vim }

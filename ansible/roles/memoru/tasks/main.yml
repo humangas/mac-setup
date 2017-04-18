@@ -1,0 +1,43 @@
+---
+# humangas/memoru
+- name: Git clone
+  shell: ghq get "git@github.com:humangas/memoru.git"
+ 
+- name: Make install
+  shell: make install
+  args:
+    chdir: "{{ gopath }}/src/github.com/humangas/memoru"
+  vars:
+    gopath: "{{ lookup('env', 'GOPATH') }}"
+
+# vim: memolist
+- name: Create userautoload directory
+  file:
+   path: ~/.vim/userautoload
+   state: directory
+   force: yes
+
+- name: Setup memolist.vim 
+  copy:
+   src: .vim/userautoload/memolist.vim
+   dest: ~/.vim/userautoload/
+   mode: 0644
+   force: yes
+
+# Dropbox: link
+- name: Install Dropbox 
+  homebrew_cask:
+   name: dropbox
+   state: present 
+
+- name: Create Dropbox dir 
+  file:
+   path: ~/Dropbox
+   state: directory 
+   force: yes
+
+- name: Setup Dropbox Symbolic link 
+  file:
+   src: ~/.config/mm/_posts
+   dest: ~/Dropbox/mm 
+   state: link
