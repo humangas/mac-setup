@@ -1,31 +1,38 @@
 ---
-- name: install dein.vim
+- name: Install homebrew packages
+  homebrew:
+    name: "{{ item.name }}"
+    state: "{{ item.state | default('latest') }}"
+    install_options: "{{ item.option | default(omit) }}"
+  with_items: "{{ homebrew_packages }}"
+
+- name: Install dein.vim
   file: path={{ deinvim['dir'] }} state=directory
-- get_url: >
-    url=https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/{{ deinvim['shell'] }}
-    dest={{ deinvim['dir'] }}/{{ deinvim['shell'] }}
-    force=True
-    mode=u+x
+- get_url:
+    url: https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/{{ deinvim['shell'] }}
+    dest: "{{ deinvim['dir'] }}/{{ deinvim['shell'] }}"
+    force: True
+    mode: u+x
 - shell: "./{{ deinvim['shell'] }} {{ deinvim['dir'] }}/"
   args:
     chdir: "{{ deinvim['dir'] }}/"
   register: result
   changed_when: "'already exists!' not in result.stdout"
 
-- name: mkdir dotifles directory
-  file: >
-    path={{ item.dest }}
-    state=directory
-    mode={{ item.dest_mode | default("0755") }}
-    force=yes
+- name: Mkdir dotifles directory
+  file:
+    path: "{{ item.dest }}"
+    state: directory
+    mode: "{{ item.dest_mode | default('0755') }}"
+    force: yes
   with_items: "{{ dotfiles }}"
   when: item.src | search("\/")
 
-- name: setup dotfiles
-  copy: >
-    src={{ item.src }}
-    dest={{ item.dest | default("~") }}
-    mode={{ item.mode | default("0644") }}
-    backup={{ item.backup | default("no") }}
-    force=yes
+- name: Setup dotfiles
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest | default('~') }}"
+    mode: "{{ item.mode | default('0644') }}"
+    backup: "{{ item.backup | default('no') }}"
+    force: yes
   with_items: "{{ dotfiles }}"

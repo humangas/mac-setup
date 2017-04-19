@@ -19,10 +19,6 @@ homebrew_packages:
   - name: nodebrew
   # java
   - name: jenv
-  # vim
-  - name: lua
-  - { name: vim, option: [with-lua, with-override-system-vi] }
-  - name: macvim 
   # tmux
   - name: tmux
   - name: reattach-to-user-namespace

@@ -1,4 +1,9 @@
 ---
+homebrew_packages:
+  - name: lua
+  - { name: vim, option: [with-lua, with-override-system-vi] }
+  - name: macvim 
+
 dotfiles:
   - src: .vimrc
  
