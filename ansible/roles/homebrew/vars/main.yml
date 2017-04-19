@@ -48,6 +48,8 @@ homebrew_packages:
   - name: plantuml
   # system tools
   - name: osquery
+  # etc tools
+  - name: tidy-html5
 
 homebrew_cask_packages:
   - name: google-chrome
