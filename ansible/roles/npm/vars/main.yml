@@ -6,3 +6,4 @@ packages:
     - name: gitbook-cli
     - name: browser-sync
     - name: minifyjs
+    - mame: hexo-cli
