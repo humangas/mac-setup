@@ -48,10 +48,6 @@ homebrew_packages:
   - name: plantuml
   # system tools
   - name: osquery
-  # etc tools
-  - name: tidy-html5  
-  - name: cheat
-  - name: terminal-notifier 
 
 homebrew_cask_packages:
   - name: google-chrome
