@@ -1,18 +1,25 @@
 ---
-- name: mkdir dotifles directory
-  file: >
-    path={{ item.dest }}
-    state=directory
-    mode={{ item.dest_mode | default("0755") }}
-    force=yes
+- name: Install homebrew packages
+  homebrew:
+    name: "{{ item.name }}"
+    state: "{{ item.state | default('latest') }}"
+    install_options: "{{ item.option | default(omit) }}"
+  with_items: "{{ homebrew_packages }}"
+
+- name: Mkdir dotifles directory
+  file:
+    path: "{{ item.dest }}"
+    state: directory
+    mode: "{{ item.dest_mode | default('0755') }}"
+    force: yes
   with_items: "{{ dotfiles }}"
   when: item.src | search("\/")
 
-- name: setup dotfiles
-  copy: >
-    src={{ item.src }}
-    dest={{ item.dest | default("~") }}
-    mode={{ item.mode | default("0644") }}
-    backup={{ item.backup | default("no") }}
-    force=yes
+- name: Setup dotfiles
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest | default('~') }}"
+    mode: "{{ item.mode | default('0644') }}"
+    backup: "{{ item.backup | default('no') }}"
+    force: yes
   with_items: "{{ dotfiles }}"

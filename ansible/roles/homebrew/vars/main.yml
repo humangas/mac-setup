@@ -19,9 +19,6 @@ homebrew_packages:
   - name: nodebrew
   # java
   - name: jenv
-  # tmux
-  - name: tmux
-  - name: reattach-to-user-namespace
   # aws
   - name: awscli
   # GNU commands

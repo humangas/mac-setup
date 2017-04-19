@@ -1,4 +1,8 @@
 ---
+homebrew_packages:
+  - name: tmux
+  - name: reattach-to-user-namespace
+
 dotfiles:
   - src: .tmux.conf
   - { src: bin/loadavg, mode: "u+x", dest: ~/bin }
