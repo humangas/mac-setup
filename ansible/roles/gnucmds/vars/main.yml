@@ -1,0 +1,9 @@
+homebrew_packages:
+  - name: xz
+  - name: binutils
+  - name: coreutils 
+  - name: findutils 
+  - name: tree
+  - name: wget
+  - name: gnu-sed
+  - name: homebrew/dupes/grep
