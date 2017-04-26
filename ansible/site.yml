@@ -17,6 +17,7 @@
     - { role: gem,          tags: ['gem'                    ] }
     - { role: npm,          tags: ['npm'                    ] }
     - { role: gnucmds,      tags: ['tool'    , 'gnucmds'    ] }
+    - { role: quicklook,    tags: ['tool'    , 'quicklook'  ] }
     - { role: tig,          tags: ['tool'    , 'tig'        ] }
     - { role: ghq,          tags: ['tool'    , 'ghq'        ] }
     - { role: fileopener,   tags: ['tool'    , 'fileopener' ] }

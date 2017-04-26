@@ -1,0 +1,8 @@
+---
+- name: Install homebrew cask packages
+  homebrew_cask: 
+    name: "{{ item.name }}"
+    state: "{{ item.state | default('present') }}"
+  #environment:
+  #  HOMEBREW_CASK_OPTS: --appdir=/Applicationse
+  with_items: "{{ homebrew_cask_packages }}"

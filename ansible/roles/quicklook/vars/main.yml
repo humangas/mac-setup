@@ -1,0 +1,13 @@
+homebrew_cask_packages:
+  - name: qlcolorcode
+  - name: qlstephen
+  - name: qlmarkdown
+  - name: quicklook-json
+  - name: qlprettypatch
+  - name: quicklook-csv
+  - name: betterzipql
+  - name: qlimagesize
+  - name: webpquicklook
+  - name: suspicious-package
+  - name: quicklookase
+  - name: qlvideo
