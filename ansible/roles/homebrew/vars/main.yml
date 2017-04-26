@@ -60,4 +60,5 @@ homebrew_cask_packages:
   - name: maczip4win
   - name: licecap
   - name: calibre
+  - name: table-tool
   - name: dropbox
