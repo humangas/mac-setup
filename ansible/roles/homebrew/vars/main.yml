@@ -41,6 +41,7 @@ homebrew_packages:
   - name: osquery
   # etc tools
   - name: tidy-html5
+  - name: csvtomd
 
 homebrew_cask_packages:
   - name: google-chrome
